@@ -1,0 +1,88 @@
+{
+ "suite": "window_precise",
+ "seed": null,
+ "note": "the NaN fuzz: a 20,000-workload campaign failure (window_precise, seed 11, after 18,585 passing examples), reduced; window mode with pages of 8, bf16 mode, MTP with a drafter that writes KV. R0's PRECISE chunk [0, 8) writes NaN unseen; R1 resumes from R0's precise window at 8 once that step completed, and its drafter recomputes its KV at 7, which depends on R1's token at 8, so R1 copies R0's page [0, 8) (KV_COPY), NaN included, and its FP8 continuation's insert puts the copy into the FP8 namespace as the node [0, 8). R1's first chunk [8, 9) does not sample. R0's final chunk reports the NaN, and its removal finds none of its pages in the FP8 namespace; R1's final chunk reads the NaN, and a removal starting at the first page its chunk marked, [8, 16), would leave the copy, nobody's unverified write. The rule under test: an admission's copy of the page holding its hit's last position is among its first chunk's unverified writes. The error is the one without that rule",
+ "error": "AssertionError: the cache holds poisoned entries: ['Node(4, [0, 8), pages [5], tail 0, ckpt 0, lock 0, ready 3): KV at 0']",
+ "example": {
+  "specs": [
+   {
+    "rid": 0,
+    "prompt_len": 9,
+    "max_tokens": 1,
+    "seed": 600,
+    "arrive": 0,
+    "eos_after": null,
+    "ignore_eos": false,
+    "abort_at": null,
+    "priority": 0,
+    "stop_ids": [],
+    "prompt": [
+     5,
+     36,
+     67,
+     98,
+     129,
+     160,
+     191,
+     222,
+     253
+    ],
+    "hints": [],
+    "salt": null,
+    "nonfinite_after": null,
+    "images": [],
+    "grammar": "",
+    "nonfinite_write": 7,
+    "nonfinite_once": false,
+    "mask_empty_after": null
+   },
+   {
+    "rid": 1,
+    "prompt_len": 10,
+    "max_tokens": 1,
+    "seed": 601,
+    "arrive": 2,
+    "eos_after": null,
+    "ignore_eos": false,
+    "abort_at": null,
+    "priority": 0,
+    "stop_ids": [],
+    "prompt": [
+     5,
+     36,
+     67,
+     98,
+     129,
+     160,
+     191,
+     222,
+     253,
+     284
+    ],
+    "hints": [
+     9
+    ],
+    "salt": null,
+    "nonfinite_after": null,
+    "images": [],
+    "grammar": "",
+    "nonfinite_write": null,
+    "nonfinite_once": false,
+    "mask_empty_after": null
+   }
+  ],
+  "page_size": 8,
+  "window_page_size": 8,
+  "window": 8,
+  "grid": 8,
+  "max_model_len": 160,
+  "max_num_seqs": 2,
+  "max_tokens": 16,
+  "num_pages": 24,
+  "chunk_cap": 8,
+  "precise": "bf16",
+  "mtp_k": 1,
+  "accept_p": 1.0,
+  "draft_kv": true
+ }
+}

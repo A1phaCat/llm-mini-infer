@@ -1,0 +1,180 @@
+{
+ "$defs": {
+  "Entry": {
+   "additionalProperties": false,
+   "description": "One item in the box, with the attributes that describe it. An attribute is null when it cannot be told.",
+   "properties": {
+    "id": {
+     "title": "Id",
+     "type": "integer"
+    },
+    "category": {
+     "enum": [
+      "book",
+      "map",
+      "letter",
+      "photograph",
+      "print",
+      "record"
+     ],
+     "title": "Category",
+     "type": "string"
+    },
+    "year": {
+     "maximum": 2030,
+     "minimum": 1800,
+     "title": "Year",
+     "type": "integer"
+    },
+    "signed": {
+     "title": "Signed",
+     "type": "boolean"
+    },
+    "languages": {
+     "anyOf": [
+      {
+       "items": {
+        "enum": [
+         "english",
+         "french",
+         "german",
+         "spanish",
+         "italian",
+         "latin"
+        ],
+        "type": "string"
+       },
+       "minItems": 1,
+       "type": "array"
+      },
+      {
+       "type": "null"
+      }
+     ],
+     "title": "Languages"
+    },
+    "subjects": {
+     "anyOf": [
+      {
+       "items": {
+        "enum": [
+         "history",
+         "science",
+         "travel",
+         "music",
+         "art",
+         "law",
+         "trade"
+        ],
+        "type": "string"
+       },
+       "minItems": 1,
+       "type": "array"
+      },
+      {
+       "type": "null"
+      }
+     ],
+     "title": "Subjects"
+    },
+    "formats": {
+     "anyOf": [
+      {
+       "items": {
+        "enum": [
+         "bound",
+         "loose",
+         "folded",
+         "rolled",
+         "framed"
+        ],
+        "type": "string"
+       },
+       "type": "array"
+      },
+      {
+       "type": "null"
+      }
+     ],
+     "title": "Formats"
+    },
+    "condition": {
+     "anyOf": [
+      {
+       "items": {
+        "enum": [
+         "fine",
+         "good",
+         "fair",
+         "poor"
+        ],
+        "type": "string"
+       },
+       "minItems": 1,
+       "type": "array"
+      },
+      {
+       "type": "null"
+      }
+     ],
+     "title": "Condition"
+    },
+    "provenance": {
+     "anyOf": [
+      {
+       "items": {
+        "enum": [
+         "donated",
+         "purchased",
+         "transferred",
+         "found"
+        ],
+        "type": "string"
+       },
+       "type": "array"
+      },
+      {
+       "type": "null"
+      }
+     ],
+     "title": "Provenance"
+    }
+   },
+   "required": [
+    "id",
+    "category",
+    "year",
+    "signed",
+    "languages",
+    "subjects",
+    "formats",
+    "condition",
+    "provenance"
+   ],
+   "title": "Entry",
+   "type": "object"
+  }
+ },
+ "additionalProperties": false,
+ "description": "The items in an archive's box: how many there are, and up to five of them described, in the box's order.",
+ "properties": {
+  "total": {
+   "title": "Total",
+   "type": "integer"
+  },
+  "entries": {
+   "items": {
+    "$ref": "#/$defs/Entry"
+   },
+   "maxItems": 5,
+   "title": "Entries",
+   "type": "array"
+  }
+ },
+ "required": [
+  "total",
+  "entries"
+ ],
+ "title": "Catalog",
+ "type": "object"
+}

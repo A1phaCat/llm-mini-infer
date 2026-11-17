@@ -1,0 +1,16 @@
+{
+ "model": "Qwen/Qwen3.8-27B-FP8",
+ "workload": "scene",
+ "metric": "e2e_ms.p99",
+ "value": 667.6,
+ "rule": "e2e p99 at most 2 x the median, across the engines, of their e2e p50 at one request in flight (family A1, the same draft count), with zero drops and zero failures",
+ "median_ms": 333.8,
+ "inputs_e2e_p50_ms": {
+  "ours": 258.5,
+  "vllm": 409.1
+ },
+ "excluded": {
+  "sglang": "no A1 report"
+ },
+ "source": "qwen/A1/<engine>/scene-c1.json"
+}

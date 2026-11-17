@@ -1,0 +1,221 @@
+{
+ "model": "qwen3.8-27b",
+ "vocab": 248320,
+ "backend": "guidance",
+ "compact": true,
+ "eos": [
+  248046
+ ],
+ "llguidance": "1.9.1",
+ "k": 3,
+ "tokenizer_build_s": 1.308,
+ "compile_corpus_ms": {
+  "person": 1.229,
+  "sentiment": 0.508,
+  "address": 0.479,
+  "order": 0.774,
+  "event": 0.562,
+  "contact": 0.896,
+  "optional_keys": 0.371,
+  "open_object": 0.481,
+  "one_of": 0.468,
+  "any_of_nullable": 0.338,
+  "tree": 0.441,
+  "const_version": 0.258,
+  "bounded_strings": 0.243,
+  "integers": 0.42,
+  "numbers": 0.494,
+  "tuple": 0.328,
+  "dictionary": 0.301,
+  "deep": 0.414,
+  "enum_numbers": 0.25,
+  "long_enum": 0.377,
+  "object_any": 0.296,
+  "array_top": 0.274,
+  "string_top": 0.138,
+  "pattern_ids": 0.319,
+  "date_time": 0.417,
+  "min_properties": 0.208,
+  "invoice": 0.744,
+  "pydantic_like": 0.453,
+  "escapes": 0.337,
+  "bool_matrix": 0.257,
+  "unicode": 0.297
+ },
+ "compile_corpus_ms_p50_max": [
+  0.377,
+  1.229
+ ],
+ "compile_json_object_ms": 0.372,
+ "clone_us_p50": 1.0,
+ "compile_catalog_cold_ms": 0.581,
+ "compile_catalog_again_ms": [
+  0.526,
+  0.491,
+  0.478,
+  0.47,
+  0.471
+ ],
+ "masks_p50_p99": {
+  "threads=1 rows=1": {
+   "one_mask_ms": [
+    0.011,
+    0.517
+   ],
+   "4_masks_ms": [
+    0.026,
+    0.061
+   ]
+  },
+  "threads=1 rows=8": {
+   "one_mask_ms": [
+    0.065,
+    0.424
+   ],
+   "4_masks_ms": [
+    0.213,
+    0.569
+   ]
+  },
+  "threads=1 rows=32": {
+   "one_mask_ms": [
+    0.212,
+    0.379
+   ],
+   "4_masks_ms": [
+    0.828,
+    1.044
+   ]
+  },
+  "threads=1 rows=64": {
+   "one_mask_ms": [
+    0.477,
+    0.594
+   ],
+   "4_masks_ms": [
+    1.653,
+    1.958
+   ]
+  },
+  "threads=2 rows=1": {
+   "one_mask_ms": [
+    0.008,
+    0.08
+   ],
+   "4_masks_ms": [
+    0.024,
+    0.074
+   ]
+  },
+  "threads=2 rows=8": {
+   "one_mask_ms": [
+    0.063,
+    0.375
+   ],
+   "4_masks_ms": [
+    0.205,
+    0.554
+   ]
+  },
+  "threads=2 rows=32": {
+   "one_mask_ms": [
+    0.208,
+    0.345
+   ],
+   "4_masks_ms": [
+    0.736,
+    0.984
+   ]
+  },
+  "threads=2 rows=64": {
+   "one_mask_ms": [
+    0.394,
+    0.537
+   ],
+   "4_masks_ms": [
+    1.352,
+    1.722
+   ]
+  },
+  "threads=4 rows=1": {
+   "one_mask_ms": [
+    0.01,
+    0.106
+   ],
+   "4_masks_ms": [
+    0.024,
+    0.058
+   ]
+  },
+  "threads=4 rows=8": {
+   "one_mask_ms": [
+    0.071,
+    0.27
+   ],
+   "4_masks_ms": [
+    0.227,
+    0.47
+   ]
+  },
+  "threads=4 rows=32": {
+   "one_mask_ms": [
+    0.281,
+    0.409
+   ],
+   "4_masks_ms": [
+    0.868,
+    1.227
+   ]
+  },
+  "threads=4 rows=64": {
+   "one_mask_ms": [
+    0.5,
+    0.639
+   ],
+   "4_masks_ms": [
+    1.703,
+    2.068
+   ]
+  },
+  "threads=8 rows=1": {
+   "one_mask_ms": [
+    0.008,
+    0.097
+   ],
+   "4_masks_ms": [
+    0.023,
+    0.049
+   ]
+  },
+  "threads=8 rows=8": {
+   "one_mask_ms": [
+    0.077,
+    0.398
+   ],
+   "4_masks_ms": [
+    0.26,
+    0.599
+   ]
+  },
+  "threads=8 rows=32": {
+   "one_mask_ms": [
+    0.284,
+    0.5
+   ],
+   "4_masks_ms": [
+    0.953,
+    1.264
+   ]
+  },
+  "threads=8 rows=64": {
+   "one_mask_ms": [
+    0.56,
+    0.717
+   ],
+   "4_masks_ms": [
+    1.83,
+    2.197
+   ]
+  }
+ }
+}

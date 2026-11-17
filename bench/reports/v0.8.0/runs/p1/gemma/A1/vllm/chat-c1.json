@@ -1,0 +1,566 @@
+{
+ "when": "2026-11",
+ "client": {
+  "host": "Linux-6.8.0-138-generic-x86_64-with-glibc2.39",
+  "python": "3.12.3"
+ },
+ "model": "RedHatAI/gemma-4-31B-it-FP8-block",
+ "workload": {
+  "name": "chat",
+  "mode": "chat",
+  "input_tokens": 1024,
+  "max_tokens": 256
+ },
+ "stream": true,
+ "temperature": 0.0,
+ "ignore_eos": true,
+ "extra_body": {
+  "chat_template_kwargs": {
+   "enable_thinking": false
+  }
+ },
+ "request_seeds": false,
+ "metrics": true,
+ "warmup_s": 10.0,
+ "duration_s": 60.0,
+ "seed": 0,
+ "requests": 80,
+ "warmup_requests": 20,
+ "first_index": 0,
+ "meta": {
+  "engine": "vllm",
+  "arm": "vllm",
+  "family": "A1",
+  "model": "RedHatAI/gemma-4-31B-it-FP8-block",
+  "k": 5,
+  "batch_invariant": false,
+  "unit": "vllm"
+ },
+ "loads": [
+  {
+   "load": "concurrency 1, 80 requests",
+   "concurrency": 1,
+   "requests": 80,
+   "measured": 80,
+   "ok": 80,
+   "dropped": 0,
+   "failed": 0,
+   "errors": {},
+   "finish": {
+    "length": 80
+   },
+   "seconds": 345.052,
+   "offered_rps": 0.232,
+   "served_rps": 0.232,
+   "output_tokens_per_s": 59.4,
+   "e2e_ms": {
+    "n": 80,
+    "p50": 5070.7,
+    "p90": 5519.2,
+    "p99": 5659.8,
+    "mean": 4307.1,
+    "max": 5697.6
+   },
+   "ttft_ms": {
+    "n": 80,
+    "p50": 171.4,
+    "p90": 172.4,
+    "p99": 174.1,
+    "mean": 167.9,
+    "max": 176.6
+   },
+   "tpot_ms": {
+    "n": 80,
+    "p50": 19.21,
+    "p90": 20.97,
+    "p99": 21.56,
+    "mean": 16.23,
+    "max": 21.67
+   },
+   "reply_tokens": {
+    "n": 80,
+    "p50": 256.0,
+    "p90": 256.0,
+    "p99": 256.0,
+    "mean": 256.0,
+    "max": 256.0
+   },
+   "prompt_tokens": {
+    "n": 80,
+    "p50": 1037.0,
+    "p90": 1037.0,
+    "p99": 1037.0,
+    "mean": 1037.0,
+    "max": 1037.0
+   },
+   "in_flight": {
+    "mean": 1.0,
+    "p99": 1,
+    "max": 1
+   },
+   "cache_reported": 80,
+   "cache_hit_rate": 0.0,
+   "uncached_tokens": {
+    "n": 80,
+    "p50": 1037.0,
+    "p90": 1037.0,
+    "p99": 1037.0,
+    "mean": 1037.0,
+    "max": 1037.0
+   },
+   "cache_by_turn": null,
+   "engine": {
+    "verify_steps": 11085,
+    "accept": {
+     "drafts": 11085,
+     "per_pos": [
+      0.479,
+      0.118,
+      0.094,
+      0.084,
+      0.076
+     ],
+     "tokens_per_verify": 1.851,
+     "verify_steps_per_request": 138.56
+    },
+    "gpu_idle_pct": null,
+    "head_steps": {},
+    "head_dense_reasons": {},
+    "sparse_share": null,
+    "union_tokens": null,
+    "draft_universe_tokens": null,
+    "draft_universe_steps": null,
+    "draft_universe_rebuilds": null,
+    "forced_requests": null,
+    "forced_tokens": null,
+    "eos_free_gated": null,
+    "requests_failed": null,
+    "grammar_errors": null,
+    "generation_tokens": 20480,
+    "forced_tokens_per_request": null,
+    "eos_free_finishes": null,
+    "spec_first_rejections": null,
+    "plans_kept": 0,
+    "plans_kept_since_start": 0
+   },
+   "spec": {
+    "series": "vllm:spec_decode_num_drafts_total",
+    "verify_steps": 11085,
+    "requests": 80,
+    "completion_tokens_minus_one": 20400,
+    "tokens_per_verify": 1.84,
+    "no_usage": 0
+   },
+   "answers": {
+    "0": [
+     "bf8b13471b71b8ce",
+     256,
+     "length"
+    ],
+    "1": [
+     "7d3ed4bc750e7ffd",
+     256,
+     "length"
+    ],
+    "2": [
+     "fdda0bb12d1adcd6",
+     256,
+     "length"
+    ],
+    "3": [
+     "9f9d257342e99752",
+     256,
+     "length"
+    ],
+    "4": [
+     "7c541e87ff5a6076",
+     256,
+     "length"
+    ],
+    "5": [
+     "553637c40f8056e1",
+     256,
+     "length"
+    ],
+    "6": [
+     "08d55d711d06c1e3",
+     256,
+     "length"
+    ],
+    "7": [
+     "267dc66775c3eb82",
+     256,
+     "length"
+    ],
+    "8": [
+     "7d5b7e798348e94f",
+     256,
+     "length"
+    ],
+    "9": [
+     "7cc184447c9cdfab",
+     256,
+     "length"
+    ],
+    "10": [
+     "d17a186015b36bfe",
+     256,
+     "length"
+    ],
+    "11": [
+     "f8f80cceb93d1d0e",
+     256,
+     "length"
+    ],
+    "12": [
+     "1a0d2133ff2e3732",
+     256,
+     "length"
+    ],
+    "13": [
+     "34f8b8ebf6f752fe",
+     256,
+     "length"
+    ],
+    "14": [
+     "27a289e981e6987e",
+     256,
+     "length"
+    ],
+    "15": [
+     "205f883a29934fee",
+     256,
+     "length"
+    ],
+    "16": [
+     "e8e19240cfa11222",
+     256,
+     "length"
+    ],
+    "17": [
+     "f8438144e06eddb7",
+     256,
+     "length"
+    ],
+    "18": [
+     "1610315e4fc99c3a",
+     256,
+     "length"
+    ],
+    "19": [
+     "5c1186d7c9d85f4f",
+     256,
+     "length"
+    ],
+    "20": [
+     "8b91343abf3a51e5",
+     256,
+     "length"
+    ],
+    "21": [
+     "1a33e16c9be22ce9",
+     256,
+     "length"
+    ],
+    "22": [
+     "f433ee84af655728",
+     256,
+     "length"
+    ],
+    "23": [
+     "b7fc8cb5efd35265",
+     256,
+     "length"
+    ],
+    "24": [
+     "413bf1710ef67fdc",
+     256,
+     "length"
+    ],
+    "25": [
+     "8ec31d0b8fc56b4a",
+     256,
+     "length"
+    ],
+    "26": [
+     "96bfcf94bbcd9776",
+     256,
+     "length"
+    ],
+    "27": [
+     "5c0d409edd78e91d",
+     256,
+     "length"
+    ],
+    "28": [
+     "4585aaf10741e9de",
+     256,
+     "length"
+    ],
+    "29": [
+     "f20822f65795da4d",
+     256,
+     "length"
+    ],
+    "30": [
+     "26f90ac6379db010",
+     256,
+     "length"
+    ],
+    "31": [
+     "a09ee33aef7989a0",
+     256,
+     "length"
+    ],
+    "32": [
+     "9554904cc59536ef",
+     256,
+     "length"
+    ],
+    "33": [
+     "f5e79675d6b54400",
+     256,
+     "length"
+    ],
+    "34": [
+     "4b6b99cae33fc500",
+     256,
+     "length"
+    ],
+    "35": [
+     "8f9c5450d856e36f",
+     256,
+     "length"
+    ],
+    "36": [
+     "687b7709a0e15359",
+     256,
+     "length"
+    ],
+    "37": [
+     "a168f5abd6bb8ff9",
+     256,
+     "length"
+    ],
+    "38": [
+     "2461ee8f78071be2",
+     256,
+     "length"
+    ],
+    "39": [
+     "f3f7714ac1c357b7",
+     256,
+     "length"
+    ],
+    "40": [
+     "4071febf4aec905a",
+     256,
+     "length"
+    ],
+    "41": [
+     "004afb9d4f1b7f17",
+     256,
+     "length"
+    ],
+    "42": [
+     "e320dacc83f95e50",
+     256,
+     "length"
+    ],
+    "43": [
+     "dbb065cb4847b472",
+     256,
+     "length"
+    ],
+    "44": [
+     "051d0a1c96509d71",
+     256,
+     "length"
+    ],
+    "45": [
+     "193602a2bae705b6",
+     256,
+     "length"
+    ],
+    "46": [
+     "da16f134ce4b7355",
+     256,
+     "length"
+    ],
+    "47": [
+     "0c57501f4d1fcc9a",
+     256,
+     "length"
+    ],
+    "48": [
+     "85e09af3a70c6ee9",
+     256,
+     "length"
+    ],
+    "49": [
+     "fab32e2ce8527202",
+     256,
+     "length"
+    ],
+    "50": [
+     "5f478b0df542b93a",
+     256,
+     "length"
+    ],
+    "51": [
+     "0cfc4393ade3a50e",
+     256,
+     "length"
+    ],
+    "52": [
+     "f7f3458e21db1b65",
+     256,
+     "length"
+    ],
+    "53": [
+     "c8c5413528465333",
+     256,
+     "length"
+    ],
+    "54": [
+     "fb08bed66236760a",
+     256,
+     "length"
+    ],
+    "55": [
+     "13b66edd22ee0793",
+     256,
+     "length"
+    ],
+    "56": [
+     "708f2006cdd514bf",
+     256,
+     "length"
+    ],
+    "57": [
+     "ec1e5926edb505c7",
+     256,
+     "length"
+    ],
+    "58": [
+     "cf41098cf9de32b3",
+     256,
+     "length"
+    ],
+    "59": [
+     "10da5680dc9110be",
+     256,
+     "length"
+    ],
+    "60": [
+     "840d007d245f1f72",
+     256,
+     "length"
+    ],
+    "61": [
+     "17c5b1744f2e076e",
+     256,
+     "length"
+    ],
+    "62": [
+     "c0133c7f4f95a244",
+     256,
+     "length"
+    ],
+    "63": [
+     "8070dd7a6fddd84d",
+     256,
+     "length"
+    ],
+    "64": [
+     "2d87af8e8e784cfb",
+     256,
+     "length"
+    ],
+    "65": [
+     "495a22151a814c1b",
+     256,
+     "length"
+    ],
+    "66": [
+     "453923bd56b085db",
+     256,
+     "length"
+    ],
+    "67": [
+     "ff6d4ae1f4b49b41",
+     256,
+     "length"
+    ],
+    "68": [
+     "5a96042c756e2539",
+     256,
+     "length"
+    ],
+    "69": [
+     "500e6f0bab5c9570",
+     256,
+     "length"
+    ],
+    "70": [
+     "76067f5ba7bda1ed",
+     256,
+     "length"
+    ],
+    "71": [
+     "df75df62df0f607c",
+     256,
+     "length"
+    ],
+    "72": [
+     "5d888ef9efad26d4",
+     256,
+     "length"
+    ],
+    "73": [
+     "63198a8bbec1fd69",
+     256,
+     "length"
+    ],
+    "74": [
+     "3803f3a3301648fe",
+     256,
+     "length"
+    ],
+    "75": [
+     "edfd5fcf96366d2e",
+     256,
+     "length"
+    ],
+    "76": [
+     "b92e9987b722034f",
+     256,
+     "length"
+    ],
+    "77": [
+     "6122fb09458fb9e6",
+     256,
+     "length"
+    ],
+    "78": [
+     "f63ab294d2da10e3",
+     256,
+     "length"
+    ],
+    "79": [
+     "4f5c14d72a9ac5c5",
+     256,
+     "length"
+    ]
+   }
+  }
+ ],
+ "gpu": {
+  "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
+  "power_limit_w": 600.0,
+  "power_max_w": 600.0,
+  "sm_clock_mhz": 2430.0,
+  "memory_mib": 97887.0,
+  "driver": "595.91.07"
+ }
+}

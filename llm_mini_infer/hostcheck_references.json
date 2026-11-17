@@ -1,0 +1,26 @@
+{
+ "about": "The host check's references (llm_mini_infer/hostcheck.py), measured by the check itself. `host`: the host measures' values and ranges, from the hosts it names, for any host. `loads`: loads in a reference.json's format (`load_reference`), each labelled by its GPU, power class, model, drafter and workload: a run gets verdicts against an entry only when every label is the run's. An entry's workload labels say which synthetic workload it was measured on (its version) and with which flags. The entry below is a default run (the model flags only) on its GPU, model and drafter, on an AMD EPYC Zen 5 host (the `host` values come from the hosts `hosts` names).",
+ "host": {
+  "hosts": "x86-64 server hosts (AMD EPYC, Zen 3 and Zen 4) with RTX PRO 6000 Blackwell cards",
+  "python_loop_s": [0.27, "cpubench 0.22-0.27 s on normal hosts (slow hosts: 0.4+)"],
+  "import_s": [2.3, "torch + flashinfer import 2.0-2.3 s"],
+  "launch_us": [5.4, "torch CUDA launch 4.0-5.4 us"]
+ },
+ "loads": [
+  {
+   "card": "NVIDIA RTX PRO 6000 Blackwell Server Edition, 600 W",
+   "gpu": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
+   "card_w": 600,
+   "model": "RedHatAI/gemma-4-31B-it-FP8-block",
+   "drafter": "google/gemma-4-31B-it-assistant",
+   "k": 5,
+   "workload": {"mode": "synthetic", "version": 2, "prompt_tokens": 2048, "tall_share": 0.25, "max_soft_tokens": 280},
+   "startup_s": [20.7, 20.7],
+   "accept_per_pos": [0.865, 0.725, 0.652, 0.563, 0.496],
+   "loads": {
+    "2": {"e2e": [1805.3, 2422.0], "ttft": [121.0, 203.4], "reply": 192.0, "tpv": 4.301, "power": 375.2, "sm": 2409},
+    "4": {"e2e": [2236.6, 3905.1], "ttft": [135.0, 280.2], "reply": 199.0, "tpv": 4.326, "power": 488.3, "sm": 2385}
+   }
+  }
+ ]
+}

@@ -1,0 +1,177 @@
+{
+ "schema": 1,
+ "arm": "sglang-bi",
+ "family": "C",
+ "engine": "sglang",
+ "model": "Qwen/Qwen3.8-27B-FP8",
+ "drafter": null,
+ "revisions": {
+  "Qwen/Qwen3.8-27B-FP8": "c3a462cc3d38cf351f3b26cbd763469eeb74ef81"
+ },
+ "k": 3,
+ "k_source": "llm-mini-infer's default; SGLang's recipe and its EAGLE default (3 steps, top-k 1, 4 draft tokens)",
+ "batch_invariant": true,
+ "batch_invariant_source": "set",
+ "argv": [
+  "sglang",
+  "serve",
+  "--model-path",
+  "Qwen/Qwen3.8-27B-FP8",
+  "--host",
+  "127.0.0.1",
+  "--port",
+  "8000",
+  "--max-running-requests",
+  "48",
+  "--context-length",
+  "8184",
+  "--enable-metrics",
+  "--enable-cache-report",
+  "--random-seed",
+  "0",
+  "--grammar-backend",
+  "llguidance",
+  "--constrained-json-disable-any-whitespace",
+  "--trust-remote-code",
+  "--attention-backend",
+  "triton",
+  "--speculative-algorithm",
+  "EAGLE",
+  "--speculative-eagle-topk",
+  "1",
+  "--speculative-num-steps",
+  "3",
+  "--speculative-num-draft-tokens",
+  "4",
+  "--max-mamba-cache-size",
+  "240",
+  "--enable-linear-replayssm-spec",
+  "--enable-deterministic-inference"
+ ],
+ "env_names": [
+  "CUDA_CACHE_PATH",
+  "CUDA_HOME",
+  "FLASHINFER_WORKSPACE_BASE",
+  "HF_HOME",
+  "HF_HUB_OFFLINE",
+  "HOME",
+  "LANG",
+  "LD_LIBRARY_PATH",
+  "NVIDIA_DRIVER_CAPABILITIES",
+  "NVIDIA_VISIBLE_DEVICES",
+  "PATH",
+  "PYTHONUNBUFFERED",
+  "SGLANG_CACHE_DIR",
+  "TORCHINDUCTOR_CACHE_DIR",
+  "TRITON_CACHE_DIR"
+ ],
+ "env_inherited": false,
+ "deviations": [
+  "--max-running-requests 48 (SGLang's own value under speculative decoding), not 64: at 64 its fp32 mamba state (5 slots a request, ~49 GB) does not fit the ~41 GB left after the weights; a load at a higher concurrency queues in the server",
+  "the cuRAND headers of SGLang's venv (nvidia/cu13/include/curand*.h, the folder as found) copied into the CUDA toolkit's include folder: its speculative-sampling JIT kernel includes curand.h, which the GPU tests' image lacks (SGLang's own image is CUDA devel)"
+ ],
+ "status": "ok",
+ "status_line": null,
+ "versions": {
+  "sglang": "0.5.23",
+  "sglang-kernel": "0.4.10",
+  "torch": "2.14.1+cu130",
+  "flashinfer-python": "0.7.2",
+  "flashinfer-cubin": "0.7.2",
+  "flashinfer-jit-cache": "0.7.2+cu130",
+  "triton": "3.8.0",
+  "xgrammar": "0.2.7",
+  "llguidance": "1.9.1",
+  "transformers": "5.19.0"
+ },
+ "source": "venv",
+ "resolved": {
+  "kv_tokens": 92567,
+  "max_running_requests": 48,
+  "prefix_cache": true,
+  "attention_backend": "triton",
+  "fp8_kernel": "auto",
+  "chunk_tokens": 8192,
+  "memory_fraction": 0.7971479687499999,
+  "batch_invariant_active": true,
+  "spec": "EAGLE steps=3",
+  "context": 8184,
+  "cuda_graphs": true,
+  "model_runner": null,
+  "kv_dtype": "auto",
+  "notes": null
+ },
+ "smoke": {
+  "ok": true,
+  "failures": [],
+  "scene_prompt_tokens": 2964,
+  "scene_completion_tokens": 24,
+  "scene_cached_tokens_second": 2944,
+  "scene_valid": true,
+  "scene_compact": true,
+  "chat_prompt_tokens": 1036,
+  "chat_completion_tokens": 64,
+  "reasoning_free": true,
+  "verify_steps": 32.0,
+  "seconds": 2.9
+ },
+ "startup": {
+  "ready_s": 57.2,
+  "first_answer_s": 57.33,
+  "cold": null,
+  "wiped": null,
+  "evicted": null,
+  "stopped": {
+   "signal": "SIGINT",
+   "seconds": 1.02,
+   "port_free": true
+  }
+ },
+ "loads": [
+  {
+   "name": "stability",
+   "file": "stability.json",
+   "exit": 0,
+   "seconds": 100.9,
+   "sm_mhz_median": 2362.0,
+   "power_w_median": 510.44,
+   "throttle": [
+    4
+   ],
+   "ok": true,
+   "client": {
+    "seed": 0,
+    "warmup_s": 10.0,
+    "duration_s": 60.0,
+    "tail_s": 30.0,
+    "timeout_s": 120.0,
+    "warmup_requests": 20
+   }
+  }
+ ],
+ "host": {
+  "gpu": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
+  "power_limit_w": 600.0,
+  "power_max_w": 600.0,
+  "sm_clock_max_mhz": 2430.0,
+  "memory_mib": 97887.0,
+  "driver": "595.91.07",
+  "cuda": "13.2",
+  "cpu": "AMD EPYC 9355 32-Core Processor",
+  "cpus": 128,
+  "cpu_quota": 13.6,
+  "kernel": "6.8.0-147-generic"
+ },
+ "client": {
+  "python": "3.12.3"
+ },
+ "order": [
+  "sglang-p1",
+  "sglang-p2",
+  "sglang-bi-p1",
+  "sglang-bi-p2"
+ ],
+ "when": "2026-11",
+ "image": "sha256:4fb1da6f0a254578173632717ec8b69b467d72a4a681b98a6c9fd2afba562d11",
+ "commit": "bfc310dfcf273907f5af0a071a7aa77c9ed55ff4"
+}

@@ -1,0 +1,56 @@
+# The host check's inputs for its mounted mode (hostcheck-job.yaml): a claim, and a pod to fill it with.
+#
+#   kubectl -n llm-mini-infer apply -f deploy/helm/examples/hostcheck-inputs.yaml
+#   kubectl -n llm-mini-infer wait --for=condition=Ready pod/llm-mini-infer-hostcheck-loader
+#   kubectl -n llm-mini-infer cp ./inputs/. llm-mini-infer-hostcheck-loader:/inputs/  # a local folder laid out as below
+#   kubectl -n llm-mini-infer delete pod llm-mini-infer-hostcheck-loader  # before the Job: it mounts the claim
+#
+# The folder (docs/operations.md, "The host check"):
+#   frames/          JPEG images (.jpg or .jpeg), each sent once (the check says how many its loads need, and stops
+#                    when there are fewer: at the default rates, about 1,000)
+#   prompt.md        the system prompt (or prompt.txt)
+#   schema.json      the JSON schema, sent as response_format's json_schema
+#   user.txt         optional: the user turn's text beside each image
+#   reference.json   optional: references for this workload (a healthy host's results: the `as_reference` part of a
+#                    host check's JSON report); without it, no verdict against a reference
+# `llm_mini_infer.synthetic.write_inputs` writes the synthetic workload in this layout, an example to start from. Delete
+# the claim after the check to measure your own images, prompt and schema.
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: llm-mini-infer-hostcheck-inputs
+  namespace: llm-mini-infer
+spec:
+  accessModes: ["ReadWriteOnce"]
+  resources:
+    requests:
+      storage: 1Gi  # about 1,000 images, the prompt and the schema
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  name: llm-mini-infer-hostcheck-loader
+  namespace: llm-mini-infer
+  labels:
+    app.kubernetes.io/name: llm-mini-infer-hostcheck
+spec:
+  restartPolicy: Never
+  enableServiceLinks: false
+  containers:
+    - name: loader
+      image: busybox:1.37.0  # sleep, and tar for kubectl cp
+      command: ["sleep", "3600"]
+      resources:
+        requests:
+          cpu: 100m
+          memory: 64Mi
+        limits:
+          cpu: 500m
+          memory: 256Mi
+      volumeMounts:
+        - name: inputs
+          mountPath: /inputs
+  volumes:
+    - name: inputs
+      persistentVolumeClaim:
+        claimName: llm-mini-infer-hostcheck-inputs

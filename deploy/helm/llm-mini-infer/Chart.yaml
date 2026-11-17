@@ -1,0 +1,15 @@
+apiVersion: v2
+name: llm-mini-infer
+description: "llm-mini-infer: a lean OpenAI-compatible LLM server (one GPU per replica)"
+type: application
+home: https://github.com/deftinfer/llm-mini-infer
+sources:
+  - https://github.com/deftinfer/llm-mini-infer
+maintainers:
+  - name: deftinfer
+    url: https://github.com/deftinfer
+version: 0.1.0
+# pyproject's version: a release (git tag v<version>) publishes the image ghcr.io/deftinfer/llm-mini-infer:<version>, the
+# default tag (values.yaml); tests/deploy/test_image_build.py keeps the three equal (docs/development.md, "Releasing").
+# `version` is the chart's own: it goes up when the chart changes
+appVersion: "0.8.0"

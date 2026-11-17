@@ -1,0 +1,142 @@
+# llm-mini-infer's chart (docs/operations.md, "Kubernetes"). The defaults are cluster-agnostic: your own settings
+# (the model, node selection, secrets, a cache claim) go in its own values file, such as tests/data/chart-values.yaml.
+# The release's resource names: "<release>-<nameOverride or the chart name>" (the release alone when it holds
+# that name), or fullnameOverride whole
+nameOverride: ""
+fullnameOverride: ""
+image:
+  # deploy/Dockerfile's image, published to GHCR by .github/workflows/image.yml (docs/operations.md, "The image").
+  # "" is the chart's appVersion, a release's tag (pyproject's version); between releases, a commit main published
+  # (its first 7 characters, immutable), never `main` (moving)
+  repository: ghcr.io/deftinfer/llm-mini-infer
+  tag: ""
+  pullPolicy: IfNotPresent
+# A private registry's credentials: a docker-registry Secret in the release's namespace, which the chart never creates
+# (for GHCR, a token with read:packages), by name, e.g. [{name: ghcr-llm-mini-infer}]
+imagePullSecrets: []
+# The image runs as its llm-mini-infer user (uid and gid 10001); fsGroup lets it write a mounted claim
+# (cache.existingClaim) whose files another user owns, changing ownership only when the volume's root does not match
+podSecurityContext:
+  runAsNonRoot: true
+  runAsUser: 10001
+  runAsGroup: 10001
+  fsGroup: 10001
+  fsGroupChangePolicy: OnRootMismatch
+
+replicaCount: 1  # one GPU each
+
+model:
+  # Required. A Hugging Face repo id, downloaded at startup into the cache volume (e.g. Qwen/Qwen3.8-27B-FP8), or a
+  # checkpoint's path on the cache volume (cache.existingClaim). It is the served name, unless
+  # config.model.served_model_name is set.
+  id: ""
+  revision: ""  # a branch, tag or commit; "" is main
+  hfToken:  # an existing Secret holding Hugging Face's token (the chart creates no secret); "" = no token
+    secretName: ""
+    secretKey: HF_TOKEN
+
+apiKey:  # an existing Secret holding the key clients send (Authorization: Bearer); "" = no key (every path open)
+  secretName: ""
+  secretKey: VLLM_API_KEY
+
+# llm-mini-infer's configuration file (llm_mini_infer/config.py; docs/operations.md, "Settings"): only what differs from
+# the derived defaults, which the server logs at startup with the reason for each. model.path and model.revision come
+# from `model` above. It replaces the image's file (deploy/config.yaml), so it repeats that file's settings; the
+# workload's own (a shorter context, fewer images a request, a client's longer wait in the drain) go in your own
+# values.
+config:
+  runner:
+    kind: cuda
+  scheduler:
+    seed: 0  # as the image's file: unseeded requests draw from its generator (the same seeds every start)
+  structured_output:  # guidance with compact JSON, as the image's file: canonical forcing (a grammar's forced tokens
+    # cost no step) and fewer tokens
+    backend: guidance
+    disable_any_whitespace: true
+  server:
+    port: 8000
+    # After SIGTERM: served this long while /health answers 503, so the Service and balancers drop the pod first:
+    # above the readiness probe's detection (probes.readiness: 2 failures x 5 s) and the endpoints' update
+    drain_grace_s: 20
+    drain_timeout_s: 30  # then in-flight requests get this long to finish (the engine's default)
+
+# The cache volume at /cache: the Hugging Face cache (the weights, sized for Gemma 4 31B in FP8 with its assistant, the
+# largest model it serves) and the compile caches. An emptyDir by default (a download in every new pod), or an
+# existing claim (ReadWriteMany for more than one replica).
+cache:
+  emptyDir:
+    sizeLimit: 100Gi
+  existingClaim: ""
+# /dev/shm: the image pool's pixel arena (dev.images.arena_mb: at least 256 MiB, four images of max_pixels)
+shm:
+  sizeLimit: 2Gi
+
+# CPU and memory: the derived defaults read the container's CPU quota (one core for the engine, one per frontend, the
+# image pool on the rest, at most 8), so set limits: 10 CPUs is the most they use (the engine, one frontend, eight image
+# workers). 32Gi holds the container's working set (memory the kernel cannot reclaim), sized for Gemma 4 31B FP8 with
+# its assistant, the largest model it serves. It leaves room for the image path's worst case (eight workers each
+# decoding an image of images.max_source_pixels, about 0.5 GiB, and the frontend's request bodies) and for the page
+# cache while the weights load. A limit reclaims the rest of the checkpoint's page cache. Equal requests and limits
+# make the pod Guaranteed.
+resources:
+  requests:
+    cpu: "10"
+    memory: 32Gi
+  limits:
+    cpu: "10"
+    memory: 32Gi
+gpu:
+  resource: nvidia.com/gpu
+  count: 1
+
+runtimeClassName: ""
+tolerations: []
+# Nodes llm-mini-infer may run on (node affinity terms, required)
+nodeSelectorTerms: []
+# Pods llm-mini-infer must never share a node with (required anti-affinity per hostname): GPU workloads that already
+# claim the node's GPU memory, in any namespace. llm-mini-infer's own replicas are always kept apart.
+avoidPodsWithLabels: []
+# Label sets other workloads select pods by (a router's engine discovery, a Service's selector): the chart refuses to
+# render pod labels that carry every label of one of them. Each: {name: ..., labels: {key: value, ...}}.
+notSelectedBy: []
+podLabels: {}
+podAnnotations: {}
+env: []  # more environment variables for the container
+
+probes:
+  # Until the first 200 from /health: the download, the weights, the warm-up (CUDA graphs, kernels)
+  startup:
+    initialDelaySeconds: 10
+    periodSeconds: 10
+    failureThreshold: 90
+  readiness:  # /health: 503 from the start of a drain, or once the engine stopped
+    periodSeconds: 5
+    timeoutSeconds: 3
+    failureThreshold: 2
+  liveness:  # /live: never /health, which answers 503 while draining
+    periodSeconds: 10
+    timeoutSeconds: 5
+    failureThreshold: 3
+
+# Above config.server.drain_grace_s + drain_timeout_s by more than 20 s, the processes' stop (the chart checks it)
+terminationGracePeriodSeconds: 90
+progressDeadlineSeconds: 1800  # an image pull, the model's download and the warm-up
+
+service:
+  port: 80
+  # A headless Service beside it (ready pods' IPs), so a client-side balancer spreads requests across replicas, not
+  # connections
+  headless: true
+
+pdb:
+  enabled: false
+  maxUnavailable: 1
+
+serviceMonitor:
+  enabled: false
+  labels: {}
+  interval: ""
+
+serviceAccount:
+  create: true
+  name: ""  # default: the release's full name when created, else "default"

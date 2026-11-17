@@ -1,0 +1,236 @@
+# llm-mini-infer's checks on GitHub's runners (docs/development.md, "CI and style"): lint, the Helm chart, the CPU test
+# suite, tools/'s own test (fetch_tools) and a short fuzz smoke. The image is image.yml's; the GPU tests run from the GPU
+# tests' image (tests/gpu-image.Dockerfile) on a GPU host, not here.
+#
+#   push to main, a pull request   every job; a change to docs only (docs/, *.md) runs none, and the fuzz smoke runs
+#                                  only when llm_mini_infer/, tests/, the lock or this file change beyond comments and
+#                                  docstrings (the changes job, .github/scripts/ci_changes.py)
+#   workflow_dispatch              every job, on any branch
+name: ci
+
+on:
+  push:
+    branches: [main]
+    paths-ignore:
+      - "docs/**"
+      - "**/*.md"
+  pull_request:
+    paths-ignore:
+      - "docs/**"
+      - "**/*.md"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+# A pull request's runs group by its number: a merged one's last run reports main's ref, and must not cancel main's
+concurrency:
+  group: ci-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
+
+env:
+  UV_VERSION: "0.13.5"  # deploy/Dockerfile's
+  PYTHONUNBUFFERED: "1"
+
+jobs:
+  # ruff at uv.lock's version, without the project's environment
+  lint:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1  # v7.0.1
+        with:
+          persist-credentials: false
+      - uses: astral-sh/setup-uv@07a047e608db84b3d8c06cd9a7c7dcc9c355c18e  # v10.3.2
+        with:
+          version: ${{ env.UV_VERSION }}
+          enable-cache: false
+      - name: ruff
+        run: |
+          ruff=$(python3 -c 'import tomllib; print(next(p["version"] for p in tomllib.load(open("uv.lock", "rb"))["package"] if p["name"] == "ruff"))')
+          uvx "ruff==$ruff" check .
+
+  # The chart with its own values and with an example cluster's (tests/data/chart-values.yaml), and the examples: helm
+  # lint, helm template, kubeconform (the ServiceMonitor's schema from the CRD catalogue, at a pinned commit). helm and kubeconform are the
+  # repository's pinned copies (tools/fetch_tools.py, each download checked against its sha256), cached by the pins
+  chart:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1  # v7.0.1
+        with:
+          persist-credentials: false
+      - uses: astral-sh/setup-uv@07a047e608db84b3d8c06cd9a7c7dcc9c355c18e  # v10.3.2
+        with:
+          version: ${{ env.UV_VERSION }}
+          enable-cache: false
+      - uses: actions/cache@55cc8345863c7cc4c66a329aec7e433d2d1c52a9  # v6.1.0
+        with:
+          path: tools/bin
+          key: tools-${{ runner.os }}-${{ hashFiles('tools/fetch_tools.py') }}
+      - name: helm and kubeconform
+        run: |
+          uv run tools/fetch_tools.py helm kubeconform
+          echo "$GITHUB_WORKSPACE/tools/bin/linux-amd64" >> "$GITHUB_PATH"
+      - name: lint, render, validate
+        run: |
+          chart=deploy/helm/llm-mini-infer
+          mkdir -p "$RUNNER_TEMP/rendered"
+          render() {  # a name for the rendering, then helm's own arguments
+            name=$1
+            shift
+            helm lint "$chart" "$@"
+            helm template llm-mini-infer "$chart" --namespace llm-mini-infer "$@" > "$RUNNER_TEMP/rendered/$name.yaml"
+          }
+          render default --set model.id=Qwen/Qwen3.8-27B-FP8
+          render cluster -f tests/data/chart-values.yaml
+          kubeconform -strict -summary -schema-location default \
+            -schema-location 'https://raw.githubusercontent.com/datreeio/CRDs-catalog/89c736bdde38b5fecd0f8436ec5f3aa3679a3b86/{{.Group}}/{{.ResourceKind}}_{{.ResourceAPIVersion}}.json' \
+            "$RUNNER_TEMP"/rendered/*.yaml deploy/helm/examples/*.yaml
+
+  # The CPU suite (GPU tests skip), with the model fixtures (tests/scripts/fetch_fixtures.py: tokenizers and
+  # configurations, no weights, cached by their pins) and helm (tests/deploy/test_helm.py). Three shards of about equal
+  # time run on their own runners, each in two pytest-xdist workers (the runner's two vCPUs); a file's tests stay on one
+  # worker, so a module's server starts once. The last shard takes every directory that the others do not name, so no
+  # new one is left out.
+  # Memory decides what runs together: the runner has 7.8 GB and 3 GB of swap, and when both are full it ends the job
+  # (its shutdown signal, or a hang that keeps no log). A test server is 0.7 GB (1.5 GB on Gemma's files), with an
+  # image pool 1.6 to 2.5 GB, and a pytest worker 0.8 to 1.9 GB. So the tests' servers start no image pool unless a
+  # test asks (tests/support/api_util.py), and the tests whose servers leave no room for a second worker's carry the
+  # serial mark: those with an image pool, and in the structured shard those that start a server beside their module's
+  tests:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 30
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - shard: api
+            paths: tests/api
+          - shard: structured
+            paths: tests/structured tests/tool_calls
+          - shard: other
+            paths: tests --ignore=tests/api --ignore=tests/structured --ignore=tests/tool_calls
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1  # v7.0.1
+        with:
+          persist-credentials: false
+      - uses: astral-sh/setup-uv@07a047e608db84b3d8c06cd9a7c7dcc9c355c18e  # v10.3.2
+        with:
+          version: ${{ env.UV_VERSION }}
+          enable-cache: true
+          cache-dependency-glob: uv.lock
+      - uses: actions/cache@55cc8345863c7cc4c66a329aec7e433d2d1c52a9  # v6.1.0
+        with:
+          path: tools/bin
+          key: tools-${{ runner.os }}-${{ hashFiles('tools/fetch_tools.py') }}
+      - uses: actions/cache@55cc8345863c7cc4c66a329aec7e433d2d1c52a9  # v6.1.0
+        with:
+          path: tests/.fixtures
+          key: fixtures-${{ hashFiles('tests/scripts/fetch_fixtures.py', 'tests/scripts/template_corpus.py') }}
+      - name: environment
+        run: |
+          uv sync --locked
+          uv run tools/fetch_tools.py helm
+          uv run --locked tests/scripts/fetch_fixtures.py
+      - name: pytest
+        env:
+          PATHS: ${{ matrix.paths }}
+        # The workers, then alone the serial tests (a timing bound that needs a whole core, servers that need the
+        # runner's memory): a shard without one collects none (pytest's exit 5). Both run, and either one's failure
+        # fails the step. faulthandler_timeout dumps every thread's stack when a test runs past 300 s. `timeout` ends
+        # a run that hangs, inside the step, with the step's log kept (a job that reaches its limit keeps none). A
+        # killed pytest reports nothing and stops no server: the step names the limit it ran into, and after a pytest
+        # that failed, the servers whose pytest process is gone are killed, each with its process group
+        # (tests/support/api_util.py's sweep_stale). The limits, their minutes to kill and the sweeps end under the
+        # step's limit. ci_sample.py prints the runner's memory each minute ([mem]), the processes 30 s before a
+        # limit ([hang]), and at the end the peaks and what was left ([end])
+        timeout-minutes: 26
+        run: |
+          status=0
+          stop="$RUNNER_TEMP/sample-stop" dump="$RUNNER_TEMP/sample-dump-at"
+          python3 .github/scripts/ci_sample.py --watch $$ --stop "$stop" --dump-at "$dump" &
+          guarded() {  # a limit in seconds, then pytest's arguments
+            echo $(( $(date +%s) + $1 - 30 )) > "$dump"
+            timeout --kill-after=60 "$1" \
+              uv run --locked pytest -q -p no:cacheprovider -ra -o faulthandler_timeout=300 "${@:2}" && return
+            code=$?
+            [ $code -lt 124 ] || echo "::error::pytest ran into its limit of $1 s (exit $code): see [hang]"
+            timeout 30 uv run --locked python -c "from tests.support.api_util import sweep_stale; sweep_stale()"
+            return $code
+          }
+          guarded 840 -n 2 --dist loadfile -m "not serial" $PATHS || status=$?
+          guarded 480 -m serial $PATHS || [ $? -eq 5 ] || status=1
+          touch "$stop"
+          wait
+          exit $status
+      - uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9  # v7.0.2
+        if: failure()
+        with:
+          name: fuzz-failures-${{ matrix.shard }}
+          path: results/fuzz/failures/
+          if-no-files-found: ignore
+
+  # tools/'s test (tools/tests/: fetch_tools) in tools/'s own environment (tools/uv.lock), apart from the root project's
+  tools:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1  # v7.0.1
+        with:
+          persist-credentials: false
+      - uses: astral-sh/setup-uv@07a047e608db84b3d8c06cd9a7c7dcc9c355c18e  # v10.3.2
+        with:
+          version: ${{ env.UV_VERSION }}
+          enable-cache: true
+          cache-dependency-glob: tools/uv.lock
+      - name: environment
+        run: uv sync --project tools --locked
+      - name: pytest
+        run: uv run --project tools --locked pytest tools/tests -q -p no:cacheprovider
+
+  # Whether the fuzz smoke has anything to check: the push's or the pull request's files against its base, on the
+  # runner's own Python (.github/scripts/ci_changes.py); a dispatch always fuzzes
+  changes:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    outputs:
+      fuzz: ${{ steps.changes.outputs.fuzz }}
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1  # v7.0.1
+        with:
+          persist-credentials: false
+          fetch-depth: 0
+      - id: changes
+        env:
+          EVENT: ${{ github.event_name }}
+          BASE: ${{ github.event_name == 'pull_request' && github.event.pull_request.base.sha || github.event.before }}
+        run: |
+          if [ "$EVENT" = workflow_dispatch ]; then echo fuzz=true >> "$GITHUB_OUTPUT"; exit 0; fi
+          python3 .github/scripts/ci_changes.py "$BASE" "$GITHUB_SHA" >> "$GITHUB_OUTPUT"
+
+  # Every fuzz suite, two seeds, 500 workloads each (a full campaign is 4 x 20,000, before scheduler changes merge)
+  fuzz:
+    needs: changes
+    if: needs.changes.outputs.fuzz == 'true'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 60
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1  # v7.0.1
+        with:
+          persist-credentials: false
+      - uses: astral-sh/setup-uv@07a047e608db84b3d8c06cd9a7c7dcc9c355c18e  # v10.3.2
+        with:
+          version: ${{ env.UV_VERSION }}
+          enable-cache: true
+          cache-dependency-glob: uv.lock
+      - name: environment
+        run: uv sync --locked
+      - name: fuzz smoke
+        run: uv run --locked python -m tests.scripts.fuzz_campaign --examples 500 --seeds 1 2 --jobs 4
+      - uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9  # v7.0.2
+        if: failure()
+        with:
+          name: fuzz
+          path: results/fuzz/
+          if-no-files-found: ignore

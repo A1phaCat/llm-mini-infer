@@ -1,0 +1,72 @@
+# llm-mini-infer on one machine, one server per GPU (docs/operations.md, "docker compose"): for local and single-machine
+# runs. On Kubernetes: the Helm chart in deploy/helm/llm-mini-infer/ (docs/operations.md, "Kubernetes").
+#
+#   export LLM_MINI_INFER_MODEL_DIR=/models/gemma-4-31B-it-FP8-block   # the checkpoint on the host
+#   export LLM_MINI_INFER_IMAGE=ghcr.io/deftinfer/llm-mini-infer:0.8.0   # a release's image
+#   docker compose -f deploy/docker-compose.yaml up -d     # without LLM_MINI_INFER_IMAGE: builds deploy/Dockerfile once
+#
+# The image runs as its llm-mini-infer user (uid 10001), which owns /cache: a new llm-mini-infer-cache volume takes that
+# owner. A volume created by a container running as root is root's:
+# `docker volume rm llm-mini-infer_llm-mini-infer-cache` (caches only).
+#   docker compose -f deploy/docker-compose.yaml stop      # drains the requests in flight first
+#   docker compose -f deploy/docker-compose.yaml run --rm llm-mini-infer hostcheck # the host check (docs/operations.md)
+name: llm-mini-infer
+services:
+  llm-mini-infer:
+    image: ${LLM_MINI_INFER_IMAGE:-llm-mini-infer:latest}
+    build:
+      context: ..
+      dockerfile: deploy/Dockerfile
+      args:
+        VERSION: ${VERSION:-unknown}             # the OCI version label: uv version --short (pyproject's)
+        GIT_COMMIT: ${GIT_COMMIT:-unknown}       # the build id: git rev-parse --short=7 HEAD
+        GIT_REVISION: ${GIT_REVISION:-unknown}   # the OCI revision label: git rev-parse HEAD
+    init: true                   # tini as PID 1: it reaps children and passes SIGTERM to the launcher alone
+    restart: unless-stopped      # a crash or a hung engine exits 1 and comes back; `docker compose stop` stays stopped
+    # SIGTERM drains (llm_mini_infer/launcher.py): drain_grace_s (0: behind a health-checking router, set it above the
+    # router's detection time) + drain_timeout_s (30) + about 20 s to stop the frontends, the engine and the image pool.
+    # Past it docker sends SIGKILL.
+    stop_signal: SIGTERM
+    stop_grace_period: 60s
+    ports:
+      - "${LLM_MINI_INFER_PORT:-8000}:8000"
+    # The model's own settings (deploy/config.yaml holds none), e.g. Gemma 4 31B in FP8: the name it is served under
+    # (a mounted checkpoint is otherwise served under its path) and its assistant as the drafter (downloaded into the
+    # cache volume by repo id; k is llm-mini-infer's default with an assistant). The workload's settings follow the same
+    # way (model.max_model_len, images.max_per_request, images.max_soft_tokens, ...)
+    # command: ["serve", "--set", "model.served_model_name=RedHatAI/gemma-4-31B-it-FP8-block",
+    #           "--set", "speculative.model=google/gemma-4-31B-it-assistant"]
+    # The API key clients must send (Authorization: Bearer) and Hugging Face's token, from the host's environment when
+    # set (unset: no key, every path open; no token). Never in config.yaml (llm_mini_infer/api/auth.py)
+    environment:
+      - LLM_MINI_INFER_API_KEY
+      - VLLM_API_KEY
+      - HF_TOKEN
+    shm_size: 2gb                # the image pool's pixel arena (dev.images.arena_mb; docker's default is 64 MB)
+    volumes:
+      - ${LLM_MINI_INFER_MODEL_DIR:?set LLM_MINI_INFER_MODEL_DIR to the checkpoint's directory}:/models/checkpoint:ro
+      - ./config.yaml:/etc/llm-mini-infer/config.yaml:ro
+      - llm-mini-infer-cache:/cache  # FlashInfer's workspace, CuTe DSL's compiles, the driver's PTX cache, HF downloads
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: 1
+              capabilities: [gpu]
+    # /health answers 200 once the model is loaded and warmed up, 503 while draining or once the engine stopped (the
+    # check a load balancer makes). bash's /dev/tcp: the image has no curl; a Python start every 10 s costs more CPU.
+    healthcheck:
+      test: ["CMD", "bash", "-c", "exec 3<>/dev/tcp/127.0.0.1/8000 && printf 'GET /health HTTP/1.1\\r\\nHost: health\\r\\nConnection: close\\r\\n\\r\\n' >&3 && head -n 1 <&3 | grep -q ' 200 '"]
+      interval: 10s
+      timeout: 5s
+      retries: 3
+      start_period: 300s         # weights, warm-up and, on a first start with an empty cache volume, the JIT compiles
+    logging:
+      driver: json-file
+      options:
+        max-size: "100m"         # one line per request (metadata only): rotate
+        max-file: "5"
+
+volumes:
+  llm-mini-infer-cache:

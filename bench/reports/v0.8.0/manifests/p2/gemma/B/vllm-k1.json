@@ -1,0 +1,166 @@
+{
+ "schema": 1,
+ "arm": "vllm-k1",
+ "family": "B",
+ "engine": "vllm",
+ "model": "RedHatAI/gemma-4-31B-it-FP8-block",
+ "drafter": "google/gemma-4-31B-it-assistant",
+ "revisions": {
+  "RedHatAI/gemma-4-31B-it-FP8-block": "d7242548c457ab4b45bd3adb8937f2659af4739d",
+  "google/gemma-4-31B-it-assistant": "627c5ec1458b9086b841a91e0512fd31fd2fbbf1"
+ },
+ "k": 1,
+ "k_source": "vLLM v0.33.0's code default: the assistant's n_predict",
+ "batch_invariant": false,
+ "batch_invariant_source": "default",
+ "argv": [
+  "vllm",
+  "serve",
+  "RedHatAI/gemma-4-31B-it-FP8-block",
+  "--host",
+  "127.0.0.1",
+  "--port",
+  "8000",
+  "--max-model-len",
+  "8184",
+  "--max-num-seqs",
+  "64",
+  "--gpu-memory-utilization",
+  "0.9",
+  "--enable-prefix-caching",
+  "--limit-mm-per-prompt",
+  "{\"image\":16}",
+  "--seed",
+  "0",
+  "--enable-prompt-tokens-details",
+  "--structured-outputs-config",
+  "{\"backend\":\"guidance\",\"disable_any_whitespace\":true}",
+  "--speculative-config",
+  "{\"method\":\"mtp\",\"model\":\"google/gemma-4-31B-it-assistant\",\"num_speculative_tokens\":1}"
+ ],
+ "env_names": [
+  "CUDA_CACHE_PATH",
+  "CUDA_HOME",
+  "FLASHINFER_WORKSPACE_BASE",
+  "HF_HOME",
+  "HF_HUB_OFFLINE",
+  "HOME",
+  "LANG",
+  "LD_LIBRARY_PATH",
+  "NVIDIA_DRIVER_CAPABILITIES",
+  "NVIDIA_VISIBLE_DEVICES",
+  "PATH",
+  "PYTHONUNBUFFERED",
+  "TORCHINDUCTOR_CACHE_DIR",
+  "TRITON_CACHE_DIR",
+  "VLLM_CACHE_ROOT"
+ ],
+ "deviations": [],
+ "status": "ok",
+ "status_line": null,
+ "versions": {
+  "vllm": "0.33.0",
+  "torch": "2.14.0+cu130",
+  "flashinfer-python": "0.7.2.post1",
+  "flashinfer-cubin": "0.7.2.post1",
+  "flashinfer-jit-cache": "0.7.2.post1+cu130",
+  "triton": "3.8.0",
+  "xgrammar": "0.2.8",
+  "llguidance": "1.7.6",
+  "transformers": "5.20.2"
+ },
+ "source": "venv",
+ "resolved": {
+  "kv_tokens": 57784,
+  "max_running_requests": 64,
+  "prefix_cache": true,
+  "attention_backend": "TRITON_ATTN (vLLM forces it for Gemma 4: FA4 not available)",
+  "fp8_kernel": "DeepGemmFp8BlockScaledMMKernel",
+  "chunk_tokens": 8192,
+  "memory_fraction": 0.9,
+  "batch_invariant_active": false,
+  "spec": "mtp k=1",
+  "context": 8184,
+  "cuda_graphs": "captured, 0.25 GiB",
+  "model_runner": "v2",
+  "kv_dtype": null,
+  "notes": null
+ },
+ "smoke": {
+  "ok": true,
+  "failures": [],
+  "scene_prompt_tokens": 2349,
+  "scene_completion_tokens": 203,
+  "scene_cached_tokens_second": 2336,
+  "scene_valid": true,
+  "scene_compact": true,
+  "chat_prompt_tokens": 1037,
+  "chat_completion_tokens": 64,
+  "reasoning_free": true,
+  "verify_steps": 258.0,
+  "seconds": 10.9
+ },
+ "startup": {
+  "ready_s": 101.13,
+  "first_answer_s": 101.19,
+  "cold": null,
+  "wiped": null,
+  "evicted": null,
+  "stopped": {
+   "signal": "SIGINT",
+   "seconds": 1.02,
+   "port_free": true
+  }
+ },
+ "loads": [
+  {
+   "name": "scene-c1",
+   "file": "scene-c1.json",
+   "exit": 0,
+   "seconds": 300.4,
+   "sm_mhz_median": 2422.0,
+   "power_w_median": 325.08,
+   "throttle": []
+  },
+  {
+   "name": "scene-c64",
+   "file": "scene-c64.json",
+   "exit": 0,
+   "seconds": 93.7,
+   "sm_mhz_median": 2377.0,
+   "power_w_median": 470.485,
+   "throttle": [
+    4
+   ]
+  }
+ ],
+ "host": {
+  "gpu": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
+  "power_limit_w": 600.0,
+  "power_max_w": 600.0,
+  "sm_clock_max_mhz": 2430.0,
+  "memory_mib": 97887.0,
+  "driver": "595.91.07",
+  "cuda": "13.2",
+  "cpu": "AMD EPYC 9355 32-Core Processor",
+  "cpus": 128,
+  "cpu_quota": 13.6,
+  "kernel": "6.8.0-147-generic"
+ },
+ "client": {
+  "seed": 0,
+  "warmup_requests": 20,
+  "warmup_s": 10.0,
+  "duration_s": 60.0,
+  "tail_s": 30.0,
+  "timeout_s": 120.0,
+  "python": "3.12.3"
+ },
+ "order": [
+  "vllm-k1",
+  "vllm-k4"
+ ],
+ "when": "2026-11",
+ "image": "sha256:ad69be85478c6d92b35740e57192dde61aef86d649578a16e4b7b02cc93c6b8b",
+ "commit": "2b321dbd00013dcfe7f5f72b932fe7748aa2c4d0"
+}

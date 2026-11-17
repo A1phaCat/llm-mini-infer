@@ -1,0 +1,14 @@
+{
+ "ok": true,
+ "failures": [],
+ "scene_prompt_tokens": 2349,
+ "scene_completion_tokens": 203,
+ "scene_cached_tokens_second": 2336,
+ "scene_valid": true,
+ "scene_compact": true,
+ "chat_prompt_tokens": 1037,
+ "chat_completion_tokens": 64,
+ "reasoning_free": true,
+ "verify_steps": 132.0,
+ "seconds": 11.05
+}

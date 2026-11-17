@@ -1,0 +1,52 @@
+llm-mini-infer's image: third-party notices
+===========================================
+
+This image holds llm-mini-infer, under the Apache License 2.0 (its LICENSE is in
+site-packages/llm_mini_infer-*.dist-info/licenses/), and third-party software, each under its own licence, which the
+image keeps where its package installs it. Here site-packages is /opt/venv/lib/python3.12/site-packages.
+
+
+NVIDIA
+
+The base image (the label org.opencontainers.image.base.name) is NVIDIA's, under the NVIDIA Deep Learning Container
+License: /NGC-DL-CONTAINER-LICENSE. This image is built on it and adds llm-mini-infer and its dependencies; NVIDIA does
+not endorse it. The CUDA libraries in the nvidia-* wheels, the copies other wheels bundle, the NVIDIA tools some wheels
+carry beside them (Triton's ptxas and disassemblers, CUPTI's profiler libraries) and CuTe DSL (the nvidia-cutlass-dsl
+wheels, which FlashInfer uses) are under the licence of the wheel that carries each.
+
+
+CUTLASS
+
+llm-mini-infer's FP8 GEMM library (/opt/llm-mini-infer/kernels/) is compiled from CUTLASS's headers, so it contains
+CUTLASS code: BSD-3-Clause, its text at the end of site-packages/llm_mini_infer-*.dist-info/licenses/LICENSE.
+
+
+Python distributions (/opt/venv)
+
+site-packages/*.dist-info/ names each distribution with its version and holds its licence files (nvidia-cusparselt-cu13
+keeps its own at site-packages/nvidia/cusparselt/LICENSE.txt). The wheels that carry no licence file:
+- cuda-toolkit: NVIDIA's CUDA Toolkit meta-package, which installs nothing but its metadata: the CUDA Toolkit's
+  licence, site-packages/nvidia_cuda_runtime-*.dist-info/licenses/License.txt
+- flashinfer-jit-cache, flashinfer-jit-cache-sm120f: FlashInfer's AOT modules, under FlashInfer's licence (Apache-2.0),
+  site-packages/flashinfer_python-*.dist-info/licenses/LICENSE
+- nvidia-ml-py: BSD-3-Clause, as the header of site-packages/pynvml.py states it
+- tokenizers: Apache-2.0, as its metadata's classifier states (the text: llm-mini-infer's LICENSE); its SBOM,
+  site-packages/tokenizers-*.dist-info/sboms/, lists the Rust crates compiled into it and their licences
+
+torchvision's wheel carries only torchvision's licence. The libraries it bundles (site-packages/torchvision.libs/) are
+under their projects' licences, which Pillow's licence file reproduces a section each
+(site-packages/pillow-*.dist-info/licenses/LICENSE), or NVIDIA's:
+- libjpeg: Pillow's LIBJPEG
+- libpng16: Pillow's LIBPNG
+- libwebp, libsharpyuv: Pillow's LIBWEBP
+- libz: Pillow's ZLIB
+- libnvjpeg, libcudart: the CUDA runtime wheel's, site-packages/nvidia_cuda_runtime-*.dist-info/licenses/License.txt
+
+
+apt packages (Ubuntu 24.04, and the base image's CUDA packages)
+
+`dpkg -l` lists them, and each one's copyright file is /usr/share/doc/<package>/copyright; NVIDIA's CUDA packages,
+which have none, are under the CUDA Toolkit's licence and the container licence (above). Their sources, the GPL and
+LGPL packages' among them, are in Ubuntu's archive as https://snapshot.ubuntu.com keeps it: this image's packages at
+the snapshot /etc/apt/sources.list.d/ubuntu.sources names, the base image's own at a snapshot of a time its version
+was current. With that snapshot as a deb-src source: apt-get source <source package>=<version>.

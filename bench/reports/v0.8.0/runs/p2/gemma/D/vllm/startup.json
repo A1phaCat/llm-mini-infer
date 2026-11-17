@@ -1,0 +1,40 @@
+{
+ "starts": [
+  {
+   "kind": "cold",
+   "ready_s": 203.89,
+   "first_answer_s": 205.14,
+   "stopped": {
+    "signal": "SIGINT",
+    "seconds": 0.87,
+    "port_free": true
+   }
+  },
+  {
+   "kind": "warm",
+   "ready_s": 68.15,
+   "first_answer_s": 68.21
+  }
+ ],
+ "wiped": [
+  {
+   "removed": 8
+  }
+ ],
+ "evicted": [
+  {
+   "files": 20,
+   "bytes": 33295640697,
+   "errors": 0,
+   "resident_before": null,
+   "resident_after": null
+  },
+  {
+   "files": 9,
+   "bytes": 971247974,
+   "errors": 0,
+   "resident_before": null,
+   "resident_after": null
+  }
+ ]
+}

@@ -1,0 +1,36 @@
+{
+ "starts": [
+  {
+   "kind": "cold",
+   "ready_s": 155.06,
+   "first_answer_s": 155.27,
+   "stopped": {
+    "signal": "SIGINT",
+    "seconds": 1.07,
+    "port_free": true
+   }
+  },
+  {
+   "kind": "warm",
+   "ready_s": 61.67,
+   "first_answer_s": 61.8
+  }
+ ],
+ "wiped": [
+  {
+   "removed": 5
+  },
+  {
+   "removed": 1
+  }
+ ],
+ "evicted": [
+  {
+   "files": 83,
+   "bytes": 30890063787,
+   "errors": 0,
+   "resident_before": null,
+   "resident_after": null
+  }
+ ]
+}

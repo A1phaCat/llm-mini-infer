@@ -1,0 +1,5 @@
+# The GPU tests' image's build context (tests/gpu-image.Dockerfile): the commit's tracked files without llm_mini_infer/,
+# all of them wanted. BuildKit reads this file in place of the root's .dockerignore, which keeps everything but the
+# package's sources out of the release image's context.
+**/__pycache__
+**/*.py[cod]

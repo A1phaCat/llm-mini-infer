@@ -1,0 +1,29 @@
+# secrets
+.env
+.env.*
+
+# python
+__pycache__/
+*.py[cod]
+.venv/
+*.egg-info/
+
+# build / runtime
+/build/
+/dist/
+*.so
+*.dylib
+
+# every tool's output (tests/support/paths.py)
+/results/
+
+# os / editors
+.DS_Store
+.idea/
+.vscode/
+
+# pinned command-line tools (tools/fetch_tools.py)
+/tools/bin/
+
+# the tests' model fixtures (tests/scripts/fetch_fixtures.py)
+/tests/.fixtures/

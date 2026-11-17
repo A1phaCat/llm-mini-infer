@@ -1,0 +1,739 @@
+{
+ "when": "2026-11",
+ "client": {
+  "host": "Linux-6.8.0-147-generic-x86_64-with-glibc2.39",
+  "python": "3.12.3"
+ },
+ "model": "RedHatAI/gemma-4-31B-it-FP8-block",
+ "workload": {
+  "name": "scene",
+  "mode": "synthetic",
+  "frames": "generated",
+  "sizes": {
+   "1280x720": "75%",
+   "720x1280": "25%"
+  },
+  "prompt_tokens": 2048,
+  "schema_name": "scene",
+  "schema_bytes": 2828,
+  "prompt_chars": 8812,
+  "max_tokens": 512
+ },
+ "stream": true,
+ "temperature": 0.0,
+ "ignore_eos": false,
+ "extra_body": {
+  "chat_template_kwargs": {
+   "enable_thinking": false
+  }
+ },
+ "request_seeds": false,
+ "metrics": true,
+ "warmup_s": 10.0,
+ "duration_s": 60.0,
+ "seed": 0,
+ "requests": null,
+ "warmup_requests": 20,
+ "first_index": 0,
+ "meta": {
+  "engine": "sglang",
+  "arm": "sglang",
+  "family": "A2",
+  "model": "RedHatAI/gemma-4-31B-it-FP8-block",
+  "k": 5,
+  "batch_invariant": false,
+  "unit": "sglang"
+ },
+ "loads": [
+  {
+   "load": "rate 1.527/s, 128 slots",
+   "rate": 1.527,
+   "slots": 128,
+   "measured": 93,
+   "ok": 93,
+   "dropped": 0,
+   "failed": 0,
+   "errors": {},
+   "finish": {
+    "stop": 93
+   },
+   "seconds": 60.0,
+   "offered_rps": 1.55,
+   "served_rps": 1.55,
+   "output_tokens_per_s": 250.0,
+   "e2e_ms": {
+    "n": 93,
+    "p50": 3338.9,
+    "p90": 5289.8,
+    "p99": 5613.5,
+    "mean": 2816.8,
+    "max": 5697.0
+   },
+   "ttft_ms": {
+    "n": 93,
+    "p50": 214.8,
+    "p90": 319.0,
+    "p99": 400.3,
+    "mean": 234.7,
+    "max": 431.1
+   },
+   "tpot_ms": {
+    "n": 93,
+    "p50": 17.49,
+    "p90": 27.09,
+    "p99": 30.01,
+    "mean": 18.74,
+    "max": 30.2
+   },
+   "reply_tokens": {
+    "n": 93,
+    "p50": 199.0,
+    "p90": 297.0,
+    "p99": 300.0,
+    "mean": 161.0,
+    "max": 301.0
+   },
+   "prompt_tokens": {
+    "n": 93,
+    "p50": 2349.0,
+    "p90": 2349.0,
+    "p99": 2349.0,
+    "mean": 2349.0,
+    "max": 2349.0
+   },
+   "in_flight": {
+    "mean": 4.33,
+    "p99": 9,
+    "max": 10
+   },
+   "cache_reported": 93,
+   "cache_hit_rate": 0.8829,
+   "uncached_tokens": {
+    "n": 93,
+    "p50": 275.0,
+    "p90": 275.0,
+    "p99": 275.0,
+    "mean": 275.0,
+    "max": 275.0
+   },
+   "cache_by_turn": null,
+   "engine": {
+    "verify_steps": 3531,
+    "gpu_idle_pct": null,
+    "head_steps": {},
+    "head_dense_reasons": {},
+    "sparse_share": null,
+    "union_tokens": null,
+    "draft_universe_tokens": null,
+    "draft_universe_steps": null,
+    "draft_universe_rebuilds": null,
+    "forced_requests": null,
+    "forced_tokens": null,
+    "eos_free_gated": null,
+    "requests_failed": null,
+    "grammar_errors": null,
+    "generation_tokens": 14735,
+    "forced_tokens_per_request": null,
+    "eos_free_finishes": null,
+    "spec_first_rejections": null,
+    "plans_kept": 0,
+    "plans_kept_since_start": 0
+   },
+   "spec": {
+    "series": "sglang:spec_verify_calls_total",
+    "verify_steps": 4024,
+    "requests": 108,
+    "completion_tokens_minus_one": 16652,
+    "tokens_per_verify": 4.138,
+    "no_usage": 0
+   },
+   "answers": {
+    "152700000": [
+     "2f2059f493efeb5b",
+     23,
+     "stop"
+    ],
+    "152700001": [
+     "a571ea7d5c7c1af1",
+     283,
+     "stop"
+    ],
+    "152700002": [
+     "92901ae44282933a",
+     245,
+     "stop"
+    ],
+    "152700003": [
+     "2f2059f493efeb5b",
+     23,
+     "stop"
+    ],
+    "152700004": [
+     "a08eb0799dee9f7c",
+     249,
+     "stop"
+    ],
+    "152700005": [
+     "5bd260159b111b58",
+     299,
+     "stop"
+    ],
+    "152700006": [
+     "2f2059f493efeb5b",
+     23,
+     "stop"
+    ],
+    "152700007": [
+     "2f2059f493efeb5b",
+     23,
+     "stop"
+    ],
+    "152700008": [
+     "2f2059f493efeb5b",
+     23,
+     "stop"
+    ],
+    "152700009": [
+     "2f2059f493efeb5b",
+     23,
+     "stop"
+    ],
+    "152700010": [
+     "a8f6760051831ffb",
+     199,
+     "stop"
+    ],
+    "152700011": [
+     "79f1cd2b120b0db5",
+     277,
+     "stop"
+    ],
+    "152700012": [
+     "2f2059f493efeb5b",
+     23,
+     "stop"
+    ],
+    "152700013": [
+     "ca0d061d11d489e6",
+     283,
+     "stop"
+    ],
+    "152700014": [
+     "1351196d6f5f159e",
+     249,
+     "stop"
+    ],
+    "152700015": [
+     "8272b972554a9da5",
+     300,
+     "stop"
+    ],
+    "152700016": [
+     "9fdb510b75758d15",
+     235,
+     "stop"
+    ],
+    "152700017": [
+     "771cdb5b88b9454b",
+     301,
+     "stop"
+    ],
+    "152700018": [
+     "0757589351913629",
+     207,
+     "stop"
+    ],
+    "152700019": [
+     "93fd8311d96d2c16",
+     295,
+     "stop"
+    ],
+    "152700020": [
+     "48f2c5836d843582",
+     299,
+     "stop"
+    ],
+    "152700021": [
+     "2f2059f493efeb5b",
+     23,
+     "stop"
+    ],
+    "152700022": [
+     "676cd528cf08543e",
+     251,
+     "stop"
+    ],
+    "152700023": [
+     "e87e906c0dee76e2",
+     271,
+     "stop"
+    ],
+    "152700024": [
+     "2f2059f493efeb5b",
+     23,
+     "stop"
+    ],
+    "152700025": [
+     "1ee0e99ab506ff1a",
+     275,
+     "stop"
+    ],
+    "152700026": [
+     "c4fd9c792dc67ba7",
+     271,
+     "stop"
+    ],
+    "152700027": [
+     "373730f1e8dfe7d4",
+     161,
+     "stop"
+    ],
+    "152700028": [
+     "70095e6c37fed815",
+     193,
+     "stop"
+    ],
+    "152700029": [
+     "95509f161382cd20",
+     205,
+     "stop"
+    ],
+    "152700030": [
+     "2f2059f493efeb5b",
+     23,
+     "stop"
+    ],
+    "152700031": [
+     "f2fa9685ead00dee",
+     287,
+     "stop"
+    ],
+    "152700032": [
+     "39590e0c1d42b22b",
+     67,
+     "stop"
+    ],
+    "152700033": [
+     "2f2059f493efeb5b",
+     23,
+     "stop"
+    ],
+    "152700034": [
+     "808888ea55e64e2b",
+     287,
+     "stop"
+    ],
+    "152700035": [
+     "12621ae2e79054f7",
+     293,
+     "stop"
+    ],
+    "152700036": [
+     "2f2059f493efeb5b",
+     23,
+     "stop"
+    ],
+    "152700037": [
+     "2f2059f493efeb5b",
+     23,
+     "stop"
+    ],
+    "152700038": [
+     "44c27d1335d33d2b",
+     297,
+     "stop"
+    ],
+    "152700039": [
+     "7281328cd89d6cce",
+     299,
+     "stop"
+    ],
+    "152700040": [
+     "b178eddd26d62204",
+     277,
+     "stop"
+    ],
+    "152700041": [
+     "2f2059f493efeb5b",
+     23,
+     "stop"
+    ],
+    "152700042": [
+     "2f2059f493efeb5b",
+     23,
+     "stop"
+    ],
+    "152700043": [
+     "227d5c9c0e5ce7b1",
+     277,
+     "stop"
+    ],
+    "152700044": [
+     "2f2059f493efeb5b",
+     23,
+     "stop"
+    ],
+    "152700045": [
+     "2f2059f493efeb5b",
+     23,
+     "stop"
+    ],
+    "152700046": [
+     "eb3c2dcbd6647f3b",
+     299,
+     "stop"
+    ],
+    "152700047": [
+     "8d85bb4b3374603c",
+     295,
+     "stop"
+    ],
+    "152700048": [
+     "509598b0c7b36db6",
+     249,
+     "stop"
+    ],
+    "152700049": [
+     "0bf3566ba1a78800",
+     253,
+     "stop"
+    ],
+    "152700050": [
+     "6309d67c5aacaeb8",
+     243,
+     "stop"
+    ],
+    "152700051": [
+     "2f2059f493efeb5b",
+     23,
+     "stop"
+    ],
+    "152700052": [
+     "c32bce49ead884bf",
+     275,
+     "stop"
+    ],
+    "152700053": [
+     "f8cc3377aea15763",
+     289,
+     "stop"
+    ],
+    "152700054": [
+     "63dbd477b363a078",
+     199,
+     "stop"
+    ],
+    "152700055": [
+     "c4eb80ba098f0914",
+     195,
+     "stop"
+    ],
+    "152700056": [
+     "2f2059f493efeb5b",
+     23,
+     "stop"
+    ],
+    "152700057": [
+     "2f2059f493efeb5b",
+     23,
+     "stop"
+    ],
+    "152700058": [
+     "0250bfb1e1e9aaf0",
+     271,
+     "stop"
+    ],
+    "152700059": [
+     "fd40be2a7b975e31",
+     199,
+     "stop"
+    ],
+    "152700060": [
+     "2f2059f493efeb5b",
+     23,
+     "stop"
+    ],
+    "152700061": [
+     "2f2059f493efeb5b",
+     23,
+     "stop"
+    ],
+    "152700062": [
+     "2f2059f493efeb5b",
+     23,
+     "stop"
+    ],
+    "152700063": [
+     "2f2059f493efeb5b",
+     23,
+     "stop"
+    ],
+    "152700064": [
+     "2f2059f493efeb5b",
+     23,
+     "stop"
+    ],
+    "152700065": [
+     "2f2059f493efeb5b",
+     23,
+     "stop"
+    ],
+    "152700066": [
+     "e43c3d7bc084272d",
+     287,
+     "stop"
+    ],
+    "152700067": [
+     "2f2059f493efeb5b",
+     23,
+     "stop"
+    ],
+    "152700068": [
+     "2f2059f493efeb5b",
+     23,
+     "stop"
+    ],
+    "152700069": [
+     "2fa7aa66713abf91",
+     207,
+     "stop"
+    ],
+    "152700070": [
+     "9a2536fdb18d2f09",
+     269,
+     "stop"
+    ],
+    "152700071": [
+     "2f2059f493efeb5b",
+     23,
+     "stop"
+    ],
+    "152700072": [
+     "8bb20beb22367ad6",
+     297,
+     "stop"
+    ],
+    "152700073": [
+     "2f2059f493efeb5b",
+     23,
+     "stop"
+    ],
+    "152700074": [
+     "21dc8bd9105a22b8",
+     243,
+     "stop"
+    ],
+    "152700075": [
+     "575a09a34addb94b",
+     287,
+     "stop"
+    ],
+    "152700076": [
+     "2f2059f493efeb5b",
+     23,
+     "stop"
+    ],
+    "152700077": [
+     "242467de4d00e8e7",
+     297,
+     "stop"
+    ],
+    "152700078": [
+     "aad65026c6b58be7",
+     287,
+     "stop"
+    ],
+    "152700079": [
+     "2f2059f493efeb5b",
+     23,
+     "stop"
+    ],
+    "152700080": [
+     "771f26074fdb7982",
+     199,
+     "stop"
+    ],
+    "152700081": [
+     "2f2059f493efeb5b",
+     23,
+     "stop"
+    ],
+    "152700082": [
+     "2f2059f493efeb5b",
+     23,
+     "stop"
+    ],
+    "152700083": [
+     "2f2059f493efeb5b",
+     23,
+     "stop"
+    ],
+    "152700084": [
+     "2f2059f493efeb5b",
+     23,
+     "stop"
+    ],
+    "152700085": [
+     "f5333b881d0d6736",
+     287,
+     "stop"
+    ],
+    "152700086": [
+     "40c8c4ded7ba7781",
+     297,
+     "stop"
+    ],
+    "152700087": [
+     "0921fa96e8f70b1b",
+     251,
+     "stop"
+    ],
+    "152700088": [
+     "2f2059f493efeb5b",
+     23,
+     "stop"
+    ],
+    "152700089": [
+     "2f2059f493efeb5b",
+     23,
+     "stop"
+    ],
+    "152700090": [
+     "f1f961c0d9aef74d",
+     299,
+     "stop"
+    ],
+    "152700091": [
+     "c4e8fd02b7aa803e",
+     155,
+     "stop"
+    ],
+    "152700092": [
+     "2f2059f493efeb5b",
+     23,
+     "stop"
+    ],
+    "152700093": [
+     "19d4591934aed2d0",
+     253,
+     "stop"
+    ],
+    "152700094": [
+     "2f2059f493efeb5b",
+     23,
+     "stop"
+    ],
+    "152700095": [
+     "543fd095d332a563",
+     291,
+     "stop"
+    ],
+    "152700096": [
+     "2f2059f493efeb5b",
+     23,
+     "stop"
+    ],
+    "152700097": [
+     "e09557029f6c5fad",
+     245,
+     "stop"
+    ],
+    "152700098": [
+     "5e499d16da5e02c3",
+     199,
+     "stop"
+    ],
+    "152700099": [
+     "2f2059f493efeb5b",
+     23,
+     "stop"
+    ],
+    "152700100": [
+     "0bc5bb4af8b4e674",
+     287,
+     "stop"
+    ],
+    "152700101": [
+     "d05dd20e777e7f8c",
+     243,
+     "stop"
+    ],
+    "152700102": [
+     "2f2059f493efeb5b",
+     23,
+     "stop"
+    ],
+    "152700103": [
+     "2f2059f493efeb5b",
+     23,
+     "stop"
+    ],
+    "152700104": [
+     "4b65221265403ba0",
+     300,
+     "stop"
+    ],
+    "152700105": [
+     "2f2059f493efeb5b",
+     23,
+     "stop"
+    ],
+    "152700106": [
+     "2f2059f493efeb5b",
+     23,
+     "stop"
+    ],
+    "152700107": [
+     "2f2059f493efeb5b",
+     23,
+     "stop"
+    ]
+   },
+   "probe": {
+    "rate": 1.527,
+    "passed": false,
+    "reason": "e2e_ms.p99 5614 > 3977.4"
+   }
+  }
+ ],
+ "gpu": {
+  "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
+  "power_limit_w": 600.0,
+  "power_max_w": 600.0,
+  "sm_clock_mhz": 2430.0,
+  "memory_mib": 97887.0,
+  "driver": "595.91.07"
+ },
+ "search": {
+  "bound": {
+   "model": "RedHatAI/gemma-4-31B-it-FP8-block",
+   "workload": "scene",
+   "metric": "e2e_ms.p99",
+   "value": 3977.4,
+   "rule": "e2e p99 at most 2 x the median, across the engines, of their e2e p50 at one request in flight (family A1, the same draft count), with zero drops and zero failures",
+   "median_ms": 1988.7,
+   "inputs_e2e_p50_ms": {
+    "ours": 1627.3,
+    "vllm": 1988.7,
+    "sglang": 2524.1
+   },
+   "excluded": {},
+   "source": "gemma/A1/<engine>/scene-c1.json"
+  },
+  "low": 1.527,
+  "high": 3.817,
+  "resolution": 0.382,
+  "confirm": 1,
+  "best_rate": null,
+  "first_failing_rate": 1.527,
+  "confirmed": false,
+  "probes": [
+   {
+    "rate": 1.527,
+    "passed": false,
+    "reason": "e2e_ms.p99 5614 > 3977.4"
+   }
+  ],
+  "stopped": null
+ }
+}

@@ -1,0 +1,9 @@
+{
+ "ready_s": 212.26,
+ "first_answer_s": 212.39,
+ "stopped": {
+  "signal": "SIGINT",
+  "seconds": 0.81,
+  "port_free": true
+ }
+}

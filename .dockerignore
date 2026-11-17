@@ -1,0 +1,15 @@
+# The image takes only pyproject.toml and uv.lock, the package's readme and licence (README.md, LICENSE), llm_mini_infer/
+# and deploy/ (deploy/Dockerfile); everything else stays out of the build context: secrets, private data, models,
+# results, environments.
+*
+!pyproject.toml
+!uv.lock
+!README.md
+!LICENSE
+!llm_mini_infer/
+!deploy/
+**/__pycache__
+**/*.py[cod]
+**/.DS_Store
+.env
+.env.*

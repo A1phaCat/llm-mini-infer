@@ -1,0 +1,211 @@
+{
+ "schema": 1,
+ "arm": "ours-nobi",
+ "family": "smoke",
+ "engine": "ours",
+ "model": "Qwen/Qwen3.8-27B-FP8",
+ "drafter": null,
+ "revisions": {
+  "Qwen/Qwen3.8-27B-FP8": "c3a462cc3d38cf351f3b26cbd763469eeb74ef81"
+ },
+ "k": 3,
+ "k_source": "llm-mini-infer's default; SGLang's recipe and its EAGLE default (3 steps, top-k 1, 4 draft tokens)",
+ "batch_invariant": false,
+ "batch_invariant_source": "set",
+ "argv": [
+  "llm-mini-infer",
+  "serve",
+  "--set",
+  "model.path=Qwen/Qwen3.8-27B-FP8",
+  "--set",
+  "model.max_model_len=8184",
+  "--set",
+  "scheduler.max_num_seqs=64",
+  "--set",
+  "server.host=127.0.0.1",
+  "--set",
+  "server.port=8000",
+  "--set",
+  "speculative.num_speculative_tokens=3",
+  "--set",
+  "dev.runner.cuda.batch_invariant=false",
+  "--config",
+  "$LLM_MINI_INFER_CONFIG"
+ ],
+ "env_names": [
+  "CUDA_CACHE_PATH",
+  "CUDA_HOME",
+  "CUTE_DSL_CACHE_DIR",
+  "FLASHINFER_DISABLE_JIT",
+  "FLASHINFER_WORKSPACE_BASE",
+  "HF_HOME",
+  "HF_HUB_OFFLINE",
+  "HOME",
+  "LANG",
+  "LD_LIBRARY_PATH",
+  "LLM_MINI_INFER_BUILD",
+  "LLM_MINI_INFER_CONFIG",
+  "LLM_MINI_INFER_KERNEL_PREBUILT",
+  "NVIDIA_DRIVER_CAPABILITIES",
+  "NVIDIA_VISIBLE_DEVICES",
+  "PATH",
+  "PYTHONUNBUFFERED",
+  "TOKENIZERS_PARALLELISM",
+  "TORCHINDUCTOR_CACHE_DIR",
+  "TRITON_CACHE_DIR",
+  "VIRTUAL_ENV"
+ ],
+ "deviations": [
+  "added: --config $LLM_MINI_INFER_CONFIG",
+  "the image's configuration file (--config, as the image's entrypoint gives it), which arms.py leaves out"
+ ],
+ "status": "ok",
+ "status_line": null,
+ "versions": {
+  "llm-mini-infer": "0.7.2",
+  "torch": "2.14.1+cu130",
+  "flashinfer-python": "0.7.2",
+  "flashinfer-jit-cache": "0.7.2+cu130",
+  "triton": "3.8.0",
+  "llguidance": "1.9.1",
+  "transformers": "5.20.1"
+ },
+ "source": "image venv",
+ "resolved": {
+  "kv_tokens": 484496,
+  "max_running_requests": 64,
+  "prefix_cache": true,
+  "attention_backend": "flashinfer",
+  "fp8_kernel": [
+   {
+    "max_m": 96,
+    "max_n": 1073741824,
+    "backend": "cutlass",
+    "config": 0
+   },
+   {
+    "max_m": 128,
+    "max_n": 8192,
+    "backend": "cutlass",
+    "config": 0
+   },
+   {
+    "max_m": 128,
+    "max_n": 20480,
+    "backend": "cutlass",
+    "config": 2
+   },
+   {
+    "max_m": 128,
+    "max_n": 36864,
+    "backend": "cutlass",
+    "config": 0
+   },
+   {
+    "max_m": 128,
+    "max_n": 1073741824,
+    "backend": "cutlass",
+    "config": 2
+   },
+   {
+    "max_m": 256,
+    "max_n": 16384,
+    "backend": "cutlass",
+    "config": 1
+   },
+   {
+    "max_m": 256,
+    "max_n": 20480,
+    "backend": "cutlass",
+    "config": 2
+   },
+   {
+    "max_m": 256,
+    "max_n": 36864,
+    "backend": "cutlass",
+    "config": 1
+   },
+   {
+    "max_m": 256,
+    "max_n": 1073741824,
+    "backend": "cutlass",
+    "config": 2
+   },
+   {
+    "max_m": 1073741824,
+    "max_n": 1073741824,
+    "backend": "cutlass",
+    "config": 2
+   }
+  ],
+  "chunk_tokens": 2048,
+  "memory_fraction": 0.9,
+  "batch_invariant_active": false,
+  "spec": "mtp k=3",
+  "context": 8184,
+  "cuda_graphs": true,
+  "model_runner": null,
+  "kv_dtype": null,
+  "notes": null
+ },
+ "smoke": {
+  "ok": true,
+  "failures": [],
+  "scene_prompt_tokens": 2964,
+  "scene_completion_tokens": 24,
+  "scene_cached_tokens_second": 2944,
+  "scene_valid": true,
+  "scene_compact": true,
+  "chat_prompt_tokens": 1036,
+  "chat_completion_tokens": 64,
+  "reasoning_free": true,
+  "verify_steps": 49.0,
+  "seconds": 2.22
+ },
+ "startup": {
+  "ready_s": 24.79,
+  "first_answer_s": 24.89,
+  "cold": null,
+  "wiped": null,
+  "evicted": null,
+  "stopped": {
+   "signal": "SIGINT",
+   "seconds": 1.27,
+   "port_free": true
+  }
+ },
+ "loads": [],
+ "host": {
+  "gpu": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
+  "power_limit_w": 600.0,
+  "power_max_w": 600.0,
+  "sm_clock_max_mhz": 2430.0,
+  "memory_mib": 97887.0,
+  "driver": "595.91.07",
+  "cuda": "13.2",
+  "cpu": "AMD EPYC 9355 32-Core Processor",
+  "cpus": 128,
+  "cpu_quota": 13.6,
+  "kernel": "6.8.0-147-generic"
+ },
+ "client": {
+  "seed": 0,
+  "warmup_requests": null,
+  "warmup_s": null,
+  "duration_s": null,
+  "tail_s": null,
+  "timeout_s": 120.0,
+  "python": "3.12.3"
+ },
+ "order": [
+  "ours",
+  "ours-nobi",
+  "vllm",
+  "vllm-bi",
+  "sglang",
+  "sglang-bi"
+ ],
+ "when": "2026-11",
+ "image": "sha256:ad69be85478c6d92b35740e57192dde61aef86d649578a16e4b7b02cc93c6b8b",
+ "commit": "2b321dbd00013dcfe7f5f72b932fe7748aa2c4d0"
+}

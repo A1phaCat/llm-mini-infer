@@ -1,0 +1,357 @@
+# llm-mini-infer's image (deploy/Dockerfile; docs/development.md, "Building the image"): built on GitHub's amd64 runner,
+# checked on its CPU (tests/deploy/test_image_checks.py), published to GHCR with the workflow's own GITHUB_TOKEN.
+#
+#   push to main                      ghcr.io/<owner>/llm-mini-infer:<commit> (immutable) and :main (moving), when the push
+#                                     changes what the image is built or checked from (`paths` below); :main then
+#                                     stays at the last commit that did
+#   push of a tag v<version>          :<version> and :<commit>: a release. The tag must be pyproject's version, or the
+#                                     run fails
+#   workflow_dispatch                 as its ref's push, a branch's as :test-<branch> (moving); `publish` off builds
+#                                     and checks only, `cache` off builds without the registry's cache (a cold build,
+#                                     to time it), `test_image` on (with `publish`) also publishes the GPU tests'
+#                                     image, :test-gpu-<commit>, and its apt packages, :test-debs (moving; the
+#                                     test-image job, below)
+#
+# <owner>/llm-mini-infer is the repository the workflow runs in (`github.repository`), and both jobs run only where the
+# repository's variable PUBLISH_IMAGE is `true` (never on a fork, which has no variables; unset, the run skips them).
+# <commit> is the commit's first 7 characters, as the image's build id (LLM_MINI_INFER_BUILD). It is never overwritten:
+# when it exists already (a re-run, or a tag on a commit main published), the run points the other tags at it instead of
+# building. A branch builds only by dispatch.
+# The cache is the registry's (buildcache-<main or branch>, every stage's layers), so a commit that changes only Python
+# rebuilds and checks in minutes; a cold build compiles the CUTLASS GEMMs too, their jobs capped by the runner's memory.
+# The GPU tests' packages keep buildcache-test-debs and :test-debs, shared by every branch.
+name: image
+
+on:
+  push:
+    branches: [main]
+    tags: ["v*"]
+    # GitHub doesn't apply path filters to a tag's push, so a release's tag always runs. The build context
+    # (.dockerignore's list, README.md aside: a Markdown change never builds) and what the Check step reads
+    paths:
+      - "llm_mini_infer/**"
+      - "deploy/Dockerfile"
+      - "deploy/config.yaml"
+      - "deploy/THIRD_PARTY_NOTICES"
+      - "pyproject.toml"
+      - "uv.lock"
+      - "LICENSE"
+      - ".dockerignore"
+      - "tests/__init__.py"
+      - "tests/conftest.py"
+      - "tests/support/__init__.py"
+      - "tests/support/paths.py"
+      - "tests/support/slim_image.py"
+      - "tests/deploy/__init__.py"
+      - "tests/deploy/test_image_checks.py"
+      - "tests/scripts/image_probe.py"
+      - "tests/data/image/**"
+      - "tests/data/gemma-4-31b-it-fp8-block.config.json"
+      - "tests/data/gemma-4-31b-it.generation_config.json"
+      - "tests/data/gemma-4-31b-it.processor_config.json"
+      - "tests/data/gemma-4-31b-it.tokenizer_config.json"
+      - ".github/workflows/image.yml"
+      - "!**/*.md"
+  workflow_dispatch:
+    inputs:
+      publish:
+        description: "Publish the image (off: build and check only)"
+        type: boolean
+        default: true
+      cache:
+        description: "Use the registry's layer cache (off: a cold build, to time it)"
+        type: boolean
+        default: true
+      test_image:
+        description: "Also publish the GPU tests' image, :test-gpu-<commit> (tests/gpu-image.Dockerfile; needs publish)"
+        type: boolean
+        default: false
+
+# Read-only by default; the two jobs push (the image job's cache too, even without publishing)
+permissions:
+  contents: read
+
+concurrency:
+  group: image-${{ github.ref }}
+  cancel-in-progress: false
+
+env:
+  IMAGE: ghcr.io/${{ github.repository }}
+  DOCKER_BUILD_RECORD_UPLOAD: "false"
+
+jobs:
+  image:
+    if: vars.PUBLISH_IMAGE == 'true'  # never on a fork
+    runs-on: ubuntu-24.04
+    timeout-minutes: 120
+    permissions:
+      contents: read
+      packages: write
+    outputs:
+      image: ${{ steps.tags.outputs.image }}
+      cache: ${{ steps.tags.outputs.cache }}
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1  # v7.0.1
+        with:
+          persist-credentials: false
+
+      - uses: docker/login-action@dbcb813823bdd20940b903addbd779551569679f  # v4.6.0
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Tags
+        id: tags
+        env:
+          PUBLISH: ${{ github.event_name != 'workflow_dispatch' || inputs.publish }}
+        run: |
+          commit="${GITHUB_SHA::7}"
+          version=$(python3 -c 'import tomllib; print(tomllib.load(open("pyproject.toml", "rb"))["project"]["version"])')
+          slug=$(printf '%s' "$GITHUB_REF_NAME" | tr '[:upper:]' '[:lower:]' | tr -c 'a-z0-9_.-' '-' | cut -c1-100)
+          case "$GITHUB_REF" in
+            refs/heads/main) tags="$IMAGE:$commit,$IMAGE:main"; cache=main ;;
+            refs/tags/*)
+              if [ "$GITHUB_REF_NAME" != "v$version" ]; then
+                echo "::error::tag $GITHUB_REF_NAME is not pyproject's version, $version: a release is tagged v$version"
+                exit 1
+              fi
+              tags="$IMAGE:$version,$IMAGE:$commit"; cache=main ;;
+            refs/heads/*)    tags="$IMAGE:test-$slug"; cache="$slug" ;;
+            *) echo "::error::no tags for $GITHUB_REF"; exit 1 ;;
+          esac
+          exists=false
+          if [[ "$tags" == *"$IMAGE:$commit"* ]] && docker buildx imagetools inspect "$IMAGE:$commit" >/dev/null 2>&1; then
+            exists=true
+            echo "::notice::$IMAGE:$commit exists: no build; a publishing run moves the other tags to it"
+          fi
+          {
+            echo "image=${tags%%,*}"
+            echo "commit=$commit"
+            echo "version=$version"
+            echo "tags=$tags"
+            echo "cache=$cache"
+            echo "publish=$PUBLISH"
+            echo "exists=$exists"
+          } | tee -a "$GITHUB_OUTPUT"
+
+      - name: Retag the commit's image
+        if: steps.tags.outputs.exists == 'true' && steps.tags.outputs.publish == 'true'
+        env:
+          TAGS: ${{ steps.tags.outputs.tags }}
+          COMMIT: ${{ steps.tags.outputs.commit }}
+        # --prefer-index=false: the tag gets the commit's own manifest, so its digest is the image's (by default
+        # imagetools wraps a single image in a new index, whose digest is another)
+        run: |
+          for t in ${TAGS//,/ }; do
+            [ "$t" = "$IMAGE:$COMMIT" ] || \
+              docker buildx imagetools create --prefer-index=false --tag "$t" "$IMAGE:$COMMIT"
+          done
+          docker buildx imagetools inspect "$IMAGE:$COMMIT"
+
+      # The runner's 14 GB are not enough: uv unpacks the dependencies into its cache mount and copies them into the
+      # venv, and the compressed layers and the image loaded for the checks follow. The preinstalled SDKs this job never
+      # uses go first
+      - name: Free disk
+        if: steps.tags.outputs.exists == 'false'
+        run: |
+          df -h / /mnt
+          start=$SECONDS
+          sudo rm -rf /usr/local/lib/android /usr/share/dotnet /opt/ghc /usr/local/.ghcup /opt/hostedtoolcache/CodeQL \
+            /usr/local/share/boost /usr/share/swift /usr/local/share/powershell /opt/microsoft /opt/google/chrome
+          docker image prune --all --force >/dev/null
+          echo "freed in $((SECONDS - start)) s"
+          df -h /
+          free -g
+
+      - uses: docker/setup-buildx-action@f87e5991a6d7451dcb8d9637bfbc97413f497069  # v4.4.1
+        if: steps.tags.outputs.exists == 'false'
+        with:
+          version: v0.37.2
+          driver-opts: image=moby/buildkit:v0.33.1@sha256:cec9f139f45e93c5c69c60f8b07cfad9f43f4ef6b6a6cd917527fea5ff2e3dea
+
+      - name: Build
+        if: steps.tags.outputs.exists == 'false'
+        uses: docker/build-push-action@c3c9e263c25d99ce0380d002d59b67737d91b0dc  # v7.4.0
+        with:
+          context: .
+          file: deploy/Dockerfile
+          platforms: linux/amd64
+          build-args: |
+            VERSION=${{ steps.tags.outputs.version }}
+            GIT_COMMIT=${{ steps.tags.outputs.commit }}
+            GIT_REVISION=${{ github.sha }}
+          tags: llm-mini-infer:check
+          load: true
+          provenance: false
+          sbom: false
+          no-cache: ${{ github.event_name == 'workflow_dispatch' && !inputs.cache }}
+          cache-from: |
+            type=registry,ref=${{ env.IMAGE }}:buildcache-main
+            type=registry,ref=${{ env.IMAGE }}:buildcache-${{ steps.tags.outputs.cache }}
+          cache-to: type=registry,ref=${{ env.IMAGE }}:buildcache-${{ steps.tags.outputs.cache }},mode=max
+
+      # The checks are tests (tests/deploy/test_image_checks.py): pytest on the runner, from uv.lock's image-checks
+      # group, run by the build's own uv (the Dockerfile's UV_IMAGE, by digest); each check runs in the image as its
+      # user
+      - name: Check
+        if: steps.tags.outputs.exists == 'false'
+        env:
+          LLM_MINI_INFER_IMAGE: llm-mini-infer:check
+          LLM_MINI_INFER_IMAGE_REVISION: ${{ github.sha }}
+          UV_PYTHON_DOWNLOADS: never
+        run: |
+          df -h /
+          uv_image=$(sed -n 's/^ARG UV_IMAGE=//p' deploy/Dockerfile)
+          id=$(docker create "$uv_image")
+          docker cp "$id:/uv" "$RUNNER_TEMP/uv"
+          docker rm "$id" >/dev/null
+          "$RUNNER_TEMP/uv" run --locked --only-group image-checks pytest -p no:cacheprovider tests/deploy/test_image_checks.py
+
+      # The same build again, every layer from the builder's own state: only the push
+      - name: Publish
+        id: publish
+        if: steps.tags.outputs.exists == 'false' && steps.tags.outputs.publish == 'true'
+        uses: docker/build-push-action@c3c9e263c25d99ce0380d002d59b67737d91b0dc  # v7.4.0
+        with:
+          context: .
+          file: deploy/Dockerfile
+          platforms: linux/amd64
+          build-args: |
+            VERSION=${{ steps.tags.outputs.version }}
+            GIT_COMMIT=${{ steps.tags.outputs.commit }}
+            GIT_REVISION=${{ github.sha }}
+          tags: ${{ steps.tags.outputs.tags }}
+          push: true
+          provenance: false
+          sbom: false
+          cache-from: type=registry,ref=${{ env.IMAGE }}:buildcache-${{ steps.tags.outputs.cache }}
+
+      - name: Summary
+        if: steps.publish.outcome == 'success'
+        env:
+          TAGS: ${{ steps.tags.outputs.tags }}
+          DIGEST: ${{ steps.publish.outputs.digest }}
+        run: |
+          first="${TAGS%%,*}"
+          # the compressed size: the amd64 manifest's layers as the registry stores them
+          size=$(python3 -c '
+          import json, subprocess, sys
+          raw = lambda ref: json.loads(subprocess.check_output(["docker", "buildx", "imagetools", "inspect", "--raw", ref]))
+          m = raw(sys.argv[1])
+          if "manifests" in m:  # an index: its linux/amd64 image
+              (d,) = [x["digest"] for x in m["manifests"] if x.get("platform", {}).get("architecture") == "amd64"]
+              m = raw(sys.argv[1].split("@")[0] + "@" + d)
+          layers = sorted((x["size"] for x in m["layers"]), reverse=True)
+          print(f"{sum(layers) / 1e9:.3f} GB compressed in {len(layers)} layers; the largest: "
+                + ", ".join(f"{x / 1e9:.3f}" for x in layers[:5]))' "$first@$DIGEST")
+          unpacked=$(docker image inspect llm-mini-infer:check --format '{{.Size}}')
+          {
+            echo "### $IMAGE"
+            echo
+            echo "- tags: ${TAGS//,/, }"
+            echo "- digest: \`$DIGEST\` (pull by digest: \`${first%:*}@$DIGEST\`)"
+            echo "- $size"
+            echo "- unpacked: $(python3 -c "print(f'{$unpacked / 1e9:.2f} GB')")"
+          } | tee -a "$GITHUB_STEP_SUMMARY"
+
+  # The GPU tests' image (tests/gpu-image.Dockerfile; docs/development.md, "The GPU suite"), built on the image this run
+  # published or found, by digest, with its apt packages from deploy/Dockerfile's test-debs stage
+  test-image:
+    if: >-
+      vars.PUBLISH_IMAGE == 'true' && github.event_name == 'workflow_dispatch' && inputs.test_image
+      && inputs.publish
+    needs: image
+    runs-on: ubuntu-24.04
+    timeout-minutes: 60
+    permissions:
+      contents: read
+      packages: write
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1  # v7.0.1
+        with:
+          persist-credentials: false
+
+      - uses: docker/login-action@dbcb813823bdd20940b903addbd779551569679f  # v4.6.0
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      # The context: the commit's tracked files (git archive), without llm_mini_infer/ (the tests run the image's
+      # package); tests/gpu-image.Dockerfile.dockerignore takes the place of the root's .dockerignore (the release
+      # image's)
+      - name: Base and context
+        id: base
+        env:
+          IMAGE_REF: ${{ needs.image.outputs.image }}
+        run: |
+          digest=$(docker buildx imagetools inspect "$IMAGE_REF" --format '{{json .Manifest}}' \
+            | python3 -c 'import json, sys; print(json.load(sys.stdin)["digest"])')
+          context="$RUNNER_TEMP/repo"
+          mkdir -p "$context"
+          git archive --format=tar HEAD -- . ':(exclude)llm_mini_infer' | tar -x -C "$context"
+          {
+            echo "base=$IMAGE@$digest"
+            echo "context=$context"
+            echo "uv=$(sed -n 's/^ARG UV_IMAGE=//p' deploy/Dockerfile)"
+            echo "tag=$IMAGE:test-gpu-${GITHUB_SHA::7}"
+          } | tee -a "$GITHUB_OUTPUT"
+
+      - uses: docker/setup-buildx-action@f87e5991a6d7451dcb8d9637bfbc97413f497069  # v4.4.1
+        with:
+          version: v0.37.2
+          driver-opts: image=moby/buildkit:v0.33.1@sha256:cec9f139f45e93c5c69c60f8b07cfad9f43f4ef6b6a6cd917527fea5ff2e3dea
+
+      # The packages (test-debs: /debs alone), downloaded on the release's os stage, which comes from the image job's
+      # cache; the download keeps a registry cache of its own, shared by every branch, as the release build's would lose
+      # it (each build's cache replaces its ref's). So the test image reaches no apt mirror, and this step does only
+      # when that cache misses: the package list or os changed, here or on the last branch that ran it, or a cold
+      # registry. Always cached: the `cache` input times the release's build
+      - name: Packages
+        id: debs
+        uses: docker/build-push-action@c3c9e263c25d99ce0380d002d59b67737d91b0dc  # v7.4.0
+        with:
+          context: .
+          file: deploy/Dockerfile
+          target: test-debs
+          platforms: linux/amd64
+          tags: ${{ env.IMAGE }}:test-debs
+          push: true
+          provenance: false
+          sbom: false
+          cache-from: |
+            type=registry,ref=${{ env.IMAGE }}:buildcache-test-debs
+            type=registry,ref=${{ env.IMAGE }}:buildcache-main
+            type=registry,ref=${{ env.IMAGE }}:buildcache-${{ needs.image.outputs.cache }}
+          cache-to: type=registry,ref=${{ env.IMAGE }}:buildcache-test-debs,mode=max
+
+      - name: Publish
+        id: publish
+        uses: docker/build-push-action@c3c9e263c25d99ce0380d002d59b67737d91b0dc  # v7.4.0
+        with:
+          context: ${{ steps.base.outputs.context }}
+          file: tests/gpu-image.Dockerfile
+          platforms: linux/amd64
+          build-args: |
+            TEST_BASE=${{ steps.base.outputs.base }}
+            TEST_DEBS=${{ env.IMAGE }}@${{ steps.debs.outputs.digest }}
+            UV_IMAGE=${{ steps.base.outputs.uv }}
+          tags: ${{ steps.base.outputs.tag }}
+          push: true
+          provenance: false
+          sbom: false
+
+      - name: The image's layers come first
+        env:
+          BASE: ${{ steps.base.outputs.base }}
+          TAG: ${{ steps.base.outputs.tag }}
+          DIGEST: ${{ steps.publish.outputs.digest }}
+        run: |
+          python3 - "$BASE" "${TAG%:*}@$DIGEST" <<'PY' | tee -a "$GITHUB_STEP_SUMMARY"
+          import json, subprocess, sys
+          raw = lambda ref: json.loads(subprocess.check_output(["docker", "buildx", "imagetools", "inspect", "--raw", ref]))
+          base, test = ([x["digest"] for x in raw(ref)["layers"]] for ref in sys.argv[1:])
+          assert test[:len(base)] == base, "the test image does not start with the image's layers"
+          print(f"### {sys.argv[2]}\n\non {sys.argv[1]}: its {len(base)} layers first, then {len(test) - len(base)} more")
+          PY

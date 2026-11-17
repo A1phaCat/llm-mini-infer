@@ -1,0 +1,922 @@
+{
+ "when": "2026-11",
+ "client": {
+  "host": "Linux-6.8.0-147-generic-x86_64-with-glibc2.39",
+  "python": "3.12.3"
+ },
+ "model": "Qwen/Qwen3.8-27B-FP8",
+ "workload": {
+  "name": "scene",
+  "mode": "synthetic",
+  "frames": "generated",
+  "sizes": {
+   "1280x720": "75%",
+   "720x1280": "25%"
+  },
+  "prompt_tokens": 2048,
+  "schema_name": "scene",
+  "schema_bytes": 2828,
+  "prompt_chars": 8812,
+  "max_tokens": 512
+ },
+ "stream": true,
+ "temperature": 0.0,
+ "ignore_eos": false,
+ "extra_body": {
+  "chat_template_kwargs": {
+   "enable_thinking": false
+  }
+ },
+ "request_seeds": false,
+ "metrics": true,
+ "warmup_s": 10.0,
+ "duration_s": 60.0,
+ "seed": 0,
+ "requests": 150,
+ "warmup_requests": 20,
+ "first_index": 0,
+ "meta": {
+  "engine": "vllm",
+  "arm": "vllm",
+  "family": "A1",
+  "model": "Qwen/Qwen3.8-27B-FP8",
+  "k": 3,
+  "batch_invariant": false,
+  "unit": "vllm"
+ },
+ "loads": [
+  {
+   "load": "concurrency 1, 150 requests",
+   "concurrency": 1,
+   "requests": 150,
+   "measured": 150,
+   "ok": 150,
+   "dropped": 0,
+   "failed": 0,
+   "errors": {},
+   "finish": {
+    "stop": 150
+   },
+   "seconds": 68.427,
+   "offered_rps": 2.192,
+   "served_rps": 2.192,
+   "output_tokens_per_s": 61.4,
+   "e2e_ms": {
+    "n": 150,
+    "p50": 409.1,
+    "p90": 440.8,
+    "p99": 2040.3,
+    "mean": 454.3,
+    "max": 2733.8
+   },
+   "ttft_ms": {
+    "n": 150,
+    "p50": 191.1,
+    "p90": 191.8,
+    "p99": 193.0,
+    "mean": 191.4,
+    "max": 249.0
+   },
+   "tpot_ms": {
+    "n": 150,
+    "p50": 9.91,
+    "p90": 11.27,
+    "p99": 11.69,
+    "mean": 9.96,
+    "max": 11.88
+   },
+   "reply_tokens": {
+    "n": 150,
+    "p50": 23.0,
+    "p90": 24.0,
+    "p99": 211.0,
+    "mean": 28.0,
+    "max": 305.0
+   },
+   "prompt_tokens": {
+    "n": 150,
+    "p50": 2964.0,
+    "p90": 2964.0,
+    "p99": 2964.0,
+    "mean": 2964.0,
+    "max": 2964.0
+   },
+   "in_flight": {
+    "mean": 1.0,
+    "p99": 1,
+    "max": 1
+   },
+   "cache_reported": 150,
+   "cache_hit_rate": 0.5614,
+   "uncached_tokens": {
+    "n": 150,
+    "p50": 1300.0,
+    "p90": 1300.0,
+    "p99": 1300.0,
+    "mean": 1300.0,
+    "max": 1300.0
+   },
+   "cache_by_turn": null,
+   "engine": {
+    "verify_steps": 1265,
+    "accept": {
+     "drafts": 1265,
+     "per_pos": [
+      0.904,
+      0.869,
+      0.536
+     ],
+     "tokens_per_verify": 3.309,
+     "verify_steps_per_request": 8.43
+    },
+    "gpu_idle_pct": null,
+    "head_steps": {},
+    "head_dense_reasons": {},
+    "sparse_share": null,
+    "union_tokens": null,
+    "draft_universe_tokens": null,
+    "draft_universe_steps": null,
+    "draft_universe_rebuilds": null,
+    "forced_requests": null,
+    "forced_tokens": null,
+    "eos_free_gated": null,
+    "requests_failed": null,
+    "grammar_errors": null,
+    "generation_tokens": 4201,
+    "forced_tokens_per_request": null,
+    "eos_free_finishes": null,
+    "spec_first_rejections": null,
+    "plans_kept": 0,
+    "plans_kept_since_start": 0
+   },
+   "spec": {
+    "series": "vllm:spec_decode_num_drafts_total",
+    "verify_steps": 1265,
+    "requests": 150,
+    "completion_tokens_minus_one": 4051,
+    "tokens_per_verify": 3.202,
+    "no_usage": 0
+   },
+   "answers": {
+    "0": [
+     "4978d202b4900d45",
+     24,
+     "stop"
+    ],
+    "1": [
+     "2f2059f493efeb5b",
+     23,
+     "stop"
+    ],
+    "2": [
+     "2f2059f493efeb5b",
+     23,
+     "stop"
+    ],
+    "3": [
+     "2f2059f493efeb5b",
+     23,
+     "stop"
+    ],
+    "4": [
+     "4978d202b4900d45",
+     24,
+     "stop"
+    ],
+    "5": [
+     "2f2059f493efeb5b",
+     23,
+     "stop"
+    ],
+    "6": [
+     "2f2059f493efeb5b",
+     23,
+     "stop"
+    ],
+    "7": [
+     "4978d202b4900d45",
+     24,
+     "stop"
+    ],
+    "8": [
+     "4978d202b4900d45",
+     23,
+     "stop"
+    ],
+    "9": [
+     "4978d202b4900d45",
+     23,
+     "stop"
+    ],
+    "10": [
+     "2f2059f493efeb5b",
+     23,
+     "stop"
+    ],
+    "11": [
+     "2f2059f493efeb5b",
+     23,
+     "stop"
+    ],
+    "12": [
+     "4978d202b4900d45",
+     23,
+     "stop"
+    ],
+    "13": [
+     "2f2059f493efeb5b",
+     23,
+     "stop"
+    ],
+    "14": [
+     "2f2059f493efeb5b",
+     23,
+     "stop"
+    ],
+    "15": [
+     "4978d202b4900d45",
+     24,
+     "stop"
+    ],
+    "16": [
+     "4978d202b4900d45",
+     23,
+     "stop"
+    ],
+    "17": [
+     "4978d202b4900d45",
+     24,
+     "stop"
+    ],
+    "18": [
+     "2f2059f493efeb5b",
+     23,
+     "stop"
+    ],
+    "19": [
+     "bfb51375e73ef6fb",
+     211,
+     "stop"
+    ],
+    "20": [
+     "2f2059f493efeb5b",
+     23,
+     "stop"
+    ],
+    "21": [
+     "4978d202b4900d45",
+     23,
+     "stop"
+    ],
+    "22": [
+     "77e7ca1f74233f51",
+     72,
+     "stop"
+    ],
+    "23": [
+     "4978d202b4900d45",
+     24,
+     "stop"
+    ],
+    "24": [
+     "4978d202b4900d45",
+     24,
+     "stop"
+    ],
+    "25": [
+     "2f2059f493efeb5b",
+     23,
+     "stop"
+    ],
+    "26": [
+     "994ad8d3677361db",
+     210,
+     "stop"
+    ],
+    "27": [
+     "2f2059f493efeb5b",
+     23,
+     "stop"
+    ],
+    "28": [
+     "2f2059f493efeb5b",
+     23,
+     "stop"
+    ],
+    "29": [
+     "4978d202b4900d45",
+     23,
+     "stop"
+    ],
+    "30": [
+     "4978d202b4900d45",
+     24,
+     "stop"
+    ],
+    "31": [
+     "2f2059f493efeb5b",
+     23,
+     "stop"
+    ],
+    "32": [
+     "4978d202b4900d45",
+     24,
+     "stop"
+    ],
+    "33": [
+     "2f2059f493efeb5b",
+     23,
+     "stop"
+    ],
+    "34": [
+     "2f2059f493efeb5b",
+     23,
+     "stop"
+    ],
+    "35": [
+     "4978d202b4900d45",
+     24,
+     "stop"
+    ],
+    "36": [
+     "2f2059f493efeb5b",
+     23,
+     "stop"
+    ],
+    "37": [
+     "2f2059f493efeb5b",
+     23,
+     "stop"
+    ],
+    "38": [
+     "09d18ac73fcbfe91",
+     25,
+     "stop"
+    ],
+    "39": [
+     "4978d202b4900d45",
+     23,
+     "stop"
+    ],
+    "40": [
+     "2f2059f493efeb5b",
+     23,
+     "stop"
+    ],
+    "41": [
+     "4978d202b4900d45",
+     23,
+     "stop"
+    ],
+    "42": [
+     "2f2059f493efeb5b",
+     23,
+     "stop"
+    ],
+    "43": [
+     "4978d202b4900d45",
+     24,
+     "stop"
+    ],
+    "44": [
+     "4978d202b4900d45",
+     23,
+     "stop"
+    ],
+    "45": [
+     "4978d202b4900d45",
+     23,
+     "stop"
+    ],
+    "46": [
+     "2f2059f493efeb5b",
+     23,
+     "stop"
+    ],
+    "47": [
+     "2f2059f493efeb5b",
+     23,
+     "stop"
+    ],
+    "48": [
+     "2f2059f493efeb5b",
+     23,
+     "stop"
+    ],
+    "49": [
+     "2f2059f493efeb5b",
+     23,
+     "stop"
+    ],
+    "50": [
+     "4978d202b4900d45",
+     24,
+     "stop"
+    ],
+    "51": [
+     "4978d202b4900d45",
+     24,
+     "stop"
+    ],
+    "52": [
+     "2f2059f493efeb5b",
+     23,
+     "stop"
+    ],
+    "53": [
+     "09d18ac73fcbfe91",
+     26,
+     "stop"
+    ],
+    "54": [
+     "2f2059f493efeb5b",
+     23,
+     "stop"
+    ],
+    "55": [
+     "2f2059f493efeb5b",
+     23,
+     "stop"
+    ],
+    "56": [
+     "2f2059f493efeb5b",
+     23,
+     "stop"
+    ],
+    "57": [
+     "2f2059f493efeb5b",
+     23,
+     "stop"
+    ],
+    "58": [
+     "cf282feabd7064e5",
+     23,
+     "stop"
+    ],
+    "59": [
+     "2f2059f493efeb5b",
+     23,
+     "stop"
+    ],
+    "60": [
+     "4978d202b4900d45",
+     24,
+     "stop"
+    ],
+    "61": [
+     "c679a303ab8bedb4",
+     25,
+     "stop"
+    ],
+    "62": [
+     "2f2059f493efeb5b",
+     23,
+     "stop"
+    ],
+    "63": [
+     "2f2059f493efeb5b",
+     23,
+     "stop"
+    ],
+    "64": [
+     "4978d202b4900d45",
+     24,
+     "stop"
+    ],
+    "65": [
+     "2f2059f493efeb5b",
+     23,
+     "stop"
+    ],
+    "66": [
+     "2f2059f493efeb5b",
+     23,
+     "stop"
+    ],
+    "67": [
+     "2f2059f493efeb5b",
+     23,
+     "stop"
+    ],
+    "68": [
+     "2f2059f493efeb5b",
+     23,
+     "stop"
+    ],
+    "69": [
+     "2f2059f493efeb5b",
+     23,
+     "stop"
+    ],
+    "70": [
+     "09d18ac73fcbfe91",
+     26,
+     "stop"
+    ],
+    "71": [
+     "2f2059f493efeb5b",
+     23,
+     "stop"
+    ],
+    "72": [
+     "4978d202b4900d45",
+     23,
+     "stop"
+    ],
+    "73": [
+     "2f2059f493efeb5b",
+     23,
+     "stop"
+    ],
+    "74": [
+     "2f2059f493efeb5b",
+     23,
+     "stop"
+    ],
+    "75": [
+     "2f2059f493efeb5b",
+     23,
+     "stop"
+    ],
+    "76": [
+     "4978d202b4900d45",
+     23,
+     "stop"
+    ],
+    "77": [
+     "2f2059f493efeb5b",
+     23,
+     "stop"
+    ],
+    "78": [
+     "2f2059f493efeb5b",
+     23,
+     "stop"
+    ],
+    "79": [
+     "4978d202b4900d45",
+     24,
+     "stop"
+    ],
+    "80": [
+     "2f2059f493efeb5b",
+     23,
+     "stop"
+    ],
+    "81": [
+     "2f2059f493efeb5b",
+     23,
+     "stop"
+    ],
+    "82": [
+     "2f2059f493efeb5b",
+     23,
+     "stop"
+    ],
+    "83": [
+     "2f2059f493efeb5b",
+     23,
+     "stop"
+    ],
+    "84": [
+     "4978d202b4900d45",
+     24,
+     "stop"
+    ],
+    "85": [
+     "4978d202b4900d45",
+     24,
+     "stop"
+    ],
+    "86": [
+     "2f2059f493efeb5b",
+     23,
+     "stop"
+    ],
+    "87": [
+     "2f2059f493efeb5b",
+     23,
+     "stop"
+    ],
+    "88": [
+     "2f2059f493efeb5b",
+     23,
+     "stop"
+    ],
+    "89": [
+     "2f2059f493efeb5b",
+     23,
+     "stop"
+    ],
+    "90": [
+     "2f2059f493efeb5b",
+     23,
+     "stop"
+    ],
+    "91": [
+     "4978d202b4900d45",
+     24,
+     "stop"
+    ],
+    "92": [
+     "2f2059f493efeb5b",
+     23,
+     "stop"
+    ],
+    "93": [
+     "2f2059f493efeb5b",
+     23,
+     "stop"
+    ],
+    "94": [
+     "2f2059f493efeb5b",
+     23,
+     "stop"
+    ],
+    "95": [
+     "2f2059f493efeb5b",
+     23,
+     "stop"
+    ],
+    "96": [
+     "4978d202b4900d45",
+     24,
+     "stop"
+    ],
+    "97": [
+     "2f2059f493efeb5b",
+     23,
+     "stop"
+    ],
+    "98": [
+     "2f2059f493efeb5b",
+     23,
+     "stop"
+    ],
+    "99": [
+     "2f2059f493efeb5b",
+     23,
+     "stop"
+    ],
+    "100": [
+     "4978d202b4900d45",
+     24,
+     "stop"
+    ],
+    "101": [
+     "09d18ac73fcbfe91",
+     26,
+     "stop"
+    ],
+    "102": [
+     "4978d202b4900d45",
+     24,
+     "stop"
+    ],
+    "103": [
+     "c679a303ab8bedb4",
+     25,
+     "stop"
+    ],
+    "104": [
+     "2f2059f493efeb5b",
+     23,
+     "stop"
+    ],
+    "105": [
+     "2f2059f493efeb5b",
+     23,
+     "stop"
+    ],
+    "106": [
+     "2f2059f493efeb5b",
+     23,
+     "stop"
+    ],
+    "107": [
+     "2f2059f493efeb5b",
+     23,
+     "stop"
+    ],
+    "108": [
+     "2f2059f493efeb5b",
+     23,
+     "stop"
+    ],
+    "109": [
+     "2f2059f493efeb5b",
+     23,
+     "stop"
+    ],
+    "110": [
+     "2f2059f493efeb5b",
+     23,
+     "stop"
+    ],
+    "111": [
+     "2f2059f493efeb5b",
+     23,
+     "stop"
+    ],
+    "112": [
+     "8ce4941aa434d6da",
+     22,
+     "stop"
+    ],
+    "113": [
+     "2f2059f493efeb5b",
+     23,
+     "stop"
+    ],
+    "114": [
+     "4978d202b4900d45",
+     24,
+     "stop"
+    ],
+    "115": [
+     "4978d202b4900d45",
+     24,
+     "stop"
+    ],
+    "116": [
+     "4978d202b4900d45",
+     23,
+     "stop"
+    ],
+    "117": [
+     "4978d202b4900d45",
+     24,
+     "stop"
+    ],
+    "118": [
+     "4978d202b4900d45",
+     24,
+     "stop"
+    ],
+    "119": [
+     "8118189f7644c408",
+     305,
+     "stop"
+    ],
+    "120": [
+     "2f2059f493efeb5b",
+     23,
+     "stop"
+    ],
+    "121": [
+     "4978d202b4900d45",
+     23,
+     "stop"
+    ],
+    "122": [
+     "2f2059f493efeb5b",
+     23,
+     "stop"
+    ],
+    "123": [
+     "2f2059f493efeb5b",
+     23,
+     "stop"
+    ],
+    "124": [
+     "4978d202b4900d45",
+     24,
+     "stop"
+    ],
+    "125": [
+     "2f2059f493efeb5b",
+     23,
+     "stop"
+    ],
+    "126": [
+     "4978d202b4900d45",
+     23,
+     "stop"
+    ],
+    "127": [
+     "4978d202b4900d45",
+     24,
+     "stop"
+    ],
+    "128": [
+     "4978d202b4900d45",
+     23,
+     "stop"
+    ],
+    "129": [
+     "2f2059f493efeb5b",
+     23,
+     "stop"
+    ],
+    "130": [
+     "2f2059f493efeb5b",
+     23,
+     "stop"
+    ],
+    "131": [
+     "2f2059f493efeb5b",
+     23,
+     "stop"
+    ],
+    "132": [
+     "2f2059f493efeb5b",
+     23,
+     "stop"
+    ],
+    "133": [
+     "2f2059f493efeb5b",
+     23,
+     "stop"
+    ],
+    "134": [
+     "2f2059f493efeb5b",
+     23,
+     "stop"
+    ],
+    "135": [
+     "2f2059f493efeb5b",
+     23,
+     "stop"
+    ],
+    "136": [
+     "2f2059f493efeb5b",
+     23,
+     "stop"
+    ],
+    "137": [
+     "2f2059f493efeb5b",
+     23,
+     "stop"
+    ],
+    "138": [
+     "09d18ac73fcbfe91",
+     25,
+     "stop"
+    ],
+    "139": [
+     "2f2059f493efeb5b",
+     23,
+     "stop"
+    ],
+    "140": [
+     "2f2059f493efeb5b",
+     23,
+     "stop"
+    ],
+    "141": [
+     "2f2059f493efeb5b",
+     23,
+     "stop"
+    ],
+    "142": [
+     "4978d202b4900d45",
+     23,
+     "stop"
+    ],
+    "143": [
+     "2f2059f493efeb5b",
+     23,
+     "stop"
+    ],
+    "144": [
+     "4978d202b4900d45",
+     24,
+     "stop"
+    ],
+    "145": [
+     "2f2059f493efeb5b",
+     23,
+     "stop"
+    ],
+    "146": [
+     "2f2059f493efeb5b",
+     23,
+     "stop"
+    ],
+    "147": [
+     "4978d202b4900d45",
+     23,
+     "stop"
+    ],
+    "148": [
+     "2f2059f493efeb5b",
+     23,
+     "stop"
+    ],
+    "149": [
+     "2f2059f493efeb5b",
+     23,
+     "stop"
+    ]
+   }
+  }
+ ],
+ "gpu": {
+  "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
+  "power_limit_w": 600.0,
+  "power_max_w": 600.0,
+  "sm_clock_mhz": 2430.0,
+  "memory_mib": 97887.0,
+  "driver": "595.91.07"
+ }
+}

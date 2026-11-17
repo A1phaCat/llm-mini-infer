@@ -1,0 +1,16 @@
+== scene: concurrency 16, 500 requests
+arm       ok    finish  req/s   tok/s  e2e p50  e2e p99  ttft p50  ttft p99  tpot p50  tpot p99  reply  hit rate
+---  -------  --------  -----  ------  -------  -------  --------  --------  --------  --------  -----  --------
+p1   500/500  stop:500  5.826  1321.6   3173.4   3704.7     194.4       857     11.17     19.46    227     87.9%
+p2   500/500  stop:500   5.82  1320.2   3169.5     3875     194.5     870.7     11.15     20.27    227     87.9%
+(latencies in ms; reply: mean output tokens)
+
+arm  tok/verify            accept per pos  sparse  union  union p90  universe  forced/req  eos-free  idle %  failed/grammar
+---  ----------  ------------------------  ------  -----  ---------  --------  ----------  --------  ------  --------------
+p1        4.336  0.87/0.73/0.66/0.57/0.51       1  181.1      <=256       331           2         0  0.0037             0/0
+p2        4.336  0.87/0.73/0.66/0.57/0.51       1  181.3      <=256       331           2         0  0.0037             0/0
+(union: the mean tokens of the steps' mask unions, and the bucket bound of their p90;
+ eos-free: finishes, those with a row in flight in brackets; idle %: GPU idle caused by the CPU)
+
+answers (identical: the same content, tokens and finish reason):
+  p1 vs p2: 500/500 identical (100.0%)

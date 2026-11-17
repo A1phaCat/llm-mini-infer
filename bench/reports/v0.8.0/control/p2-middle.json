@@ -1,0 +1,34 @@
+{
+ "torch": "2.14.1+cu130",
+ "cuda": "13.0",
+ "gpu": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
+ "phases": {
+  "bf16": {
+   "tflops": 410.8,
+   "sm_mhz_median": 2205.0,
+   "power_w_median": 600.03,
+   "throttle": [
+    4
+   ],
+   "seconds": 35.01
+  },
+  "fp8": {
+   "tflops": 776.4,
+   "sm_mhz_median": 2137.0,
+   "power_w_median": 599.98,
+   "throttle": [
+    4
+   ],
+   "seconds": 35.0
+  },
+  "copy": {
+   "gbs": 1460.1,
+   "sm_mhz_median": 2422.0,
+   "power_w_median": 266.5,
+   "throttle": [
+    4
+   ],
+   "seconds": 35.02
+  }
+ }
+}

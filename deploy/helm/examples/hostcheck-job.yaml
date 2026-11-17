@@ -1,0 +1,102 @@
+# The host check as a one-off Job on a GPU node (docs/operations.md, "The host check"): before a node serves, it
+# measures the GPU, the host, two server starts and two loads against reference numbers, and fails without the drafter.
+# It is also the image's first pull and first GPU run on that node.
+#
+#   kubectl -n llm-mini-infer apply -f deploy/helm/examples/hostcheck-inputs.yaml  # the mounted mode only: then fill it
+#   kubectl -n llm-mini-infer apply -f deploy/helm/examples/hostcheck-job.yaml
+#   kubectl -n llm-mini-infer logs -f job/llm-mini-infer-hostcheck
+#   kubectl -n llm-mini-infer delete job llm-mini-infer-hostcheck
+#   kubectl -n llm-mini-infer delete pvc llm-mini-infer-hostcheck-inputs
+#
+# It runs `llm-mini-infer hostcheck` with the image's configuration (deploy/config.yaml) plus a model and its assistant,
+# both downloaded by repo id (here Gemma 4 31B FP8, about 34 GB; for Qwen3.8 27B FP8 set model.path=Qwen/Qwen3.8-27B-FP8
+# alone): add with --set the settings your own values pin (the context, the image budget, ...), so it measures what you
+# serve. Exit 0: no verdict failed (read the SLOW and LOW rows); 1: one failed; 2: it could not run (`llm-mini-infer
+# hostcheck --help` gives the causes of 1 and 2). A server that fails to start prints the end of its log here, since the
+# log on the pod's volume goes with the pod.
+#
+# **Its inputs.** The mounted mode (`--inputs /inputs`): the claim of hostcheck-inputs.yaml, read-only, with your own
+# images, prompt and schema, and optionally a user text and references; nothing of it is ever in the image. For the
+# synthetic workload instead, drop `--inputs /inputs`, the `inputs` mount and its volume: its verdicts compare with a
+# packaged reference only on the GPU, model and workload that reference names. `--rates` and `--slots` set the two
+# loads (default: 2 and 4 requests/s, at most 32 and 64 in flight).
+#
+# It needs the GPU's memory free: on a time-sliced GPU another pod may hold some, and the check then says so and stops.
+# Set the node selector to your GPU's product label (the placeholder below), the image's tag, a pull secret for a
+# private registry (`imagePullSecrets`), and the Hugging Face token's secret for gated models. The image runs as its
+# llm-mini-infer user (10001).
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: llm-mini-infer-hostcheck
+  namespace: llm-mini-infer
+  labels:
+    app.kubernetes.io/name: llm-mini-infer-hostcheck
+spec:
+  backoffLimit: 0
+  ttlSecondsAfterFinished: 86400
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: llm-mini-infer-hostcheck  # not the server's labels: no Service selects it
+    spec:
+      restartPolicy: Never
+      runtimeClassName: nvidia
+      enableServiceLinks: false
+      securityContext:
+        runAsNonRoot: true
+        runAsUser: 10001
+        runAsGroup: 10001
+        fsGroup: 10001
+      tolerations:
+        - key: "nvidia.com/gpu"
+          operator: "Exists"
+          effect: "NoSchedule"
+      nodeSelector:
+        nvidia.com/gpu.product: "<the GPU's product label>"
+      containers:
+        - name: hostcheck
+          image: ghcr.io/deftinfer/llm-mini-infer:0.8.0  # the release (pyproject's version), as the chart's default
+          # The model and its assistant (the image's deploy/config.yaml has the rest;
+          # tests/deploy/test_deploy_contract.py checks what they serve together); no k: the assistant drafts
+          # llm-mini-infer's own default
+          args: ["hostcheck", "--set", "model.path=RedHatAI/gemma-4-31B-it-FP8-block",
+                 "--set", "speculative.model=google/gemma-4-31B-it-assistant", "--inputs", "/inputs"]
+          env:
+            - name: HF_HOME
+              value: /cache/huggingface
+            - name: HF_TOKEN
+              valueFrom:
+                secretKeyRef:
+                  name: hf-token
+                  key: HF_TOKEN
+                  optional: true
+          resources:  # as the server's (the chart's values): the derived defaults read the CPU quota
+            requests:
+              cpu: "10"
+              memory: 32Gi
+              nvidia.com/gpu: 1
+            limits:
+              cpu: "10"
+              memory: 32Gi
+              nvidia.com/gpu: 1
+          volumeMounts:
+            - name: cache
+              mountPath: /cache
+            - name: shm
+              mountPath: /dev/shm
+            - name: inputs
+              mountPath: /inputs
+              readOnly: true
+      volumes:
+        - name: inputs
+          persistentVolumeClaim:
+            claimName: llm-mini-infer-hostcheck-inputs
+            readOnly: true
+        - name: cache
+          emptyDir:
+            sizeLimit: 100Gi
+        - name: shm
+          emptyDir:
+            medium: Memory
+            sizeLimit: 2Gi

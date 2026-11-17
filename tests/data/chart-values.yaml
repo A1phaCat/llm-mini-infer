@@ -1,0 +1,89 @@
+# An example values file for llm-mini-infer's chart (tests/deploy/test_helm.py, tests/deploy/test_deploy_contract.py),
+# with deliberately non-default settings: Gemma 4 31B in FP8 with its assistant, a context of 16,384 positions, four
+# images a request at 140 soft tokens, 16 rows, seed 42, a memory share of 0.85, the auto grammar backend, secrets by
+# name, one GPU on a node type, kept away from another engine's pods, and a label guard for workloads that select pods
+# by their labels.
+image:
+  repository: ghcr.io/example/llm-mini-infer
+imagePullSecrets:
+  - name: registry-credentials
+replicaCount: 1
+model:
+  id: RedHatAI/gemma-4-31B-it-FP8-block
+  revision: ""
+  hfToken:
+    secretName: llm-secrets
+    secretKey: HF_TOKEN
+apiKey:
+  secretName: llm-secrets
+  secretKey: VLLM_API_KEY
+config:
+  model:
+    max_model_len: 16384
+  speculative:
+    model: google/gemma-4-31B-it-assistant
+  images:
+    max_soft_tokens: 140
+    max_per_request: 4
+  structured_output:
+    backend: auto
+    disable_any_whitespace: false  # the chart's default (true) needs guidance
+  scheduler:
+    max_num_seqs: 16
+    seed: 42
+  runner:
+    kind: cuda
+    cuda:
+      memory_utilization: 0.85
+  server:
+    port: 8000
+    keep_alive_s: 12
+    drain_grace_s: 15
+    drain_timeout_s: 75
+  observability:
+    log_level: info
+    log_requests: true
+cache:
+  emptyDir:
+    sizeLimit: 100Gi
+resources:
+  requests:
+    cpu: "16"
+    memory: 48Gi
+  limits:
+    cpu: "16"
+    memory: 48Gi
+runtimeClassName: nvidia
+tolerations:
+  - key: "nvidia.com/gpu"
+    operator: "Exists"
+    effect: "NoSchedule"
+nodeSelectorTerms:
+  - matchExpressions:
+      - key: nvidia.com/gpu.product
+        operator: In
+        values:
+          - "NVIDIA-RTX-PRO-6000-Blackwell-Server-Edition"
+avoidPodsWithLabels:
+  - component: other-engine
+notSelectedBy:
+  - name: engine discovery
+    labels: {app: llm, component: engine}
+  - name: gateway Service
+    labels: {app: llm, component: gateway}
+podLabels:
+  app: llm
+probes:
+  startup:
+    initialDelaySeconds: 10
+    periodSeconds: 10
+    failureThreshold: 90
+terminationGracePeriodSeconds: 120
+service:
+  port: 80
+  headless: true
+pdb:
+  enabled: true
+  maxUnavailable: 1
+serviceMonitor:
+  enabled: true

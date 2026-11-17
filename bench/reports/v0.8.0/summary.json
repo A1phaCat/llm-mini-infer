@@ -1,0 +1,5036 @@
+{
+ "cells": {
+  "A1": {
+   "gemma": {
+    "ours": {
+     "host": "p1",
+     "scene-c1": {
+      "n": 150,
+      "failed": 0,
+      "dropped": 0,
+      "e2e_p50": 1627.3,
+      "e2e_p90": 1778.9,
+      "e2e_p99": 1905.4,
+      "e2e_mean": 1399.3,
+      "ttft_p50": 86.8,
+      "tpot_p50": 5.86,
+      "tpot_p90": 6.89,
+      "tpot_p99": 8.03,
+      "tpot_mean": 6.06,
+      "served_rps": 0.712,
+      "tok_s": 162.7,
+      "reply_mean": 228.0,
+      "tokens_per_verify": 4.376
+     },
+     "chat-c1": {
+      "n": 80,
+      "failed": 0,
+      "dropped": 0,
+      "e2e_p50": 3706.3,
+      "e2e_p90": 5532.5,
+      "e2e_p99": 5769.5,
+      "e2e_mean": 3829.6,
+      "ttft_p50": 143.7,
+      "tpot_p50": 13.97,
+      "tpot_p90": 21.13,
+      "tpot_p99": 22.06,
+      "tpot_mean": 14.45,
+      "served_rps": 0.261,
+      "tok_s": 66.7,
+      "reply_mean": 256.0,
+      "tokens_per_verify": 2.036
+     },
+     "scene-c16": {
+      "n": 347,
+      "failed": 0,
+      "dropped": 0,
+      "e2e_p50": 3207.7,
+      "e2e_p90": 3470.9,
+      "e2e_p99": 3631.3,
+      "e2e_mean": 2771.8,
+      "ttft_p50": 193.1,
+      "tpot_p50": 11.16,
+      "tpot_p90": 13.65,
+      "tpot_p99": 18.25,
+      "tpot_mean": 11.62,
+      "served_rps": 5.783,
+      "tok_s": 1352.9,
+      "reply_mean": 234.0,
+      "tokens_per_verify": 4.383
+     },
+     "scene-c64": {
+      "n": 474,
+      "failed": 0,
+      "dropped": 0,
+      "e2e_p50": 9573.6,
+      "e2e_p90": 10405.5,
+      "e2e_p99": 10957.2,
+      "e2e_mean": 8280.3,
+      "ttft_p50": 766.9,
+      "tpot_p50": 32.54,
+      "tpot_p90": 45.06,
+      "tpot_p99": 61.71,
+      "tpot_mean": 34.75,
+      "served_rps": 7.9,
+      "tok_s": 1834.8,
+      "reply_mean": 232.0,
+      "tokens_per_verify": 4.373
+     },
+     "chat-c16": {
+      "n": 119,
+      "failed": 0,
+      "dropped": 0,
+      "e2e_p50": 8411.1,
+      "e2e_p90": 10950.9,
+      "e2e_p99": 11376.3,
+      "e2e_mean": 8263.0,
+      "ttft_p50": 237.8,
+      "tpot_p50": 32.07,
+      "tpot_p90": 41.56,
+      "tpot_p99": 43.68,
+      "tpot_mean": 31.28,
+      "served_rps": 1.983,
+      "tok_s": 507.7,
+      "reply_mean": 256.0,
+      "tokens_per_verify": 1.847
+     },
+     "chat-c64": {
+      "n": 155,
+      "failed": 0,
+      "dropped": 0,
+      "e2e_p50": 23957.1,
+      "e2e_p90": 30721.9,
+      "e2e_p99": 32311.8,
+      "e2e_mean": 23661.0,
+      "ttft_p50": 3913.1,
+      "tpot_p50": 77.6,
+      "tpot_p90": 104.92,
+      "tpot_p99": 107.13,
+      "tpot_mean": 76.95,
+      "served_rps": 2.583,
+      "tok_s": 661.3,
+      "reply_mean": 256.0,
+      "tokens_per_verify": 1.883
+     }
+    },
+    "vllm": {
+     "host": "p1",
+     "scene-c1": {
+      "n": 150,
+      "failed": 0,
+      "dropped": 0,
+      "e2e_p50": 1988.7,
+      "e2e_p90": 2171.0,
+      "e2e_p99": 2229.6,
+      "e2e_mean": 1511.5,
+      "ttft_p50": 184.0,
+      "tpot_p50": 7.07,
+      "tpot_p90": 10.81,
+      "tpot_p99": 10.85,
+      "tpot_mean": 7.95,
+      "served_rps": 0.66,
+      "tok_s": 126.7,
+      "reply_mean": 192.0,
+      "tokens_per_verify": 4.325
+     },
+     "chat-c1": {
+      "n": 80,
+      "failed": 0,
+      "dropped": 0,
+      "e2e_p50": 5070.7,
+      "e2e_p90": 5519.2,
+      "e2e_p99": 5659.8,
+      "e2e_mean": 4307.1,
+      "ttft_p50": 171.4,
+      "tpot_p50": 19.21,
+      "tpot_p90": 20.97,
+      "tpot_p99": 21.56,
+      "tpot_mean": 16.23,
+      "served_rps": 0.232,
+      "tok_s": 59.4,
+      "reply_mean": 256.0,
+      "tokens_per_verify": 1.84
+     },
+     "scene-c16": {
+      "n": 285,
+      "failed": 0,
+      "dropped": 0,
+      "e2e_p50": 4315.1,
+      "e2e_p90": 4908.7,
+      "e2e_p99": 5143.4,
+      "e2e_mean": 3385.0,
+      "ttft_p50": 310.7,
+      "tpot_p50": 15.97,
+      "tpot_p90": 24.69,
+      "tpot_p99": 31.25,
+      "tpot_mean": 17.79,
+      "served_rps": 4.75,
+      "tok_s": 935.1,
+      "reply_mean": 197.0,
+      "tokens_per_verify": 4.325
+     },
+     "scene-c64": {
+      "n": 395,
+      "failed": 0,
+      "dropped": 0,
+      "e2e_p50": 12127.6,
+      "e2e_p90": 13676.0,
+      "e2e_p99": 14526.0,
+      "e2e_mean": 9414.7,
+      "ttft_p50": 705.7,
+      "tpot_p50": 44.84,
+      "tpot_p90": 92.01,
+      "tpot_p99": 131.34,
+      "tpot_mean": 55.19,
+      "served_rps": 6.583,
+      "tok_s": 1282.6,
+      "reply_mean": 195.0,
+      "tokens_per_verify": 4.319
+     },
+     "chat-c16": {
+      "n": 112,
+      "failed": 0,
+      "dropped": 0,
+      "e2e_p50": 9891.4,
+      "e2e_p90": 10692.8,
+      "e2e_p99": 11260.9,
+      "e2e_mean": 8603.9,
+      "ttft_p50": 241.9,
+      "tpot_p50": 37.74,
+      "tpot_p90": 40.95,
+      "tpot_p99": 43.22,
+      "tpot_mean": 32.66,
+      "served_rps": 1.867,
+      "tok_s": 477.9,
+      "reply_mean": 256.0,
+      "tokens_per_verify": 1.765
+     },
+     "chat-c64": {
+      "n": 154,
+      "failed": 0,
+      "dropped": 0,
+      "e2e_p50": 25483.8,
+      "e2e_p90": 29496.3,
+      "e2e_p99": 31125.3,
+      "e2e_mean": 23363.0,
+      "ttft_p50": 3765.6,
+      "tpot_p50": 85.49,
+      "tpot_p90": 99.62,
+      "tpot_p99": 103.61,
+      "tpot_mean": 76.93,
+      "served_rps": 2.567,
+      "tok_s": 657.1,
+      "reply_mean": 256.0,
+      "tokens_per_verify": 1.831
+     }
+    },
+    "sglang": {
+     "host": "p1",
+     "scene-c1": {
+      "n": 150,
+      "failed": 0,
+      "dropped": 0,
+      "e2e_p50": 2524.1,
+      "e2e_p90": 3436.8,
+      "e2e_p99": 3536.0,
+      "e2e_mean": 1972.3,
+      "ttft_p50": 163.2,
+      "tpot_p50": 12.27,
+      "tpot_p90": 17.42,
+      "tpot_p99": 17.45,
+      "tpot_mean": 13.82,
+      "served_rps": 0.506,
+      "tok_s": 79.2,
+      "reply_mean": 157.0,
+      "tokens_per_verify": 4.149
+     },
+     "chat-c1": {
+      "n": 80,
+      "failed": 0,
+      "dropped": 0,
+      "e2e_p50": 6078.3,
+      "e2e_p90": 8396.0,
+      "e2e_p99": 8750.1,
+      "e2e_mean": 6147.0,
+      "ttft_p50": 178.8,
+      "tpot_p50": 23.13,
+      "tpot_p90": 32.22,
+      "tpot_p99": 33.61,
+      "tpot_mean": 23.44,
+      "served_rps": 0.163,
+      "tok_s": 41.6,
+      "reply_mean": 256.0,
+      "tokens_per_verify": 1.923
+     },
+     "scene-c16": {
+      "n": 182,
+      "failed": 0,
+      "dropped": 0,
+      "e2e_p50": 7100.7,
+      "e2e_p90": 8477.2,
+      "e2e_p99": 8891.0,
+      "e2e_mean": 5418.9,
+      "ttft_p50": 289.2,
+      "tpot_p50": 27.81,
+      "tpot_p90": 39.44,
+      "tpot_p99": 48.43,
+      "tpot_mean": 29.97,
+      "served_rps": 3.033,
+      "tok_s": 565.0,
+      "reply_mean": 186.0,
+      "tokens_per_verify": 4.203
+     },
+     "scene-c64": {
+      "n": 229,
+      "failed": 0,
+      "dropped": 0,
+      "e2e_p50": 20736.7,
+      "e2e_p90": 25056.4,
+      "e2e_p99": 26399.0,
+      "e2e_mean": 15608.5,
+      "ttft_p50": 787.2,
+      "tpot_p50": 86.17,
+      "tpot_p90": 160.41,
+      "tpot_p99": 204.46,
+      "tpot_mean": 98.14,
+      "served_rps": 3.817,
+      "tok_s": 671.1,
+      "reply_mean": 176.0,
+      "tokens_per_verify": 4.19
+     },
+     "chat-c16": {
+      "n": 72,
+      "failed": 0,
+      "dropped": 0,
+      "e2e_p50": 15000.2,
+      "e2e_p90": 17037.0,
+      "e2e_p99": 17564.2,
+      "e2e_mean": 13141.3,
+      "ttft_p50": 282.2,
+      "tpot_p50": 57.72,
+      "tpot_p90": 65.65,
+      "tpot_p99": 67.77,
+      "tpot_mean": 50.26,
+      "served_rps": 1.2,
+      "tok_s": 307.2,
+      "reply_mean": 256.0,
+      "tokens_per_verify": 1.809
+     },
+     "chat-c64": {
+      "n": 74,
+      "failed": 0,
+      "dropped": 0,
+      "e2e_p50": 44760.6,
+      "e2e_p90": 55736.6,
+      "e2e_p99": 64899.4,
+      "e2e_mean": 44348.9,
+      "ttft_p50": 14267.7,
+      "tpot_p50": 123.79,
+      "tpot_p90": 143.73,
+      "tpot_p99": 184.92,
+      "tpot_mean": 113.1,
+      "served_rps": 1.233,
+      "tok_s": 315.7,
+      "reply_mean": 256.0,
+      "tokens_per_verify": 1.801
+     }
+    }
+   },
+   "qwen": {
+    "ours": {
+     "host": "p3",
+     "scene-c1": {
+      "n": 150,
+      "failed": 0,
+      "dropped": 0,
+      "e2e_p50": 258.7,
+      "e2e_p90": 281.5,
+      "e2e_p99": 1868.8,
+      "e2e_mean": 304.6,
+      "ttft_p50": 128.5,
+      "tpot_p50": 5.91,
+      "tpot_p90": 6.89,
+      "tpot_p99": 7.86,
+      "tpot_mean": 6.0,
+      "served_rps": 3.257,
+      "tok_s": 99.0,
+      "reply_mean": 30.0,
+      "tokens_per_verify": 3.622
+     },
+     "chat-c1": {
+      "n": 80,
+      "failed": 0,
+      "dropped": 0,
+      "e2e_p50": 2013.3,
+      "e2e_p90": 3086.2,
+      "e2e_p99": 3467.6,
+      "e2e_mean": 2166.4,
+      "ttft_p50": 112.4,
+      "tpot_p50": 7.45,
+      "tpot_p90": 11.66,
+      "tpot_p99": 13.16,
+      "tpot_mean": 8.05,
+      "served_rps": 0.461,
+      "tok_s": 118.0,
+      "reply_mean": 256.0,
+      "tokens_per_verify": 2.985
+     },
+     "scene-c16": {
+      "n": 501,
+      "failed": 0,
+      "dropped": 0,
+      "e2e_p50": 1779.4,
+      "e2e_p90": 2068.8,
+      "e2e_p99": 8445.4,
+      "e2e_mean": 1922.9,
+      "ttft_p50": 637.9,
+      "tpot_p50": 51.09,
+      "tpot_p90": 61.05,
+      "tpot_p99": 67.93,
+      "tpot_mean": 50.9,
+      "served_rps": 8.35,
+      "tok_s": 218.2,
+      "reply_mean": 26.0,
+      "tokens_per_verify": 3.719
+     },
+     "scene-c64": {
+      "n": 509,
+      "failed": 0,
+      "dropped": 0,
+      "e2e_p50": 7246.8,
+      "e2e_p90": 7534.4,
+      "e2e_p99": 25617.3,
+      "e2e_mean": 7520.4,
+      "ttft_p50": 5748.0,
+      "tpot_p50": 68.29,
+      "tpot_p90": 79.37,
+      "tpot_p99": 88.05,
+      "tpot_mean": 67.42,
+      "served_rps": 8.483,
+      "tok_s": 234.6,
+      "reply_mean": 28.0,
+      "tokens_per_verify": 3.677
+     },
+     "chat-c16": {
+      "n": 229,
+      "failed": 0,
+      "dropped": 0,
+      "e2e_p50": 4028.0,
+      "e2e_p90": 5875.7,
+      "e2e_p99": 6685.7,
+      "e2e_mean": 4204.4,
+      "ttft_p50": 171.7,
+      "tpot_p50": 14.95,
+      "tpot_p90": 22.19,
+      "tpot_p99": 25.55,
+      "tpot_mean": 15.67,
+      "served_rps": 3.817,
+      "tok_s": 977.1,
+      "reply_mean": 256.0,
+      "tokens_per_verify": 2.695
+     },
+     "chat-c64": {
+      "n": 358,
+      "failed": 0,
+      "dropped": 0,
+      "e2e_p50": 10112.3,
+      "e2e_p90": 14830.2,
+      "e2e_p99": 17616.6,
+      "e2e_mean": 10885.6,
+      "ttft_p50": 1387.0,
+      "tpot_p50": 34.81,
+      "tpot_p90": 53.51,
+      "tpot_p99": 63.58,
+      "tpot_mean": 37.35,
+      "served_rps": 5.967,
+      "tok_s": 1527.5,
+      "reply_mean": 256.0,
+      "tokens_per_verify": 2.891
+     }
+    },
+    "vllm": {
+     "host": "p3",
+     "scene-c1": {
+      "n": 150,
+      "failed": 0,
+      "dropped": 0,
+      "e2e_p50": 409.1,
+      "e2e_p90": 440.9,
+      "e2e_p99": 2667.3,
+      "e2e_mean": 467.8,
+      "ttft_p50": 191.3,
+      "tpot_p50": 9.9,
+      "tpot_p90": 11.32,
+      "tpot_p99": 12.19,
+      "tpot_mean": 10.01,
+      "served_rps": 2.128,
+      "tok_s": 63.1,
+      "reply_mean": 30.0,
+      "tokens_per_verify": 3.227
+     },
+     "chat-c1": {
+      "n": 80,
+      "failed": 0,
+      "dropped": 0,
+      "e2e_p50": 2578.4,
+      "e2e_p90": 3778.4,
+      "e2e_p99": 4539.0,
+      "e2e_mean": 2760.9,
+      "ttft_p50": 136.6,
+      "tpot_p50": 9.57,
+      "tpot_p90": 14.29,
+      "tpot_p99": 17.36,
+      "tpot_mean": 10.31,
+      "served_rps": 0.362,
+      "tok_s": 92.7,
+      "reply_mean": 256.0,
+      "tokens_per_verify": 2.922
+     },
+     "scene-c16": {
+      "n": 371,
+      "failed": 0,
+      "dropped": 0,
+      "e2e_p50": 2358.0,
+      "e2e_p90": 2651.6,
+      "e2e_p99": 16600.5,
+      "e2e_mean": 2562.4,
+      "ttft_p50": 860.1,
+      "tpot_p50": 63.33,
+      "tpot_p90": 81.94,
+      "tpot_p99": 91.71,
+      "tpot_mean": 62.76,
+      "served_rps": 6.183,
+      "tok_s": 165.8,
+      "reply_mean": 27.0,
+      "tokens_per_verify": 3.227
+     },
+     "scene-c64": {
+      "n": 387,
+      "failed": 0,
+      "dropped": 0,
+      "e2e_p50": 9167.6,
+      "e2e_p90": 10094.8,
+      "e2e_p99": 48329.0,
+      "e2e_mean": 10242.1,
+      "ttft_p50": 2758.2,
+      "tpot_p50": 287.3,
+      "tpot_p90": 314.8,
+      "tpot_p99": 342.91,
+      "tpot_mean": 282.74,
+      "served_rps": 6.45,
+      "tok_s": 178.2,
+      "reply_mean": 28.0,
+      "tokens_per_verify": 3.203
+     },
+     "chat-c16": {
+      "n": 181,
+      "failed": 0,
+      "dropped": 0,
+      "e2e_p50": 5001.6,
+      "e2e_p90": 7158.7,
+      "e2e_p99": 7770.6,
+      "e2e_mean": 5219.0,
+      "ttft_p50": 200.8,
+      "tpot_p50": 18.79,
+      "tpot_p90": 27.14,
+      "tpot_p99": 29.69,
+      "tpot_mean": 19.56,
+      "served_rps": 3.017,
+      "tok_s": 772.3,
+      "reply_mean": 256.0,
+      "tokens_per_verify": 2.662
+     },
+     "chat-c64": {
+      "n": 291,
+      "failed": 0,
+      "dropped": 0,
+      "e2e_p50": 12371.8,
+      "e2e_p90": 18942.1,
+      "e2e_p99": 21520.4,
+      "e2e_mean": 13408.6,
+      "ttft_p50": 525.6,
+      "tpot_p50": 46.54,
+      "tpot_p90": 72.66,
+      "tpot_p99": 81.96,
+      "tpot_mean": 50.48,
+      "served_rps": 4.85,
+      "tok_s": 1241.6,
+      "reply_mean": 256.0,
+      "tokens_per_verify": 2.843
+     }
+    },
+    "sglang": {
+     "host": "p3",
+     "scene-c1": {
+      "n": 150,
+      "failed": 0,
+      "dropped": 0,
+      "e2e_p50": 417.9,
+      "e2e_p90": 447.3,
+      "e2e_p99": 2649.5,
+      "e2e_mean": 489.6,
+      "ttft_p50": 203.4,
+      "tpot_p50": 9.69,
+      "tpot_p90": 11.04,
+      "tpot_p99": 11.37,
+      "tpot_mean": 9.78,
+      "served_rps": 2.032,
+      "tok_s": 64.0,
+      "reply_mean": 32.0,
+      "tokens_per_verify": 3.247
+     },
+     "chat-c1": {
+      "n": 80,
+      "failed": 0,
+      "dropped": 0,
+      "e2e_p50": 2559.8,
+      "e2e_p90": 3987.3,
+      "e2e_p99": 4278.5,
+      "e2e_mean": 2752.0,
+      "ttft_p50": 143.4,
+      "tpot_p50": 9.47,
+      "tpot_p90": 15.07,
+      "tpot_p99": 16.22,
+      "tpot_mean": 10.25,
+      "served_rps": 0.363,
+      "tok_s": 92.9,
+      "reply_mean": 256.0,
+      "tokens_per_verify": 2.844
+     },
+     "scene-c16": {
+      "n": 348,
+      "failed": 0,
+      "dropped": 0,
+      "e2e_p50": 2363.1,
+      "e2e_p90": 2650.4,
+      "e2e_p99": 22729.9,
+      "e2e_mean": 2836.2,
+      "ttft_p50": 1577.6,
+      "tpot_p50": 34.33,
+      "tpot_p90": 86.59,
+      "tpot_p99": 106.98,
+      "tpot_mean": 42.69,
+      "served_rps": 5.8,
+      "tok_s": 172.5,
+      "reply_mean": 30.0,
+      "tokens_per_verify": 3.227
+     },
+     "scene-c64": {
+      "n": 358,
+      "failed": 0,
+      "dropped": 0,
+      "e2e_p50": 9107.7,
+      "e2e_p90": 11358.5,
+      "e2e_p99": 60066.3,
+      "e2e_mean": 10639.7,
+      "ttft_p50": 4059.3,
+      "tpot_p50": 213.86,
+      "tpot_p90": 276.13,
+      "tpot_p99": 304.33,
+      "tpot_mean": 213.03,
+      "served_rps": 5.967,
+      "tok_s": 186.9,
+      "reply_mean": 31.0,
+      "tokens_per_verify": 3.19
+     },
+     "chat-c16": {
+      "n": 187,
+      "failed": 0,
+      "dropped": 0,
+      "e2e_p50": 4928.3,
+      "e2e_p90": 7159.5,
+      "e2e_p99": 8047.6,
+      "e2e_mean": 5145.3,
+      "ttft_p50": 181.1,
+      "tpot_p50": 18.41,
+      "tpot_p90": 27.13,
+      "tpot_p99": 30.83,
+      "tpot_mean": 19.34,
+      "served_rps": 3.117,
+      "tok_s": 797.9,
+      "reply_mean": 256.0,
+      "tokens_per_verify": 2.662
+     },
+     "chat-c64": {
+      "n": 302,
+      "failed": 0,
+      "dropped": 0,
+      "e2e_p50": 11929.2,
+      "e2e_p90": 17463.6,
+      "e2e_p99": 19650.5,
+      "e2e_mean": 12947.7,
+      "ttft_p50": 3410.9,
+      "tpot_p50": 33.51,
+      "tpot_p90": 54.55,
+      "tpot_p99": 63.33,
+      "tpot_mean": 37.22,
+      "served_rps": 5.033,
+      "tok_s": 1288.5,
+      "reply_mean": 256.0,
+      "tokens_per_verify": 2.836
+     }
+    }
+   }
+  },
+  "bound": {
+   "gemma": {
+    "scene": {
+     "host": "p1",
+     "median_ms": 1988.7,
+     "value_ms": 3977.4,
+     "value_in_file_ms": 3977.4,
+     "engines": {
+      "ours": 1627.3,
+      "vllm": 1988.7,
+      "sglang": 2524.1
+     }
+    },
+    "chat": {
+     "host": "p1",
+     "median_ms": 5070.7,
+     "value_ms": 10141.4,
+     "value_in_file_ms": 10141.4,
+     "engines": {
+      "ours": 3706.3,
+      "vllm": 5070.7,
+      "sglang": 6078.3
+     }
+    }
+   },
+   "qwen": {
+    "scene": {
+     "host": "p2",
+     "median_ms": 333.8,
+     "value_ms": 667.6,
+     "value_in_file_ms": 667.6,
+     "engines": {
+      "ours": 258.5,
+      "vllm": 409.1
+     }
+    },
+    "chat": {
+     "host": "p2",
+     "median_ms": 2325.6,
+     "value_ms": 4651.2,
+     "value_in_file_ms": 4651.2,
+     "engines": {
+      "ours": 2014.0,
+      "vllm": 2637.2
+     }
+    }
+   }
+  },
+  "A2": {
+   "gemma": {
+    "ours": {
+     "host": "p2",
+     "best_rate": 3.95,
+     "confirmed": true,
+     "first_failing_rate": 4.74,
+     "low": 3.16,
+     "high": 7.9,
+     "probes_checked": 7,
+     "probe_verdict_mismatches": 0
+    },
+    "vllm": {
+     "host": "p2",
+     "best_rate": 2.633,
+     "confirmed": true,
+     "first_failing_rate": 2.9621,
+     "low": 2.633,
+     "high": 6.583,
+     "probes_checked": 6,
+     "probe_verdict_mismatches": 0
+    },
+    "sglang": {
+     "host": "p2",
+     "best_rate": null,
+     "confirmed": false,
+     "first_failing_rate": 1.527,
+     "low": 1.527,
+     "high": 3.817,
+     "probes_checked": 1,
+     "probe_verdict_mismatches": 0
+    }
+   },
+   "qwen": {
+    "ours": {
+     "host": "p2",
+     "best_rate": null,
+     "confirmed": false,
+     "first_failing_rate": 3.42,
+     "low": 3.42,
+     "high": 8.55,
+     "probes_checked": 1,
+     "probe_verdict_mismatches": 0
+    },
+    "vllm": {
+     "host": "p2",
+     "best_rate": null,
+     "confirmed": false,
+     "first_failing_rate": 2.593,
+     "low": 2.593,
+     "high": 6.483,
+     "probes_checked": 1,
+     "probe_verdict_mismatches": 0
+    },
+    "sglang": null
+   }
+  },
+  "C": {
+   "gemma": {
+    "ours": {
+     "host": "p2",
+     "fp8_kernel": "CUTLASS",
+     "batch_invariant_active": true,
+     "distinct_p1": 416,
+     "distinct_p2": 416,
+     "top_p1": 85,
+     "top_p2": 85,
+     "identical": 500,
+     "n": 500,
+     "pct": 100.0,
+     "ci_lo_pct": 99.23756594190853,
+     "ci_hi_pct": 100.00000000000003,
+     "status": "ok"
+    },
+    "ours-nobi": {
+     "host": "p2",
+     "fp8_kernel": "CUTLASS",
+     "batch_invariant_active": false,
+     "distinct_p1": 369,
+     "distinct_p2": 370,
+     "top_p1": 132,
+     "top_p2": 131,
+     "identical": 207,
+     "n": 500,
+     "pct": 41.4,
+     "ci_lo_pct": 37.16426085832934,
+     "ci_hi_pct": 45.766877799662396,
+     "status": "ok"
+    },
+    "vllm": {
+     "host": "p2",
+     "fp8_kernel": "DeepGemmFp8BlockScaledMMKernel",
+     "batch_invariant_active": false,
+     "distinct_p1": 311,
+     "distinct_p2": 326,
+     "top_p1": 190,
+     "top_p2": 175,
+     "identical": 261,
+     "n": 500,
+     "pct": 52.2,
+     "ci_lo_pct": 47.821548906951605,
+     "ci_hi_pct": 56.544903994492365,
+     "status": "ok"
+    },
+    "vllm-bi": {
+     "host": "p2",
+     "fp8_kernel": "DeepGemmFp8BlockScaledMMKernel",
+     "batch_invariant_active": true,
+     "distinct_p1": 329,
+     "distinct_p2": 330,
+     "top_p1": 172,
+     "top_p2": 171,
+     "identical": 286,
+     "n": 500,
+     "pct": 57.2,
+     "ci_lo_pct": 52.82438500160791,
+     "ci_hi_pct": 61.46582449402691,
+     "status": "ok"
+    },
+    "vllm-bi-nodg": {
+     "host": "p3",
+     "fp8_kernel": "CutlassFp8BlockScaledMMKernel",
+     "batch_invariant_active": true,
+     "distinct_p1": 405,
+     "distinct_p2": 405,
+     "top_p1": 96,
+     "top_p2": 96,
+     "identical": 500,
+     "n": 500,
+     "pct": 100.0,
+     "ci_lo_pct": 99.23756594190853,
+     "ci_hi_pct": 100.00000000000003,
+     "status": "ok"
+    },
+    "sglang": {
+     "host": "p2",
+     "fp8_kernel": "auto",
+     "batch_invariant_active": false,
+     "distinct_p1": 289,
+     "distinct_p2": 283,
+     "top_p1": 212,
+     "top_p2": 218,
+     "identical": 335,
+     "n": 500,
+     "pct": 67.0,
+     "ci_lo_pct": 62.76256236300922,
+     "ci_hi_pct": 70.97821005723969,
+     "status": "ok"
+    },
+    "sglang-bi": {
+     "host": "p2",
+     "fp8_kernel": "auto",
+     "batch_invariant_active": true,
+     "distinct_p1": 3,
+     "distinct_p2": 5,
+     "top_p1": 498,
+     "top_p2": 496,
+     "identical": 496,
+     "n": 500,
+     "pct": 99.2,
+     "ci_lo_pct": 97.96129640268147,
+     "ci_hi_pct": 99.68846848415652,
+     "status": "ok"
+    }
+   },
+   "qwen": {
+    "ours": {
+     "host": "p2",
+     "fp8_kernel": "CUTLASS",
+     "batch_invariant_active": true,
+     "distinct_p1": 17,
+     "distinct_p2": 16,
+     "top_p1": 378,
+     "top_p2": 376,
+     "identical": 496,
+     "n": 500,
+     "pct": 99.2,
+     "ci_lo_pct": 97.96129640268147,
+     "ci_hi_pct": 99.68846848415652,
+     "status": "ok"
+    },
+    "ours-nobi": {
+     "host": "p2",
+     "fp8_kernel": "CUTLASS",
+     "batch_invariant_active": false,
+     "distinct_p1": 15,
+     "distinct_p2": 14,
+     "top_p1": 397,
+     "top_p2": 411,
+     "identical": 387,
+     "n": 500,
+     "pct": 77.4,
+     "ci_lo_pct": 73.53316419726512,
+     "ci_hi_pct": 80.84902193890076,
+     "status": "ok"
+    },
+    "vllm": {
+     "host": "p2",
+     "fp8_kernel": "CutlassFp8BlockScaledMMKernel",
+     "batch_invariant_active": false,
+     "distinct_p1": 16,
+     "distinct_p2": 14,
+     "top_p1": 308,
+     "top_p2": 353,
+     "identical": 326,
+     "n": 500,
+     "pct": 65.2,
+     "ci_lo_pct": 60.92325022125389,
+     "ci_hi_pct": 69.2449698250863,
+     "status": "ok"
+    },
+    "vllm-bi": {
+     "host": "p2",
+     "fp8_kernel": null,
+     "batch_invariant_active": null,
+     "identical": null,
+     "n": null,
+     "pct": null,
+     "ci_lo_pct": null,
+     "ci_hi_pct": null,
+     "status": "unsupported",
+     "distinct_p1": null,
+     "distinct_p2": null,
+     "top_p1": null,
+     "top_p2": null
+    },
+    "sglang": {
+     "host": "p3",
+     "fp8_kernel": "auto",
+     "batch_invariant_active": false,
+     "distinct_p1": 19,
+     "distinct_p2": 18,
+     "top_p1": 345,
+     "top_p2": 335,
+     "identical": 321,
+     "n": 500,
+     "pct": 64.2,
+     "ci_lo_pct": 59.90422903652528,
+     "ci_hi_pct": 68.27923969097674,
+     "status": "ok"
+    },
+    "sglang-bi": {
+     "host": "p3",
+     "fp8_kernel": "auto",
+     "batch_invariant_active": true,
+     "distinct_p1": 20,
+     "distinct_p2": 13,
+     "top_p1": 321,
+     "top_p2": 316,
+     "identical": 320,
+     "n": 500,
+     "pct": 64.0,
+     "ci_lo_pct": 59.700661673072716,
+     "ci_hi_pct": 68.08585679066167,
+     "status": "ok"
+    }
+   }
+  },
+  "C_vllm_kernels": {
+   "vllm-bi": {
+    "deep_gemm": "on (vLLM's default)",
+    "host": "p2",
+    "fp8_kernel": "DeepGemmFp8BlockScaledMMKernel",
+    "batch_invariant_active": true,
+    "identical": 286,
+    "n": 500,
+    "pct": 57.2,
+    "ci_lo_pct": 52.82438500160791,
+    "ci_hi_pct": 61.46582449402691,
+    "status": "ok",
+    "distinct_p1": 329,
+    "distinct_p2": 330,
+    "top_p1": 172,
+    "top_p2": 171
+   },
+   "vllm-bi-nodg": {
+    "deep_gemm": "off (VLLM_USE_DEEP_GEMM=0)",
+    "host": "p3",
+    "fp8_kernel": "CutlassFp8BlockScaledMMKernel",
+    "batch_invariant_active": true,
+    "identical": 500,
+    "n": 500,
+    "pct": 100.0,
+    "ci_lo_pct": 99.23756594190853,
+    "ci_hi_pct": 100.00000000000003,
+    "status": "ok",
+    "distinct_p1": 405,
+    "distinct_p2": 405,
+    "top_p1": 96,
+    "top_p2": 96
+   }
+  },
+  "cost": {
+   "gemma": {
+    "ours": {
+     "scene": {
+      "host": "p3",
+      "source": "I",
+      "other_arm": "ours-nobi",
+      "status": "ok",
+      "default_tok_s": 1848.6,
+      "other_tok_s": 1816.7,
+      "default_tpot_p50": 32.45,
+      "other_tpot_p50": 32.58,
+      "default_served_rps": 7.967,
+      "other_served_rps": 8.35,
+      "default_reply_mean": 232.0,
+      "other_reply_mean": 218.0,
+      "ratio": 0.9827436979335714
+     },
+     "chat": {
+      "host": "p3",
+      "source": "I",
+      "other_arm": "ours-nobi",
+      "status": "ok",
+      "default_tok_s": 678.4,
+      "other_tok_s": 708.3,
+      "default_tpot_p50": 76.45,
+      "other_tpot_p50": 73.87,
+      "default_served_rps": 2.65,
+      "other_served_rps": 2.767,
+      "default_reply_mean": 256.0,
+      "other_reply_mean": 256.0,
+      "ratio": 1.0440742924528301
+     }
+    },
+    "vllm": {
+     "scene": {
+      "host": "p3",
+      "source": "I",
+      "other_arm": "vllm-bi-nodg",
+      "status": "ok",
+      "default_tok_s": 1342.7,
+      "other_tok_s": 1401.3,
+      "default_tpot_p50": 44.57,
+      "other_tpot_p50": 43.35,
+      "default_served_rps": 6.833,
+      "other_served_rps": 5.967,
+      "default_reply_mean": 196.0,
+      "other_reply_mean": 235.0,
+      "ratio": 1.0436434050793177
+     },
+     "chat": {
+      "host": "p3",
+      "source": "I",
+      "other_arm": "vllm-bi-nodg",
+      "status": "ok",
+      "default_tok_s": 661.3,
+      "other_tok_s": 601.6,
+      "default_tpot_p50": 83.3,
+      "other_tpot_p50": 89.26,
+      "default_served_rps": 2.583,
+      "other_served_rps": 2.35,
+      "default_reply_mean": 256.0,
+      "other_reply_mean": 256.0,
+      "ratio": 0.9097232723423561
+     }
+    },
+    "sglang": {
+     "scene": {
+      "host": "p3",
+      "source": "I",
+      "other_arm": "sglang-bi",
+      "status": "ok",
+      "default_tok_s": 710.7,
+      "other_tok_s": 156.5,
+      "default_tpot_p50": 83.29,
+      "other_tpot_p50": 333.3,
+      "default_served_rps": 4.35,
+      "other_served_rps": 6.067,
+      "default_reply_mean": 163.0,
+      "other_reply_mean": 26.0,
+      "ratio": 0.22020543126495004
+     },
+     "chat": {
+      "host": "p3",
+      "source": "I",
+      "other_arm": "sglang-bi",
+      "status": "ok",
+      "default_tok_s": 328.5,
+      "other_tok_s": 174.9,
+      "default_tpot_p50": 100.92,
+      "other_tpot_p50": 204.9,
+      "default_served_rps": 1.283,
+      "other_served_rps": 0.683,
+      "default_reply_mean": 256.0,
+      "other_reply_mean": 256.0,
+      "ratio": 0.532420091324201
+     }
+    }
+   },
+   "qwen": {
+    "ours": {
+     "scene": {
+      "host": "p2",
+      "source": "A1 vs C pass 1",
+      "other_arm": "ours-nobi",
+      "status": "ok",
+      "default_tok_s": 236.1,
+      "other_tok_s": 239.2,
+      "default_tpot_p50": 67.84,
+      "other_tpot_p50": 66.74,
+      "default_served_rps": 8.55,
+      "other_served_rps": 8.733,
+      "default_reply_mean": 28.0,
+      "other_reply_mean": 27.0,
+      "ratio": 1.013130029648454
+     },
+     "chat": {
+      "host": "p2",
+      "source": "A1 vs C pass 1",
+      "other_arm": "ours-nobi",
+      "status": "ok",
+      "default_tok_s": 1527.5,
+      "other_tok_s": 1514.7,
+      "default_tpot_p50": 34.38,
+      "other_tpot_p50": 35.35,
+      "default_served_rps": 5.967,
+      "other_served_rps": 5.917,
+      "default_reply_mean": 256.0,
+      "other_reply_mean": 256.0,
+      "ratio": 0.991620294599018
+     }
+    },
+    "vllm": {
+     "scene": {
+      "host": "p2",
+      "source": "A1 vs C pass 1",
+      "other_arm": "vllm-bi",
+      "status": "unsupported",
+      "default_tok_s": null,
+      "other_tok_s": null,
+      "default_tpot_p50": null,
+      "other_tpot_p50": null,
+      "default_served_rps": null,
+      "other_served_rps": null,
+      "default_reply_mean": null,
+      "other_reply_mean": null,
+      "ratio": null
+     },
+     "chat": {
+      "host": "p2",
+      "source": "A1 vs C pass 1",
+      "other_arm": "vllm-bi",
+      "status": "unsupported",
+      "default_tok_s": null,
+      "other_tok_s": null,
+      "default_tpot_p50": null,
+      "other_tpot_p50": null,
+      "default_served_rps": null,
+      "other_served_rps": null,
+      "default_reply_mean": null,
+      "other_reply_mean": null,
+      "ratio": null
+     }
+    },
+    "sglang": {
+     "scene": {
+      "host": "p3",
+      "source": "A1 vs C pass 1",
+      "other_arm": "sglang-bi",
+      "status": "ok",
+      "default_tok_s": 186.9,
+      "other_tok_s": 170.4,
+      "default_tpot_p50": 213.86,
+      "other_tpot_p50": 246.92,
+      "default_served_rps": 5.967,
+      "other_served_rps": 5.7,
+      "default_reply_mean": 31.0,
+      "other_reply_mean": 30.0,
+      "ratio": 0.9117174959871589
+     },
+     "chat": {
+      "host": "p3",
+      "source": "A1 vs C pass 1",
+      "other_arm": "sglang-bi",
+      "status": "ok",
+      "default_tok_s": 1288.5,
+      "other_tok_s": 955.7,
+      "default_tpot_p50": 33.51,
+      "other_tpot_p50": 44.89,
+      "default_served_rps": 5.033,
+      "other_served_rps": 3.733,
+      "default_reply_mean": 256.0,
+      "other_reply_mean": 256.0,
+      "ratio": 0.7417151726814125
+     }
+    }
+   }
+  },
+  "D": {
+   "gemma": {
+    "ours": {
+     "host": "p2",
+     "cold_first_answer_s": 24.14,
+     "warm_first_answer_s": 21.59,
+     "cold_ready_s": 24.08,
+     "warm_ready_s": 21.52
+    },
+    "vllm": {
+     "host": "p2",
+     "cold_first_answer_s": 205.14,
+     "warm_first_answer_s": 68.21,
+     "cold_ready_s": 203.89,
+     "warm_ready_s": 68.15
+    },
+    "sglang": {
+     "host": "p2",
+     "cold_first_answer_s": 140.89,
+     "warm_first_answer_s": 36.5,
+     "cold_ready_s": 140.82,
+     "warm_ready_s": 36.43
+    }
+   },
+   "qwen": {
+    "ours": {
+     "host": "p2",
+     "cold_first_answer_s": 27.66,
+     "warm_first_answer_s": 24.89,
+     "cold_ready_s": 27.56,
+     "warm_ready_s": 24.79
+    },
+    "vllm": {
+     "host": "p2",
+     "cold_first_answer_s": 212.39,
+     "warm_first_answer_s": 75.21,
+     "cold_ready_s": 212.26,
+     "warm_ready_s": 75.09
+    },
+    "sglang": {
+     "host": "p3",
+     "cold_first_answer_s": 155.27,
+     "warm_first_answer_s": 61.8,
+     "cold_ready_s": 155.06,
+     "warm_ready_s": 61.67
+    }
+   }
+  },
+  "S": {
+   "gemma": {
+    "ours": {
+     "host": "p2",
+     "status": "ok",
+     "requests": 93,
+     "stop": 87,
+     "valid": 87,
+     "invalid": 0,
+     "duplicate_keys": 0,
+     "length": 6,
+     "errors": 0
+    },
+    "vllm": {
+     "host": "p2",
+     "status": "ok",
+     "requests": 93,
+     "stop": 89,
+     "valid": 89,
+     "invalid": 0,
+     "duplicate_keys": 0,
+     "length": 4,
+     "errors": 0
+    },
+    "sglang": {
+     "host": "p2",
+     "status": "struck (see README)",
+     "requests": null,
+     "stop": null,
+     "valid": null,
+     "invalid": null,
+     "duplicate_keys": null,
+     "length": null,
+     "errors": null
+    }
+   },
+   "qwen": {
+    "ours": {
+     "host": "p2",
+     "status": "ok",
+     "requests": 93,
+     "stop": 92,
+     "valid": 91,
+     "invalid": 0,
+     "duplicate_keys": 1,
+     "length": 1,
+     "errors": 0
+    },
+    "vllm": {
+     "host": "p2",
+     "status": "ok",
+     "requests": 93,
+     "stop": 90,
+     "valid": 86,
+     "invalid": 0,
+     "duplicate_keys": 4,
+     "length": 3,
+     "errors": 0
+    },
+    "sglang": {
+     "host": "p3",
+     "status": "not run (no structured-output row for SGLang)",
+     "requests": null,
+     "stop": null,
+     "valid": null,
+     "invalid": null,
+     "duplicate_keys": null,
+     "length": null,
+     "errors": null
+    }
+   }
+  },
+  "B": {
+   "gemma": {
+    "vllm-k1": {
+     "host": "p2",
+     "c1_tpot_p50": 13.76,
+     "c1_e2e_p50": 3904.9,
+     "c1_tokens_per_verify": 1.913,
+     "c64_served_rps": 5.85,
+     "c64_tpot_p50": 51.66
+    },
+    "vllm-k4": {
+     "host": "p2",
+     "c1_tpot_p50": 7.71,
+     "c1_e2e_p50": 2143.8,
+     "c1_tokens_per_verify": 3.844,
+     "c64_served_rps": 6.6,
+     "c64_tpot_p50": 46.08
+    }
+   },
+   "qwen": {
+    "vllm-k1": {
+     "host": "p2",
+     "c1_tpot_p50": 13.99,
+     "c1_e2e_p50": 501.1,
+     "c1_tokens_per_verify": 1.902,
+     "c64_served_rps": 6.567,
+     "c64_tpot_p50": 312.97
+    },
+    "vllm-k4": null
+   }
+  },
+  "Q": {
+   "vllm": {
+    "host_ratio": 0.9979400997372895,
+    "q_tpot_p50": 7.15,
+    "p1_tpot_p50": 7.07,
+    "deviation": -0.01322566361641453,
+    "verdict": "pass"
+   },
+   "sglang": {
+    "host_ratio": 0.984464664899362,
+    "q_tpot_p50": 12.72,
+    "p1_tpot_p50": 12.27,
+    "deviation": -0.05036309447207776,
+    "verdict": "fail"
+   }
+  }
+ },
+ "manifests": {
+  "p1/gemma/A1/ours": {
+   "status": "ok",
+   "status_line": null,
+   "k": 5,
+   "k_source": "llm-mini-infer's default; SGLang's recipe and CI value (5 steps, top-k 1, 6 draft tokens)",
+   "batch_invariant": true,
+   "deviations": [
+    "added: --config $LLM_MINI_INFER_CONFIG",
+    "the image's configuration file (--config, as the image's entrypoint gives it), which arms.py leaves out"
+   ],
+   "resolved": {
+    "kv_tokens": 1245760,
+    "max_running_requests": 64,
+    "attention_backend": "flashinfer",
+    "fp8_kernel": "CUTLASS",
+    "chunk_tokens": 2048,
+    "memory_fraction": 0.9,
+    "prefix_cache": true,
+    "batch_invariant_active": true
+   },
+   "versions": {
+    "llm-mini-infer": "0.7.2",
+    "torch": "2.14.1+cu130",
+    "flashinfer-python": "0.7.2",
+    "flashinfer-jit-cache": "0.7.2+cu130",
+    "triton": "3.8.0",
+    "llguidance": "1.9.1",
+    "transformers": "5.20.1"
+   }
+  },
+  "p1/gemma/A1/sglang": {
+   "status": "ok",
+   "status_line": null,
+   "k": 5,
+   "k_source": "llm-mini-infer's default; SGLang's recipe and CI value (5 steps, top-k 1, 6 draft tokens)",
+   "batch_invariant": false,
+   "deviations": [],
+   "resolved": {
+    "kv_tokens": 57428,
+    "max_running_requests": 64,
+    "attention_backend": "triton",
+    "fp8_kernel": "auto",
+    "chunk_tokens": 8192,
+    "memory_fraction": 0.7887413964843749,
+    "prefix_cache": true,
+    "batch_invariant_active": false
+   },
+   "versions": {
+    "sglang": "0.5.23",
+    "sglang-kernel": "0.4.10",
+    "torch": "2.14.1+cu130",
+    "flashinfer-python": "0.7.2",
+    "flashinfer-cubin": "0.7.2",
+    "flashinfer-jit-cache": "0.7.2+cu130",
+    "triton": "3.8.0",
+    "xgrammar": "0.2.7",
+    "llguidance": "1.9.1",
+    "transformers": "5.19.0"
+   }
+  },
+  "p1/gemma/A1/vllm": {
+   "status": "ok",
+   "status_line": null,
+   "k": 5,
+   "k_source": "the same k as the other engines (vLLM's own: bench/engines/arms.py, VLLM_OWN_K)",
+   "batch_invariant": false,
+   "deviations": [],
+   "resolved": {
+    "kv_tokens": 59025,
+    "max_running_requests": 64,
+    "attention_backend": "TRITON_ATTN (vLLM forces it for Gemma 4: FA4 not available)",
+    "fp8_kernel": "DeepGemmFp8BlockScaledMMKernel",
+    "chunk_tokens": 8192,
+    "memory_fraction": 0.9,
+    "prefix_cache": true,
+    "batch_invariant_active": false
+   },
+   "versions": {
+    "vllm": "0.33.0",
+    "torch": "2.14.0+cu130",
+    "flashinfer-python": "0.7.2.post1",
+    "flashinfer-cubin": "0.7.2.post1",
+    "flashinfer-jit-cache": "0.7.2.post1+cu130",
+    "triton": "3.8.0",
+    "xgrammar": "0.2.8",
+    "llguidance": "1.7.6",
+    "transformers": "5.20.2"
+   }
+  },
+  "p1/gemma/smoke/ours-nobi": {
+   "status": "ok",
+   "status_line": null,
+   "k": 5,
+   "k_source": "llm-mini-infer's default; SGLang's recipe and CI value (5 steps, top-k 1, 6 draft tokens)",
+   "batch_invariant": false,
+   "deviations": [
+    "added: --config $LLM_MINI_INFER_CONFIG",
+    "the image's configuration file (--config, as the image's entrypoint gives it), which arms.py leaves out"
+   ],
+   "resolved": {
+    "kv_tokens": 1269440,
+    "max_running_requests": 64,
+    "attention_backend": "flashinfer",
+    "fp8_kernel": "CUTLASS",
+    "chunk_tokens": 2048,
+    "memory_fraction": 0.9,
+    "prefix_cache": true,
+    "batch_invariant_active": false
+   },
+   "versions": {
+    "llm-mini-infer": "0.7.2",
+    "torch": "2.14.1+cu130",
+    "flashinfer-python": "0.7.2",
+    "flashinfer-jit-cache": "0.7.2+cu130",
+    "triton": "3.8.0",
+    "llguidance": "1.9.1",
+    "transformers": "5.20.1"
+   }
+  },
+  "p1/gemma/smoke/ours": {
+   "status": "ok",
+   "status_line": null,
+   "k": 5,
+   "k_source": "llm-mini-infer's default; SGLang's recipe and CI value (5 steps, top-k 1, 6 draft tokens)",
+   "batch_invariant": true,
+   "deviations": [
+    "added: --config $LLM_MINI_INFER_CONFIG",
+    "the image's configuration file (--config, as the image's entrypoint gives it), which arms.py leaves out"
+   ],
+   "resolved": {
+    "kv_tokens": 1245760,
+    "max_running_requests": 64,
+    "attention_backend": "flashinfer",
+    "fp8_kernel": "CUTLASS",
+    "chunk_tokens": 2048,
+    "memory_fraction": 0.9,
+    "prefix_cache": true,
+    "batch_invariant_active": true
+   },
+   "versions": {
+    "llm-mini-infer": "0.7.2",
+    "torch": "2.14.1+cu130",
+    "flashinfer-python": "0.7.2",
+    "flashinfer-jit-cache": "0.7.2+cu130",
+    "triton": "3.8.0",
+    "llguidance": "1.9.1",
+    "transformers": "5.20.1"
+   }
+  },
+  "p1/gemma/smoke/sglang-bi": {
+   "status": "ok",
+   "status_line": null,
+   "k": 5,
+   "k_source": "llm-mini-infer's default; SGLang's recipe and CI value (5 steps, top-k 1, 6 draft tokens)",
+   "batch_invariant": true,
+   "deviations": [],
+   "resolved": {
+    "kv_tokens": 57428,
+    "max_running_requests": 64,
+    "attention_backend": "triton",
+    "fp8_kernel": "auto",
+    "chunk_tokens": 8192,
+    "memory_fraction": 0.7887413964843749,
+    "prefix_cache": true,
+    "batch_invariant_active": true
+   },
+   "versions": {
+    "sglang": "0.5.23",
+    "sglang-kernel": "0.4.10",
+    "torch": "2.14.1+cu130",
+    "flashinfer-python": "0.7.2",
+    "flashinfer-cubin": "0.7.2",
+    "flashinfer-jit-cache": "0.7.2+cu130",
+    "triton": "3.8.0",
+    "xgrammar": "0.2.7",
+    "llguidance": "1.9.1",
+    "transformers": "5.19.0"
+   }
+  },
+  "p1/gemma/smoke/sglang": {
+   "status": "ok",
+   "status_line": null,
+   "k": 5,
+   "k_source": "llm-mini-infer's default; SGLang's recipe and CI value (5 steps, top-k 1, 6 draft tokens)",
+   "batch_invariant": false,
+   "deviations": [],
+   "resolved": {
+    "kv_tokens": 57428,
+    "max_running_requests": 64,
+    "attention_backend": "triton",
+    "fp8_kernel": "auto",
+    "chunk_tokens": 8192,
+    "memory_fraction": 0.7887413964843749,
+    "prefix_cache": true,
+    "batch_invariant_active": false
+   },
+   "versions": {
+    "sglang": "0.5.23",
+    "sglang-kernel": "0.4.10",
+    "torch": "2.14.1+cu130",
+    "flashinfer-python": "0.7.2",
+    "flashinfer-cubin": "0.7.2",
+    "flashinfer-jit-cache": "0.7.2+cu130",
+    "triton": "3.8.0",
+    "xgrammar": "0.2.7",
+    "llguidance": "1.9.1",
+    "transformers": "5.19.0"
+   }
+  },
+  "p1/gemma/smoke/vllm-bi": {
+   "status": "ok",
+   "status_line": null,
+   "k": 5,
+   "k_source": "the same k as the other engines (vLLM's own: bench/engines/arms.py, VLLM_OWN_K)",
+   "batch_invariant": true,
+   "deviations": [],
+   "resolved": {
+    "kv_tokens": 57311,
+    "max_running_requests": 64,
+    "attention_backend": "TRITON_ATTN (vLLM forces it for Gemma 4: FA4 not available)",
+    "fp8_kernel": "DeepGemmFp8BlockScaledMMKernel",
+    "chunk_tokens": 8192,
+    "memory_fraction": 0.9,
+    "prefix_cache": true,
+    "batch_invariant_active": true
+   },
+   "versions": {
+    "vllm": "0.33.0",
+    "torch": "2.14.0+cu130",
+    "flashinfer-python": "0.7.2.post1",
+    "flashinfer-cubin": "0.7.2.post1",
+    "flashinfer-jit-cache": "0.7.2.post1+cu130",
+    "triton": "3.8.0",
+    "xgrammar": "0.2.8",
+    "llguidance": "1.7.6",
+    "transformers": "5.20.2"
+   }
+  },
+  "p1/gemma/smoke/vllm": {
+   "status": "ok",
+   "status_line": null,
+   "k": 5,
+   "k_source": "the same k as the other engines (vLLM's own: bench/engines/arms.py, VLLM_OWN_K)",
+   "batch_invariant": false,
+   "deviations": [],
+   "resolved": {
+    "kv_tokens": 57227,
+    "max_running_requests": 64,
+    "attention_backend": "TRITON_ATTN (vLLM forces it for Gemma 4: FA4 not available)",
+    "fp8_kernel": "DeepGemmFp8BlockScaledMMKernel",
+    "chunk_tokens": 8192,
+    "memory_fraction": 0.9,
+    "prefix_cache": true,
+    "batch_invariant_active": false
+   },
+   "versions": {
+    "vllm": "0.33.0",
+    "torch": "2.14.0+cu130",
+    "flashinfer-python": "0.7.2.post1",
+    "flashinfer-cubin": "0.7.2.post1",
+    "flashinfer-jit-cache": "0.7.2.post1+cu130",
+    "triton": "3.8.0",
+    "xgrammar": "0.2.8",
+    "llguidance": "1.7.6",
+    "transformers": "5.20.2"
+   }
+  },
+  "p2/gemma/A2/ours": {
+   "status": "ok",
+   "status_line": null,
+   "k": 5,
+   "k_source": "llm-mini-infer's default; SGLang's recipe and CI value (5 steps, top-k 1, 6 draft tokens)",
+   "batch_invariant": true,
+   "deviations": [
+    "added: --config $LLM_MINI_INFER_CONFIG",
+    "the image's configuration file (--config, as the image's entrypoint gives it), which arms.py leaves out"
+   ],
+   "resolved": {
+    "kv_tokens": 1245760,
+    "max_running_requests": 64,
+    "attention_backend": "flashinfer",
+    "fp8_kernel": "CUTLASS",
+    "chunk_tokens": 2048,
+    "memory_fraction": 0.9,
+    "prefix_cache": true,
+    "batch_invariant_active": true
+   },
+   "versions": {
+    "llm-mini-infer": "0.7.2",
+    "torch": "2.14.1+cu130",
+    "flashinfer-python": "0.7.2",
+    "flashinfer-jit-cache": "0.7.2+cu130",
+    "triton": "3.8.0",
+    "llguidance": "1.9.1",
+    "transformers": "5.20.1"
+   }
+  },
+  "p2/gemma/A2/sglang": {
+   "status": "ok",
+   "status_line": null,
+   "k": 5,
+   "k_source": "llm-mini-infer's default; SGLang's recipe and CI value (5 steps, top-k 1, 6 draft tokens)",
+   "batch_invariant": false,
+   "deviations": [],
+   "resolved": {
+    "kv_tokens": 57428,
+    "max_running_requests": 64,
+    "attention_backend": "triton",
+    "fp8_kernel": "auto",
+    "chunk_tokens": 8192,
+    "memory_fraction": 0.7887413964843749,
+    "prefix_cache": true,
+    "batch_invariant_active": false
+   },
+   "versions": {
+    "sglang": "0.5.23",
+    "sglang-kernel": "0.4.10",
+    "torch": "2.14.1+cu130",
+    "flashinfer-python": "0.7.2",
+    "flashinfer-cubin": "0.7.2",
+    "flashinfer-jit-cache": "0.7.2+cu130",
+    "triton": "3.8.0",
+    "xgrammar": "0.2.7",
+    "llguidance": "1.9.1",
+    "transformers": "5.19.0"
+   }
+  },
+  "p2/gemma/A2/vllm": {
+   "status": "ok",
+   "status_line": null,
+   "k": 5,
+   "k_source": "the same k as the other engines (vLLM's own: bench/engines/arms.py, VLLM_OWN_K)",
+   "batch_invariant": false,
+   "deviations": [],
+   "resolved": {
+    "kv_tokens": 57227,
+    "max_running_requests": 64,
+    "attention_backend": "TRITON_ATTN (vLLM forces it for Gemma 4: FA4 not available)",
+    "fp8_kernel": "DeepGemmFp8BlockScaledMMKernel",
+    "chunk_tokens": 8192,
+    "memory_fraction": 0.9,
+    "prefix_cache": true,
+    "batch_invariant_active": false
+   },
+   "versions": {
+    "vllm": "0.33.0",
+    "torch": "2.14.0+cu130",
+    "flashinfer-python": "0.7.2.post1",
+    "flashinfer-cubin": "0.7.2.post1",
+    "flashinfer-jit-cache": "0.7.2.post1+cu130",
+    "triton": "3.8.0",
+    "xgrammar": "0.2.8",
+    "llguidance": "1.7.6",
+    "transformers": "5.20.2"
+   }
+  },
+  "p2/gemma/B/vllm-k1": {
+   "status": "ok",
+   "status_line": null,
+   "k": 1,
+   "k_source": "vLLM v0.33.0's code default: the assistant's n_predict",
+   "batch_invariant": false,
+   "deviations": [],
+   "resolved": {
+    "kv_tokens": 57784,
+    "max_running_requests": 64,
+    "attention_backend": "TRITON_ATTN (vLLM forces it for Gemma 4: FA4 not available)",
+    "fp8_kernel": "DeepGemmFp8BlockScaledMMKernel",
+    "chunk_tokens": 8192,
+    "memory_fraction": 0.9,
+    "prefix_cache": true,
+    "batch_invariant_active": false
+   },
+   "versions": {
+    "vllm": "0.33.0",
+    "torch": "2.14.0+cu130",
+    "flashinfer-python": "0.7.2.post1",
+    "flashinfer-cubin": "0.7.2.post1",
+    "flashinfer-jit-cache": "0.7.2.post1+cu130",
+    "triton": "3.8.0",
+    "xgrammar": "0.2.8",
+    "llguidance": "1.7.6",
+    "transformers": "5.20.2"
+   }
+  },
+  "p2/gemma/B/vllm-k4": {
+   "status": "ok",
+   "status_line": null,
+   "k": 4,
+   "k_source": "vLLM v0.33.0's recipe, recipes/models/Google/gemma-4-31B-it.yaml",
+   "batch_invariant": false,
+   "deviations": [],
+   "resolved": {
+    "kv_tokens": 57224,
+    "max_running_requests": 64,
+    "attention_backend": "TRITON_ATTN (vLLM forces it for Gemma 4: FA4 not available)",
+    "fp8_kernel": "DeepGemmFp8BlockScaledMMKernel",
+    "chunk_tokens": 8192,
+    "memory_fraction": 0.9,
+    "prefix_cache": true,
+    "batch_invariant_active": false
+   },
+   "versions": {
+    "vllm": "0.33.0",
+    "torch": "2.14.0+cu130",
+    "flashinfer-python": "0.7.2.post1",
+    "flashinfer-cubin": "0.7.2.post1",
+    "flashinfer-jit-cache": "0.7.2.post1+cu130",
+    "triton": "3.8.0",
+    "xgrammar": "0.2.8",
+    "llguidance": "1.7.6",
+    "transformers": "5.20.2"
+   }
+  },
+  "p2/gemma/C/ours-nobi-p1": {
+   "status": "ok",
+   "status_line": null,
+   "k": 5,
+   "k_source": "llm-mini-infer's default; SGLang's recipe and CI value (5 steps, top-k 1, 6 draft tokens)",
+   "batch_invariant": false,
+   "deviations": [
+    "added: --config $LLM_MINI_INFER_CONFIG",
+    "the image's configuration file (--config, as the image's entrypoint gives it), which arms.py leaves out"
+   ],
+   "resolved": {
+    "kv_tokens": 1269440,
+    "max_running_requests": 64,
+    "attention_backend": "flashinfer",
+    "fp8_kernel": "CUTLASS",
+    "chunk_tokens": 2048,
+    "memory_fraction": 0.9,
+    "prefix_cache": true,
+    "batch_invariant_active": false
+   },
+   "versions": {
+    "llm-mini-infer": "0.7.2",
+    "torch": "2.14.1+cu130",
+    "flashinfer-python": "0.7.2",
+    "flashinfer-jit-cache": "0.7.2+cu130",
+    "triton": "3.8.0",
+    "llguidance": "1.9.1",
+    "transformers": "5.20.1"
+   }
+  },
+  "p2/gemma/C/ours-nobi-p2": {
+   "status": "ok",
+   "status_line": null,
+   "k": 5,
+   "k_source": "llm-mini-infer's default; SGLang's recipe and CI value (5 steps, top-k 1, 6 draft tokens)",
+   "batch_invariant": false,
+   "deviations": [
+    "added: --config $LLM_MINI_INFER_CONFIG",
+    "the image's configuration file (--config, as the image's entrypoint gives it), which arms.py leaves out"
+   ],
+   "resolved": {
+    "kv_tokens": 1269440,
+    "max_running_requests": 64,
+    "attention_backend": "flashinfer",
+    "fp8_kernel": "CUTLASS",
+    "chunk_tokens": 2048,
+    "memory_fraction": 0.9,
+    "prefix_cache": true,
+    "batch_invariant_active": false
+   },
+   "versions": {
+    "llm-mini-infer": "0.7.2",
+    "torch": "2.14.1+cu130",
+    "flashinfer-python": "0.7.2",
+    "flashinfer-jit-cache": "0.7.2+cu130",
+    "triton": "3.8.0",
+    "llguidance": "1.9.1",
+    "transformers": "5.20.1"
+   }
+  },
+  "p2/gemma/C/ours-p1": {
+   "status": "ok",
+   "status_line": null,
+   "k": 5,
+   "k_source": "llm-mini-infer's default; SGLang's recipe and CI value (5 steps, top-k 1, 6 draft tokens)",
+   "batch_invariant": true,
+   "deviations": [
+    "added: --config $LLM_MINI_INFER_CONFIG",
+    "the image's configuration file (--config, as the image's entrypoint gives it), which arms.py leaves out"
+   ],
+   "resolved": {
+    "kv_tokens": 1245760,
+    "max_running_requests": 64,
+    "attention_backend": "flashinfer",
+    "fp8_kernel": "CUTLASS",
+    "chunk_tokens": 2048,
+    "memory_fraction": 0.9,
+    "prefix_cache": true,
+    "batch_invariant_active": true
+   },
+   "versions": {
+    "llm-mini-infer": "0.7.2",
+    "torch": "2.14.1+cu130",
+    "flashinfer-python": "0.7.2",
+    "flashinfer-jit-cache": "0.7.2+cu130",
+    "triton": "3.8.0",
+    "llguidance": "1.9.1",
+    "transformers": "5.20.1"
+   }
+  },
+  "p2/gemma/C/ours-p2": {
+   "status": "ok",
+   "status_line": null,
+   "k": 5,
+   "k_source": "llm-mini-infer's default; SGLang's recipe and CI value (5 steps, top-k 1, 6 draft tokens)",
+   "batch_invariant": true,
+   "deviations": [
+    "added: --config $LLM_MINI_INFER_CONFIG",
+    "the image's configuration file (--config, as the image's entrypoint gives it), which arms.py leaves out"
+   ],
+   "resolved": {
+    "kv_tokens": 1245760,
+    "max_running_requests": 64,
+    "attention_backend": "flashinfer",
+    "fp8_kernel": "CUTLASS",
+    "chunk_tokens": 2048,
+    "memory_fraction": 0.9,
+    "prefix_cache": true,
+    "batch_invariant_active": true
+   },
+   "versions": {
+    "llm-mini-infer": "0.7.2",
+    "torch": "2.14.1+cu130",
+    "flashinfer-python": "0.7.2",
+    "flashinfer-jit-cache": "0.7.2+cu130",
+    "triton": "3.8.0",
+    "llguidance": "1.9.1",
+    "transformers": "5.20.1"
+   }
+  },
+  "p2/gemma/C/sglang-bi-p1": {
+   "status": "ok",
+   "status_line": null,
+   "k": 5,
+   "k_source": "llm-mini-infer's default; SGLang's recipe and CI value (5 steps, top-k 1, 6 draft tokens)",
+   "batch_invariant": true,
+   "deviations": [],
+   "resolved": {
+    "kv_tokens": 57428,
+    "max_running_requests": 64,
+    "attention_backend": "triton",
+    "fp8_kernel": "auto",
+    "chunk_tokens": 8192,
+    "memory_fraction": 0.7887413964843749,
+    "prefix_cache": true,
+    "batch_invariant_active": true
+   },
+   "versions": {
+    "sglang": "0.5.23",
+    "sglang-kernel": "0.4.10",
+    "torch": "2.14.1+cu130",
+    "flashinfer-python": "0.7.2",
+    "flashinfer-cubin": "0.7.2",
+    "flashinfer-jit-cache": "0.7.2+cu130",
+    "triton": "3.8.0",
+    "xgrammar": "0.2.7",
+    "llguidance": "1.9.1",
+    "transformers": "5.19.0"
+   }
+  },
+  "p2/gemma/C/sglang-bi-p2": {
+   "status": "ok",
+   "status_line": null,
+   "k": 5,
+   "k_source": "llm-mini-infer's default; SGLang's recipe and CI value (5 steps, top-k 1, 6 draft tokens)",
+   "batch_invariant": true,
+   "deviations": [],
+   "resolved": {
+    "kv_tokens": 57428,
+    "max_running_requests": 64,
+    "attention_backend": "triton",
+    "fp8_kernel": "auto",
+    "chunk_tokens": 8192,
+    "memory_fraction": 0.7887413964843749,
+    "prefix_cache": true,
+    "batch_invariant_active": true
+   },
+   "versions": {
+    "sglang": "0.5.23",
+    "sglang-kernel": "0.4.10",
+    "torch": "2.14.1+cu130",
+    "flashinfer-python": "0.7.2",
+    "flashinfer-cubin": "0.7.2",
+    "flashinfer-jit-cache": "0.7.2+cu130",
+    "triton": "3.8.0",
+    "xgrammar": "0.2.7",
+    "llguidance": "1.9.1",
+    "transformers": "5.19.0"
+   }
+  },
+  "p2/gemma/C/sglang-p1": {
+   "status": "ok",
+   "status_line": null,
+   "k": 5,
+   "k_source": "llm-mini-infer's default; SGLang's recipe and CI value (5 steps, top-k 1, 6 draft tokens)",
+   "batch_invariant": false,
+   "deviations": [],
+   "resolved": {
+    "kv_tokens": 57428,
+    "max_running_requests": 64,
+    "attention_backend": "triton",
+    "fp8_kernel": "auto",
+    "chunk_tokens": 8192,
+    "memory_fraction": 0.7887413964843749,
+    "prefix_cache": true,
+    "batch_invariant_active": false
+   },
+   "versions": {
+    "sglang": "0.5.23",
+    "sglang-kernel": "0.4.10",
+    "torch": "2.14.1+cu130",
+    "flashinfer-python": "0.7.2",
+    "flashinfer-cubin": "0.7.2",
+    "flashinfer-jit-cache": "0.7.2+cu130",
+    "triton": "3.8.0",
+    "xgrammar": "0.2.7",
+    "llguidance": "1.9.1",
+    "transformers": "5.19.0"
+   }
+  },
+  "p2/gemma/C/sglang-p2": {
+   "status": "ok",
+   "status_line": null,
+   "k": 5,
+   "k_source": "llm-mini-infer's default; SGLang's recipe and CI value (5 steps, top-k 1, 6 draft tokens)",
+   "batch_invariant": false,
+   "deviations": [],
+   "resolved": {
+    "kv_tokens": 57428,
+    "max_running_requests": 64,
+    "attention_backend": "triton",
+    "fp8_kernel": "auto",
+    "chunk_tokens": 8192,
+    "memory_fraction": 0.7887413964843749,
+    "prefix_cache": true,
+    "batch_invariant_active": false
+   },
+   "versions": {
+    "sglang": "0.5.23",
+    "sglang-kernel": "0.4.10",
+    "torch": "2.14.1+cu130",
+    "flashinfer-python": "0.7.2",
+    "flashinfer-cubin": "0.7.2",
+    "flashinfer-jit-cache": "0.7.2+cu130",
+    "triton": "3.8.0",
+    "xgrammar": "0.2.7",
+    "llguidance": "1.9.1",
+    "transformers": "5.19.0"
+   }
+  },
+  "p2/gemma/C/vllm-bi-p1": {
+   "status": "ok",
+   "status_line": null,
+   "k": 5,
+   "k_source": "the same k as the other engines (vLLM's own: bench/engines/arms.py, VLLM_OWN_K)",
+   "batch_invariant": true,
+   "deviations": [],
+   "resolved": {
+    "kv_tokens": 57311,
+    "max_running_requests": 64,
+    "attention_backend": "TRITON_ATTN (vLLM forces it for Gemma 4: FA4 not available)",
+    "fp8_kernel": "DeepGemmFp8BlockScaledMMKernel",
+    "chunk_tokens": 8192,
+    "memory_fraction": 0.9,
+    "prefix_cache": true,
+    "batch_invariant_active": true
+   },
+   "versions": {
+    "vllm": "0.33.0",
+    "torch": "2.14.0+cu130",
+    "flashinfer-python": "0.7.2.post1",
+    "flashinfer-cubin": "0.7.2.post1",
+    "flashinfer-jit-cache": "0.7.2.post1+cu130",
+    "triton": "3.8.0",
+    "xgrammar": "0.2.8",
+    "llguidance": "1.7.6",
+    "transformers": "5.20.2"
+   }
+  },
+  "p2/gemma/C/vllm-bi-p2": {
+   "status": "ok",
+   "status_line": null,
+   "k": 5,
+   "k_source": "the same k as the other engines (vLLM's own: bench/engines/arms.py, VLLM_OWN_K)",
+   "batch_invariant": true,
+   "deviations": [],
+   "resolved": {
+    "kv_tokens": 59109,
+    "max_running_requests": 64,
+    "attention_backend": "TRITON_ATTN (vLLM forces it for Gemma 4: FA4 not available)",
+    "fp8_kernel": "DeepGemmFp8BlockScaledMMKernel",
+    "chunk_tokens": 8192,
+    "memory_fraction": 0.9,
+    "prefix_cache": true,
+    "batch_invariant_active": true
+   },
+   "versions": {
+    "vllm": "0.33.0",
+    "torch": "2.14.0+cu130",
+    "flashinfer-python": "0.7.2.post1",
+    "flashinfer-cubin": "0.7.2.post1",
+    "flashinfer-jit-cache": "0.7.2.post1+cu130",
+    "triton": "3.8.0",
+    "xgrammar": "0.2.8",
+    "llguidance": "1.7.6",
+    "transformers": "5.20.2"
+   }
+  },
+  "p2/gemma/C/vllm-p1": {
+   "status": "ok",
+   "status_line": null,
+   "k": 5,
+   "k_source": "the same k as the other engines (vLLM's own: bench/engines/arms.py, VLLM_OWN_K)",
+   "batch_invariant": false,
+   "deviations": [],
+   "resolved": {
+    "kv_tokens": 59025,
+    "max_running_requests": 64,
+    "attention_backend": "TRITON_ATTN (vLLM forces it for Gemma 4: FA4 not available)",
+    "fp8_kernel": "DeepGemmFp8BlockScaledMMKernel",
+    "chunk_tokens": 8192,
+    "memory_fraction": 0.9,
+    "prefix_cache": true,
+    "batch_invariant_active": false
+   },
+   "versions": {
+    "vllm": "0.33.0",
+    "torch": "2.14.0+cu130",
+    "flashinfer-python": "0.7.2.post1",
+    "flashinfer-cubin": "0.7.2.post1",
+    "flashinfer-jit-cache": "0.7.2.post1+cu130",
+    "triton": "3.8.0",
+    "xgrammar": "0.2.8",
+    "llguidance": "1.7.6",
+    "transformers": "5.20.2"
+   }
+  },
+  "p2/gemma/C/vllm-p2": {
+   "status": "ok",
+   "status_line": null,
+   "k": 5,
+   "k_source": "the same k as the other engines (vLLM's own: bench/engines/arms.py, VLLM_OWN_K)",
+   "batch_invariant": false,
+   "deviations": [],
+   "resolved": {
+    "kv_tokens": 59025,
+    "max_running_requests": 64,
+    "attention_backend": "TRITON_ATTN (vLLM forces it for Gemma 4: FA4 not available)",
+    "fp8_kernel": "DeepGemmFp8BlockScaledMMKernel",
+    "chunk_tokens": 8192,
+    "memory_fraction": 0.9,
+    "prefix_cache": true,
+    "batch_invariant_active": false
+   },
+   "versions": {
+    "vllm": "0.33.0",
+    "torch": "2.14.0+cu130",
+    "flashinfer-python": "0.7.2.post1",
+    "flashinfer-cubin": "0.7.2.post1",
+    "flashinfer-jit-cache": "0.7.2.post1+cu130",
+    "triton": "3.8.0",
+    "xgrammar": "0.2.8",
+    "llguidance": "1.7.6",
+    "transformers": "5.20.2"
+   }
+  },
+  "p2/gemma/D/ours": {
+   "status": "ok",
+   "status_line": null,
+   "k": 5,
+   "k_source": "llm-mini-infer's default; SGLang's recipe and CI value (5 steps, top-k 1, 6 draft tokens)",
+   "batch_invariant": true,
+   "deviations": [
+    "added: --config $LLM_MINI_INFER_CONFIG",
+    "the image's configuration file (--config, as the image's entrypoint gives it), which arms.py leaves out"
+   ],
+   "resolved": {
+    "kv_tokens": 1245760,
+    "max_running_requests": 64,
+    "attention_backend": "flashinfer",
+    "fp8_kernel": "CUTLASS",
+    "chunk_tokens": 2048,
+    "memory_fraction": 0.9,
+    "prefix_cache": true,
+    "batch_invariant_active": true
+   },
+   "versions": {
+    "llm-mini-infer": "0.7.2",
+    "torch": "2.14.1+cu130",
+    "flashinfer-python": "0.7.2",
+    "flashinfer-jit-cache": "0.7.2+cu130",
+    "triton": "3.8.0",
+    "llguidance": "1.9.1",
+    "transformers": "5.20.1"
+   }
+  },
+  "p2/gemma/D/sglang": {
+   "status": "ok",
+   "status_line": null,
+   "k": 5,
+   "k_source": "llm-mini-infer's default; SGLang's recipe and CI value (5 steps, top-k 1, 6 draft tokens)",
+   "batch_invariant": false,
+   "deviations": [
+    "its cold start also emptied ~/.cache/sglang/jit, where SGLang v0.5.23 builds its JIT kernels outside SGLANG_CACHE_DIR",
+    "the CUDA cuRAND headers copied from its venv into the CUDA include directory: its speculative-sampling JIT kernel (requests above temperature 0) includes curand.h, which the GPU tests image lacks and SGLang own CUDA devel image has"
+   ],
+   "resolved": {
+    "kv_tokens": 57428,
+    "max_running_requests": 64,
+    "attention_backend": "triton",
+    "fp8_kernel": "auto",
+    "chunk_tokens": 8192,
+    "memory_fraction": 0.7887413964843749,
+    "prefix_cache": true,
+    "batch_invariant_active": false
+   },
+   "versions": {
+    "sglang": "0.5.23",
+    "sglang-kernel": "0.4.10",
+    "torch": "2.14.1+cu130",
+    "flashinfer-python": "0.7.2",
+    "flashinfer-cubin": "0.7.2",
+    "flashinfer-jit-cache": "0.7.2+cu130",
+    "triton": "3.8.0",
+    "xgrammar": "0.2.7",
+    "llguidance": "1.9.1",
+    "transformers": "5.19.0"
+   }
+  },
+  "p2/gemma/D/vllm": {
+   "status": "ok",
+   "status_line": null,
+   "k": 5,
+   "k_source": "the same k as the other engines (vLLM's own: bench/engines/arms.py, VLLM_OWN_K)",
+   "batch_invariant": false,
+   "deviations": [],
+   "resolved": {
+    "kv_tokens": 59025,
+    "max_running_requests": 64,
+    "attention_backend": "TRITON_ATTN (vLLM forces it for Gemma 4: FA4 not available)",
+    "fp8_kernel": "DeepGemmFp8BlockScaledMMKernel",
+    "chunk_tokens": 8192,
+    "memory_fraction": 0.9,
+    "prefix_cache": true,
+    "batch_invariant_active": false
+   },
+   "versions": {
+    "vllm": "0.33.0",
+    "torch": "2.14.0+cu130",
+    "flashinfer-python": "0.7.2.post1",
+    "flashinfer-cubin": "0.7.2.post1",
+    "flashinfer-jit-cache": "0.7.2.post1+cu130",
+    "triton": "3.8.0",
+    "xgrammar": "0.2.8",
+    "llguidance": "1.7.6",
+    "transformers": "5.20.2"
+   }
+  },
+  "p2/qwen/A1/ours": {
+   "status": "ok",
+   "status_line": null,
+   "k": 3,
+   "k_source": "llm-mini-infer's default; SGLang's recipe and its EAGLE default (3 steps, top-k 1, 4 draft tokens)",
+   "batch_invariant": true,
+   "deviations": [
+    "added: --config $LLM_MINI_INFER_CONFIG",
+    "the image's configuration file (--config, as the image's entrypoint gives it), which arms.py leaves out"
+   ],
+   "resolved": {
+    "kv_tokens": 481168,
+    "max_running_requests": 64,
+    "attention_backend": "flashinfer",
+    "fp8_kernel": "CUTLASS",
+    "chunk_tokens": 2048,
+    "memory_fraction": 0.9,
+    "prefix_cache": true,
+    "batch_invariant_active": true
+   },
+   "versions": {
+    "llm-mini-infer": "0.7.2",
+    "torch": "2.14.1+cu130",
+    "flashinfer-python": "0.7.2",
+    "flashinfer-jit-cache": "0.7.2+cu130",
+    "triton": "3.8.0",
+    "llguidance": "1.9.1",
+    "transformers": "5.20.1"
+   }
+  },
+  "p2/qwen/A1/sglang": {
+   "status": "failed",
+   "status_line": "ValueError: Loaded weights leave no GPU memory for the KV cache under --mem-fraction-static=0.7971479687499999. Raise --mem-fraction-static above 0.358 (minimum viable = 1 - available/pre = 0.3576). If using speculative decoding, draft weights are now counted.",
+   "k": 3,
+   "k_source": "llm-mini-infer's default; SGLang's recipe and its EAGLE default (3 steps, top-k 1, 4 draft tokens)",
+   "batch_invariant": false,
+   "deviations": [],
+   "resolved": {
+    "kv_tokens": null,
+    "max_running_requests": null,
+    "attention_backend": null,
+    "fp8_kernel": null,
+    "chunk_tokens": null,
+    "memory_fraction": null,
+    "prefix_cache": null,
+    "batch_invariant_active": null
+   },
+   "versions": {
+    "sglang": "0.5.23",
+    "sglang-kernel": "0.4.10",
+    "torch": "2.14.1+cu130",
+    "flashinfer-python": "0.7.2",
+    "flashinfer-cubin": "0.7.2",
+    "flashinfer-jit-cache": "0.7.2+cu130",
+    "triton": "3.8.0",
+    "xgrammar": "0.2.7",
+    "llguidance": "1.9.1",
+    "transformers": "5.19.0"
+   }
+  },
+  "p2/qwen/A1/vllm": {
+   "status": "ok",
+   "status_line": null,
+   "k": 3,
+   "k_source": "the same k as the other engines (vLLM's own: bench/engines/arms.py, VLLM_OWN_K)",
+   "batch_invariant": false,
+   "deviations": [],
+   "resolved": {
+    "kv_tokens": 289655,
+    "max_running_requests": 64,
+    "attention_backend": "FLASH_ATTN",
+    "fp8_kernel": "CutlassFp8BlockScaledMMKernel",
+    "chunk_tokens": 8192,
+    "memory_fraction": 0.9,
+    "prefix_cache": true,
+    "batch_invariant_active": false
+   },
+   "versions": {
+    "vllm": "0.33.0",
+    "torch": "2.14.0+cu130",
+    "flashinfer-python": "0.7.2.post1",
+    "flashinfer-cubin": "0.7.2.post1",
+    "flashinfer-jit-cache": "0.7.2.post1+cu130",
+    "triton": "3.8.0",
+    "xgrammar": "0.2.8",
+    "llguidance": "1.7.6",
+    "transformers": "5.20.2"
+   }
+  },
+  "p2/qwen/A2/ours": {
+   "status": "ok",
+   "status_line": null,
+   "k": 3,
+   "k_source": "llm-mini-infer's default; SGLang's recipe and its EAGLE default (3 steps, top-k 1, 4 draft tokens)",
+   "batch_invariant": true,
+   "deviations": [
+    "added: --config $LLM_MINI_INFER_CONFIG",
+    "the image's configuration file (--config, as the image's entrypoint gives it), which arms.py leaves out"
+   ],
+   "resolved": {
+    "kv_tokens": 481168,
+    "max_running_requests": 64,
+    "attention_backend": "flashinfer",
+    "fp8_kernel": "CUTLASS",
+    "chunk_tokens": 2048,
+    "memory_fraction": 0.9,
+    "prefix_cache": true,
+    "batch_invariant_active": true
+   },
+   "versions": {
+    "llm-mini-infer": "0.7.2",
+    "torch": "2.14.1+cu130",
+    "flashinfer-python": "0.7.2",
+    "flashinfer-jit-cache": "0.7.2+cu130",
+    "triton": "3.8.0",
+    "llguidance": "1.9.1",
+    "transformers": "5.20.1"
+   }
+  },
+  "p2/qwen/A2/vllm": {
+   "status": "ok",
+   "status_line": null,
+   "k": 3,
+   "k_source": "the same k as the other engines (vLLM's own: bench/engines/arms.py, VLLM_OWN_K)",
+   "batch_invariant": false,
+   "deviations": [],
+   "resolved": {
+    "kv_tokens": 289655,
+    "max_running_requests": 64,
+    "attention_backend": "FLASH_ATTN",
+    "fp8_kernel": "CutlassFp8BlockScaledMMKernel",
+    "chunk_tokens": 8192,
+    "memory_fraction": 0.9,
+    "prefix_cache": true,
+    "batch_invariant_active": false
+   },
+   "versions": {
+    "vllm": "0.33.0",
+    "torch": "2.14.0+cu130",
+    "flashinfer-python": "0.7.2.post1",
+    "flashinfer-cubin": "0.7.2.post1",
+    "flashinfer-jit-cache": "0.7.2.post1+cu130",
+    "triton": "3.8.0",
+    "xgrammar": "0.2.8",
+    "llguidance": "1.7.6",
+    "transformers": "5.20.2"
+   }
+  },
+  "p2/qwen/B/vllm-k1": {
+   "status": "ok",
+   "status_line": null,
+   "k": 1,
+   "k_source": "the value vLLM v0.33.0's docs start at (an MTP layer needs an explicit k)",
+   "batch_invariant": false,
+   "deviations": [],
+   "resolved": {
+    "kv_tokens": 335916,
+    "max_running_requests": 64,
+    "attention_backend": "FLASH_ATTN",
+    "fp8_kernel": "CutlassFp8BlockScaledMMKernel",
+    "chunk_tokens": 8192,
+    "memory_fraction": 0.9,
+    "prefix_cache": true,
+    "batch_invariant_active": false
+   },
+   "versions": {
+    "vllm": "0.33.0",
+    "torch": "2.14.0+cu130",
+    "flashinfer-python": "0.7.2.post1",
+    "flashinfer-cubin": "0.7.2.post1",
+    "flashinfer-jit-cache": "0.7.2.post1+cu130",
+    "triton": "3.8.0",
+    "xgrammar": "0.2.8",
+    "llguidance": "1.7.6",
+    "transformers": "5.20.2"
+   }
+  },
+  "p2/qwen/C/ours-nobi-p1": {
+   "status": "ok",
+   "status_line": null,
+   "k": 3,
+   "k_source": "llm-mini-infer's default; SGLang's recipe and its EAGLE default (3 steps, top-k 1, 4 draft tokens)",
+   "batch_invariant": false,
+   "deviations": [
+    "added: --config $LLM_MINI_INFER_CONFIG",
+    "the image's configuration file (--config, as the image's entrypoint gives it), which arms.py leaves out"
+   ],
+   "resolved": {
+    "kv_tokens": 484496,
+    "max_running_requests": 64,
+    "attention_backend": "flashinfer",
+    "fp8_kernel": "CUTLASS",
+    "chunk_tokens": 2048,
+    "memory_fraction": 0.9,
+    "prefix_cache": true,
+    "batch_invariant_active": false
+   },
+   "versions": {
+    "llm-mini-infer": "0.7.2",
+    "torch": "2.14.1+cu130",
+    "flashinfer-python": "0.7.2",
+    "flashinfer-jit-cache": "0.7.2+cu130",
+    "triton": "3.8.0",
+    "llguidance": "1.9.1",
+    "transformers": "5.20.1"
+   }
+  },
+  "p2/qwen/C/ours-nobi-p2": {
+   "status": "ok",
+   "status_line": null,
+   "k": 3,
+   "k_source": "llm-mini-infer's default; SGLang's recipe and its EAGLE default (3 steps, top-k 1, 4 draft tokens)",
+   "batch_invariant": false,
+   "deviations": [
+    "added: --config $LLM_MINI_INFER_CONFIG",
+    "the image's configuration file (--config, as the image's entrypoint gives it), which arms.py leaves out"
+   ],
+   "resolved": {
+    "kv_tokens": 484496,
+    "max_running_requests": 64,
+    "attention_backend": "flashinfer",
+    "fp8_kernel": "CUTLASS",
+    "chunk_tokens": 2048,
+    "memory_fraction": 0.9,
+    "prefix_cache": true,
+    "batch_invariant_active": false
+   },
+   "versions": {
+    "llm-mini-infer": "0.7.2",
+    "torch": "2.14.1+cu130",
+    "flashinfer-python": "0.7.2",
+    "flashinfer-jit-cache": "0.7.2+cu130",
+    "triton": "3.8.0",
+    "llguidance": "1.9.1",
+    "transformers": "5.20.1"
+   }
+  },
+  "p2/qwen/C/ours-p1": {
+   "status": "ok",
+   "status_line": null,
+   "k": 3,
+   "k_source": "llm-mini-infer's default; SGLang's recipe and its EAGLE default (3 steps, top-k 1, 4 draft tokens)",
+   "batch_invariant": true,
+   "deviations": [
+    "added: --config $LLM_MINI_INFER_CONFIG",
+    "the image's configuration file (--config, as the image's entrypoint gives it), which arms.py leaves out"
+   ],
+   "resolved": {
+    "kv_tokens": 481168,
+    "max_running_requests": 64,
+    "attention_backend": "flashinfer",
+    "fp8_kernel": "CUTLASS",
+    "chunk_tokens": 2048,
+    "memory_fraction": 0.9,
+    "prefix_cache": true,
+    "batch_invariant_active": true
+   },
+   "versions": {
+    "llm-mini-infer": "0.7.2",
+    "torch": "2.14.1+cu130",
+    "flashinfer-python": "0.7.2",
+    "flashinfer-jit-cache": "0.7.2+cu130",
+    "triton": "3.8.0",
+    "llguidance": "1.9.1",
+    "transformers": "5.20.1"
+   }
+  },
+  "p2/qwen/C/ours-p2": {
+   "status": "ok",
+   "status_line": null,
+   "k": 3,
+   "k_source": "llm-mini-infer's default; SGLang's recipe and its EAGLE default (3 steps, top-k 1, 4 draft tokens)",
+   "batch_invariant": true,
+   "deviations": [
+    "added: --config $LLM_MINI_INFER_CONFIG",
+    "the image's configuration file (--config, as the image's entrypoint gives it), which arms.py leaves out"
+   ],
+   "resolved": {
+    "kv_tokens": 481168,
+    "max_running_requests": 64,
+    "attention_backend": "flashinfer",
+    "fp8_kernel": "CUTLASS",
+    "chunk_tokens": 2048,
+    "memory_fraction": 0.9,
+    "prefix_cache": true,
+    "batch_invariant_active": true
+   },
+   "versions": {
+    "llm-mini-infer": "0.7.2",
+    "torch": "2.14.1+cu130",
+    "flashinfer-python": "0.7.2",
+    "flashinfer-jit-cache": "0.7.2+cu130",
+    "triton": "3.8.0",
+    "llguidance": "1.9.1",
+    "transformers": "5.20.1"
+   }
+  },
+  "p2/qwen/C/vllm-bi-p1": {
+   "status": "unsupported",
+   "status_line": "RuntimeError: VLLM batch_invariant mode is not supported for GDN_ATTN.",
+   "k": 3,
+   "k_source": "the same k as the other engines (vLLM's own: bench/engines/arms.py, VLLM_OWN_K)",
+   "batch_invariant": true,
+   "deviations": [],
+   "resolved": {
+    "kv_tokens": null,
+    "max_running_requests": null,
+    "attention_backend": null,
+    "fp8_kernel": null,
+    "chunk_tokens": null,
+    "memory_fraction": null,
+    "prefix_cache": null,
+    "batch_invariant_active": null
+   },
+   "versions": {
+    "vllm": "0.33.0",
+    "torch": "2.14.0+cu130",
+    "flashinfer-python": "0.7.2.post1",
+    "flashinfer-cubin": "0.7.2.post1",
+    "flashinfer-jit-cache": "0.7.2.post1+cu130",
+    "triton": "3.8.0",
+    "xgrammar": "0.2.8",
+    "llguidance": "1.7.6",
+    "transformers": "5.20.2"
+   }
+  },
+  "p2/qwen/C/vllm-bi-p2": {
+   "status": "unsupported",
+   "status_line": "RuntimeError: VLLM batch_invariant mode is not supported for GDN_ATTN.",
+   "k": 3,
+   "k_source": "the same k as the other engines (vLLM's own: bench/engines/arms.py, VLLM_OWN_K)",
+   "batch_invariant": true,
+   "deviations": [],
+   "resolved": {
+    "kv_tokens": null,
+    "max_running_requests": null,
+    "attention_backend": null,
+    "fp8_kernel": null,
+    "chunk_tokens": null,
+    "memory_fraction": null,
+    "prefix_cache": null,
+    "batch_invariant_active": null
+   },
+   "versions": {
+    "vllm": "0.33.0",
+    "torch": "2.14.0+cu130",
+    "flashinfer-python": "0.7.2.post1",
+    "flashinfer-cubin": "0.7.2.post1",
+    "flashinfer-jit-cache": "0.7.2.post1+cu130",
+    "triton": "3.8.0",
+    "xgrammar": "0.2.8",
+    "llguidance": "1.7.6",
+    "transformers": "5.20.2"
+   }
+  },
+  "p2/qwen/C/vllm-p1": {
+   "status": "ok",
+   "status_line": null,
+   "k": 3,
+   "k_source": "the same k as the other engines (vLLM's own: bench/engines/arms.py, VLLM_OWN_K)",
+   "batch_invariant": false,
+   "deviations": [],
+   "resolved": {
+    "kv_tokens": 289655,
+    "max_running_requests": 64,
+    "attention_backend": "FLASH_ATTN",
+    "fp8_kernel": "CutlassFp8BlockScaledMMKernel",
+    "chunk_tokens": 8192,
+    "memory_fraction": 0.9,
+    "prefix_cache": true,
+    "batch_invariant_active": false
+   },
+   "versions": {
+    "vllm": "0.33.0",
+    "torch": "2.14.0+cu130",
+    "flashinfer-python": "0.7.2.post1",
+    "flashinfer-cubin": "0.7.2.post1",
+    "flashinfer-jit-cache": "0.7.2.post1+cu130",
+    "triton": "3.8.0",
+    "xgrammar": "0.2.8",
+    "llguidance": "1.7.6",
+    "transformers": "5.20.2"
+   }
+  },
+  "p2/qwen/C/vllm-p2": {
+   "status": "ok",
+   "status_line": null,
+   "k": 3,
+   "k_source": "the same k as the other engines (vLLM's own: bench/engines/arms.py, VLLM_OWN_K)",
+   "batch_invariant": false,
+   "deviations": [],
+   "resolved": {
+    "kv_tokens": 289655,
+    "max_running_requests": 64,
+    "attention_backend": "FLASH_ATTN",
+    "fp8_kernel": "CutlassFp8BlockScaledMMKernel",
+    "chunk_tokens": 8192,
+    "memory_fraction": 0.9,
+    "prefix_cache": true,
+    "batch_invariant_active": false
+   },
+   "versions": {
+    "vllm": "0.33.0",
+    "torch": "2.14.0+cu130",
+    "flashinfer-python": "0.7.2.post1",
+    "flashinfer-cubin": "0.7.2.post1",
+    "flashinfer-jit-cache": "0.7.2.post1+cu130",
+    "triton": "3.8.0",
+    "xgrammar": "0.2.8",
+    "llguidance": "1.7.6",
+    "transformers": "5.20.2"
+   }
+  },
+  "p2/qwen/D/ours": {
+   "status": "ok",
+   "status_line": null,
+   "k": 3,
+   "k_source": "llm-mini-infer's default; SGLang's recipe and its EAGLE default (3 steps, top-k 1, 4 draft tokens)",
+   "batch_invariant": true,
+   "deviations": [
+    "added: --config $LLM_MINI_INFER_CONFIG",
+    "the image's configuration file (--config, as the image's entrypoint gives it), which arms.py leaves out"
+   ],
+   "resolved": {
+    "kv_tokens": 481168,
+    "max_running_requests": 64,
+    "attention_backend": "flashinfer",
+    "fp8_kernel": "CUTLASS",
+    "chunk_tokens": 2048,
+    "memory_fraction": 0.9,
+    "prefix_cache": true,
+    "batch_invariant_active": true
+   },
+   "versions": {
+    "llm-mini-infer": "0.7.2",
+    "torch": "2.14.1+cu130",
+    "flashinfer-python": "0.7.2",
+    "flashinfer-jit-cache": "0.7.2+cu130",
+    "triton": "3.8.0",
+    "llguidance": "1.9.1",
+    "transformers": "5.20.1"
+   }
+  },
+  "p2/qwen/D/vllm": {
+   "status": "ok",
+   "status_line": null,
+   "k": 3,
+   "k_source": "the same k as the other engines (vLLM's own: bench/engines/arms.py, VLLM_OWN_K)",
+   "batch_invariant": false,
+   "deviations": [],
+   "resolved": {
+    "kv_tokens": 289655,
+    "max_running_requests": 64,
+    "attention_backend": "FLASH_ATTN",
+    "fp8_kernel": "CutlassFp8BlockScaledMMKernel",
+    "chunk_tokens": 8192,
+    "memory_fraction": 0.9,
+    "prefix_cache": true,
+    "batch_invariant_active": false
+   },
+   "versions": {
+    "vllm": "0.33.0",
+    "torch": "2.14.0+cu130",
+    "flashinfer-python": "0.7.2.post1",
+    "flashinfer-cubin": "0.7.2.post1",
+    "flashinfer-jit-cache": "0.7.2.post1+cu130",
+    "triton": "3.8.0",
+    "xgrammar": "0.2.8",
+    "llguidance": "1.7.6",
+    "transformers": "5.20.2"
+   }
+  },
+  "p2/qwen/smoke/ours-nobi": {
+   "status": "ok",
+   "status_line": null,
+   "k": 3,
+   "k_source": "llm-mini-infer's default; SGLang's recipe and its EAGLE default (3 steps, top-k 1, 4 draft tokens)",
+   "batch_invariant": false,
+   "deviations": [
+    "added: --config $LLM_MINI_INFER_CONFIG",
+    "the image's configuration file (--config, as the image's entrypoint gives it), which arms.py leaves out"
+   ],
+   "resolved": {
+    "kv_tokens": 484496,
+    "max_running_requests": 64,
+    "attention_backend": "flashinfer",
+    "fp8_kernel": "CUTLASS",
+    "chunk_tokens": 2048,
+    "memory_fraction": 0.9,
+    "prefix_cache": true,
+    "batch_invariant_active": false
+   },
+   "versions": {
+    "llm-mini-infer": "0.7.2",
+    "torch": "2.14.1+cu130",
+    "flashinfer-python": "0.7.2",
+    "flashinfer-jit-cache": "0.7.2+cu130",
+    "triton": "3.8.0",
+    "llguidance": "1.9.1",
+    "transformers": "5.20.1"
+   }
+  },
+  "p2/qwen/smoke/ours": {
+   "status": "ok",
+   "status_line": null,
+   "k": 3,
+   "k_source": "llm-mini-infer's default; SGLang's recipe and its EAGLE default (3 steps, top-k 1, 4 draft tokens)",
+   "batch_invariant": true,
+   "deviations": [
+    "added: --config $LLM_MINI_INFER_CONFIG",
+    "the image's configuration file (--config, as the image's entrypoint gives it), which arms.py leaves out"
+   ],
+   "resolved": {
+    "kv_tokens": 481168,
+    "max_running_requests": 64,
+    "attention_backend": "flashinfer",
+    "fp8_kernel": "CUTLASS",
+    "chunk_tokens": 2048,
+    "memory_fraction": 0.9,
+    "prefix_cache": true,
+    "batch_invariant_active": true
+   },
+   "versions": {
+    "llm-mini-infer": "0.7.2",
+    "torch": "2.14.1+cu130",
+    "flashinfer-python": "0.7.2",
+    "flashinfer-jit-cache": "0.7.2+cu130",
+    "triton": "3.8.0",
+    "llguidance": "1.9.1",
+    "transformers": "5.20.1"
+   }
+  },
+  "p2/qwen/smoke/sglang-bi": {
+   "status": "failed",
+   "status_line": "ValueError: Loaded weights leave no GPU memory for the KV cache under --mem-fraction-static=0.7971479687499999. Raise --mem-fraction-static above 0.358 (minimum viable = 1 - available/pre = 0.3576). If using speculative decoding, draft weights are now counted.",
+   "k": 3,
+   "k_source": "llm-mini-infer's default; SGLang's recipe and its EAGLE default (3 steps, top-k 1, 4 draft tokens)",
+   "batch_invariant": true,
+   "deviations": [],
+   "resolved": {
+    "kv_tokens": null,
+    "max_running_requests": null,
+    "attention_backend": null,
+    "fp8_kernel": null,
+    "chunk_tokens": null,
+    "memory_fraction": null,
+    "prefix_cache": null,
+    "batch_invariant_active": null
+   },
+   "versions": {
+    "sglang": "0.5.23",
+    "sglang-kernel": "0.4.10",
+    "torch": "2.14.1+cu130",
+    "flashinfer-python": "0.7.2",
+    "flashinfer-cubin": "0.7.2",
+    "flashinfer-jit-cache": "0.7.2+cu130",
+    "triton": "3.8.0",
+    "xgrammar": "0.2.7",
+    "llguidance": "1.9.1",
+    "transformers": "5.19.0"
+   }
+  },
+  "p2/qwen/smoke/sglang": {
+   "status": "failed",
+   "status_line": "ValueError: Loaded weights leave no GPU memory for the KV cache under --mem-fraction-static=0.85. Raise --mem-fraction-static above 0.358 (minimum viable = 1 - available/pre = 0.3576). If using speculative decoding, draft weights are now counted.",
+   "k": 3,
+   "k_source": "llm-mini-infer's default; SGLang's recipe and its EAGLE default (3 steps, top-k 1, 4 draft tokens)",
+   "batch_invariant": false,
+   "deviations": [
+    "added: --mem-fraction-static 0.85",
+    "try 2: --mem-fraction-static 0.85 (the cookbook's RTX PRO 6000 value)"
+   ],
+   "resolved": {
+    "kv_tokens": null,
+    "max_running_requests": null,
+    "attention_backend": null,
+    "fp8_kernel": null,
+    "chunk_tokens": null,
+    "memory_fraction": null,
+    "prefix_cache": null,
+    "batch_invariant_active": null
+   },
+   "versions": {
+    "sglang": "0.5.23",
+    "sglang-kernel": "0.4.10",
+    "torch": "2.14.1+cu130",
+    "flashinfer-python": "0.7.2",
+    "flashinfer-cubin": "0.7.2",
+    "flashinfer-jit-cache": "0.7.2+cu130",
+    "triton": "3.8.0",
+    "xgrammar": "0.2.7",
+    "llguidance": "1.9.1",
+    "transformers": "5.19.0"
+   }
+  },
+  "p2/qwen/smoke/vllm-bi": {
+   "status": "unsupported",
+   "status_line": "RuntimeError: VLLM batch_invariant mode is not supported for GDN_ATTN.",
+   "k": 3,
+   "k_source": "the same k as the other engines (vLLM's own: bench/engines/arms.py, VLLM_OWN_K)",
+   "batch_invariant": true,
+   "deviations": [],
+   "resolved": {
+    "kv_tokens": null,
+    "max_running_requests": null,
+    "attention_backend": null,
+    "fp8_kernel": null,
+    "chunk_tokens": null,
+    "memory_fraction": null,
+    "prefix_cache": null,
+    "batch_invariant_active": null
+   },
+   "versions": {
+    "vllm": "0.33.0",
+    "torch": "2.14.0+cu130",
+    "flashinfer-python": "0.7.2.post1",
+    "flashinfer-cubin": "0.7.2.post1",
+    "flashinfer-jit-cache": "0.7.2.post1+cu130",
+    "triton": "3.8.0",
+    "xgrammar": "0.2.8",
+    "llguidance": "1.7.6",
+    "transformers": "5.20.2"
+   }
+  },
+  "p2/qwen/smoke/vllm": {
+   "status": "ok",
+   "status_line": null,
+   "k": 3,
+   "k_source": "the same k as the other engines (vLLM's own: bench/engines/arms.py, VLLM_OWN_K)",
+   "batch_invariant": false,
+   "deviations": [],
+   "resolved": {
+    "kv_tokens": 289655,
+    "max_running_requests": 64,
+    "attention_backend": "FLASH_ATTN",
+    "fp8_kernel": "CutlassFp8BlockScaledMMKernel",
+    "chunk_tokens": 8192,
+    "memory_fraction": 0.9,
+    "prefix_cache": true,
+    "batch_invariant_active": false
+   },
+   "versions": {
+    "vllm": "0.33.0",
+    "torch": "2.14.0+cu130",
+    "flashinfer-python": "0.7.2.post1",
+    "flashinfer-cubin": "0.7.2.post1",
+    "flashinfer-jit-cache": "0.7.2.post1+cu130",
+    "triton": "3.8.0",
+    "xgrammar": "0.2.8",
+    "llguidance": "1.7.6",
+    "transformers": "5.20.2"
+   }
+  },
+  "p3/gemma/C/vllm-bi-nodg-p1": {
+   "status": "ok",
+   "status_line": null,
+   "k": 5,
+   "k_source": "the same k as the other engines (vLLM's own: bench/engines/arms.py, VLLM_OWN_K)",
+   "batch_invariant": true,
+   "deviations": [
+    "VLLM_USE_DEEP_GEMM=0: DeepGEMM off, so vLLM selects its next block-FP8 kernel (the arm with DeepGEMM, vLLM's default, runs beside it)"
+   ],
+   "resolved": {
+    "kv_tokens": 59379,
+    "max_running_requests": 64,
+    "attention_backend": "TRITON_ATTN",
+    "fp8_kernel": "CutlassFp8BlockScaledMMKernel",
+    "chunk_tokens": 8192,
+    "memory_fraction": 0.9,
+    "prefix_cache": true,
+    "batch_invariant_active": true
+   },
+   "versions": {
+    "vllm": "0.33.0",
+    "torch": "2.14.0+cu130",
+    "flashinfer-python": "0.7.2.post1",
+    "flashinfer-cubin": "0.7.2.post1",
+    "flashinfer-jit-cache": "0.7.2.post1+cu130",
+    "triton": "3.8.0",
+    "xgrammar": "0.2.8",
+    "llguidance": "1.7.6",
+    "transformers": "5.20.2"
+   }
+  },
+  "p3/gemma/C/vllm-bi-nodg-p2": {
+   "status": "ok",
+   "status_line": null,
+   "k": 5,
+   "k_source": "the same k as the other engines (vLLM's own: bench/engines/arms.py, VLLM_OWN_K)",
+   "batch_invariant": true,
+   "deviations": [
+    "VLLM_USE_DEEP_GEMM=0: DeepGEMM off, so vLLM selects its next block-FP8 kernel (the arm with DeepGEMM, vLLM's default, runs beside it)"
+   ],
+   "resolved": {
+    "kv_tokens": 59379,
+    "max_running_requests": 64,
+    "attention_backend": "TRITON_ATTN",
+    "fp8_kernel": "CutlassFp8BlockScaledMMKernel",
+    "chunk_tokens": 8192,
+    "memory_fraction": 0.9,
+    "prefix_cache": true,
+    "batch_invariant_active": true
+   },
+   "versions": {
+    "vllm": "0.33.0",
+    "torch": "2.14.0+cu130",
+    "flashinfer-python": "0.7.2.post1",
+    "flashinfer-cubin": "0.7.2.post1",
+    "flashinfer-jit-cache": "0.7.2.post1+cu130",
+    "triton": "3.8.0",
+    "xgrammar": "0.2.8",
+    "llguidance": "1.7.6",
+    "transformers": "5.20.2"
+   }
+  },
+  "p3/gemma/I/ours-nobi": {
+   "status": "ok",
+   "status_line": null,
+   "k": 5,
+   "k_source": "llm-mini-infer's default; SGLang's recipe and CI value (5 steps, top-k 1, 6 draft tokens)",
+   "batch_invariant": false,
+   "deviations": [],
+   "resolved": {
+    "kv_tokens": 1269440,
+    "max_running_requests": 64,
+    "attention_backend": "flashinfer",
+    "fp8_kernel": "CUTLASS",
+    "chunk_tokens": 2048,
+    "memory_fraction": 0.9,
+    "prefix_cache": true,
+    "batch_invariant_active": false
+   },
+   "versions": {
+    "llm-mini-infer": "0.7.2",
+    "torch": "2.14.1+cu130",
+    "flashinfer-python": "0.7.2",
+    "flashinfer-jit-cache": "0.7.2+cu130",
+    "triton": "3.8.0",
+    "llguidance": "1.9.1",
+    "transformers": "5.20.1"
+   }
+  },
+  "p3/gemma/I/ours": {
+   "status": "ok",
+   "status_line": null,
+   "k": 5,
+   "k_source": "llm-mini-infer's default; SGLang's recipe and CI value (5 steps, top-k 1, 6 draft tokens)",
+   "batch_invariant": true,
+   "deviations": [],
+   "resolved": {
+    "kv_tokens": 1245760,
+    "max_running_requests": 64,
+    "attention_backend": "flashinfer",
+    "fp8_kernel": "CUTLASS",
+    "chunk_tokens": 2048,
+    "memory_fraction": 0.9,
+    "prefix_cache": true,
+    "batch_invariant_active": true
+   },
+   "versions": {
+    "llm-mini-infer": "0.7.2",
+    "torch": "2.14.1+cu130",
+    "flashinfer-python": "0.7.2",
+    "flashinfer-jit-cache": "0.7.2+cu130",
+    "triton": "3.8.0",
+    "llguidance": "1.9.1",
+    "transformers": "5.20.1"
+   }
+  },
+  "p3/gemma/I/sglang-bi": {
+   "status": "ok",
+   "status_line": null,
+   "k": 5,
+   "k_source": "llm-mini-infer's default; SGLang's recipe and CI value (5 steps, top-k 1, 6 draft tokens)",
+   "batch_invariant": true,
+   "deviations": [
+    "the cuRAND headers of SGLang's venv (nvidia/cu13/include/curand*.h, the folder as found) copied into the CUDA toolkit's include folder: its speculative-sampling JIT kernel includes curand.h, which the GPU tests' image lacks (SGLang's own image is CUDA devel)"
+   ],
+   "resolved": {
+    "kv_tokens": 57428,
+    "max_running_requests": 64,
+    "attention_backend": "triton",
+    "fp8_kernel": "auto",
+    "chunk_tokens": 8192,
+    "memory_fraction": 0.7887413964843749,
+    "prefix_cache": true,
+    "batch_invariant_active": true
+   },
+   "versions": {
+    "sglang": "0.5.23",
+    "sglang-kernel": "0.4.10",
+    "torch": "2.14.1+cu130",
+    "flashinfer-python": "0.7.2",
+    "flashinfer-cubin": "0.7.2",
+    "flashinfer-jit-cache": "0.7.2+cu130",
+    "triton": "3.8.0",
+    "xgrammar": "0.2.7",
+    "llguidance": "1.9.1",
+    "transformers": "5.19.0"
+   }
+  },
+  "p3/gemma/I/sglang": {
+   "status": "ok",
+   "status_line": null,
+   "k": 5,
+   "k_source": "llm-mini-infer's default; SGLang's recipe and CI value (5 steps, top-k 1, 6 draft tokens)",
+   "batch_invariant": false,
+   "deviations": [
+    "the cuRAND headers of SGLang's venv (nvidia/cu13/include/curand*.h, the folder as found) copied into the CUDA toolkit's include folder: its speculative-sampling JIT kernel includes curand.h, which the GPU tests' image lacks (SGLang's own image is CUDA devel)"
+   ],
+   "resolved": {
+    "kv_tokens": 57428,
+    "max_running_requests": 64,
+    "attention_backend": "triton",
+    "fp8_kernel": "auto",
+    "chunk_tokens": 8192,
+    "memory_fraction": 0.7887413964843749,
+    "prefix_cache": true,
+    "batch_invariant_active": false
+   },
+   "versions": {
+    "sglang": "0.5.23",
+    "sglang-kernel": "0.4.10",
+    "torch": "2.14.1+cu130",
+    "flashinfer-python": "0.7.2",
+    "flashinfer-cubin": "0.7.2",
+    "flashinfer-jit-cache": "0.7.2+cu130",
+    "triton": "3.8.0",
+    "xgrammar": "0.2.7",
+    "llguidance": "1.9.1",
+    "transformers": "5.19.0"
+   }
+  },
+  "p3/gemma/I/vllm-bi-nodg": {
+   "status": "ok",
+   "status_line": null,
+   "k": 5,
+   "k_source": "the same k as the other engines (vLLM's own: bench/engines/arms.py, VLLM_OWN_K)",
+   "batch_invariant": true,
+   "deviations": [
+    "VLLM_USE_DEEP_GEMM=0: DeepGEMM off, so vLLM selects its next block-FP8 kernel (the arm with DeepGEMM, vLLM's default, runs beside it)"
+   ],
+   "resolved": {
+    "kv_tokens": 59379,
+    "max_running_requests": 64,
+    "attention_backend": "TRITON_ATTN",
+    "fp8_kernel": "CutlassFp8BlockScaledMMKernel",
+    "chunk_tokens": 8192,
+    "memory_fraction": 0.9,
+    "prefix_cache": true,
+    "batch_invariant_active": true
+   },
+   "versions": {
+    "vllm": "0.33.0",
+    "torch": "2.14.0+cu130",
+    "flashinfer-python": "0.7.2.post1",
+    "flashinfer-cubin": "0.7.2.post1",
+    "flashinfer-jit-cache": "0.7.2.post1+cu130",
+    "triton": "3.8.0",
+    "xgrammar": "0.2.8",
+    "llguidance": "1.7.6",
+    "transformers": "5.20.2"
+   }
+  },
+  "p3/gemma/I/vllm": {
+   "status": "ok",
+   "status_line": null,
+   "k": 5,
+   "k_source": "the same k as the other engines (vLLM's own: bench/engines/arms.py, VLLM_OWN_K)",
+   "batch_invariant": false,
+   "deviations": [],
+   "resolved": {
+    "kv_tokens": 57227,
+    "max_running_requests": 64,
+    "attention_backend": "TRITON_ATTN",
+    "fp8_kernel": "DeepGemmFp8BlockScaledMMKernel",
+    "chunk_tokens": 8192,
+    "memory_fraction": 0.9,
+    "prefix_cache": true,
+    "batch_invariant_active": false
+   },
+   "versions": {
+    "vllm": "0.33.0",
+    "torch": "2.14.0+cu130",
+    "flashinfer-python": "0.7.2.post1",
+    "flashinfer-cubin": "0.7.2.post1",
+    "flashinfer-jit-cache": "0.7.2.post1+cu130",
+    "triton": "3.8.0",
+    "xgrammar": "0.2.8",
+    "llguidance": "1.7.6",
+    "transformers": "5.20.2"
+   }
+  },
+  "p3/gemma/smoke/ours": {
+   "status": "ok",
+   "status_line": null,
+   "k": 5,
+   "k_source": "llm-mini-infer's default; SGLang's recipe and CI value (5 steps, top-k 1, 6 draft tokens)",
+   "batch_invariant": true,
+   "deviations": [],
+   "resolved": {
+    "kv_tokens": 1245760,
+    "max_running_requests": 64,
+    "attention_backend": "flashinfer",
+    "fp8_kernel": "CUTLASS",
+    "chunk_tokens": 2048,
+    "memory_fraction": 0.9,
+    "prefix_cache": true,
+    "batch_invariant_active": true
+   },
+   "versions": {
+    "llm-mini-infer": "0.7.2",
+    "torch": "2.14.1+cu130",
+    "flashinfer-python": "0.7.2",
+    "flashinfer-jit-cache": "0.7.2+cu130",
+    "triton": "3.8.0",
+    "llguidance": "1.9.1",
+    "transformers": "5.20.1"
+   }
+  },
+  "p3/gemma/smoke/sglang": {
+   "status": "ok",
+   "status_line": null,
+   "k": 5,
+   "k_source": "llm-mini-infer's default; SGLang's recipe and CI value (5 steps, top-k 1, 6 draft tokens)",
+   "batch_invariant": false,
+   "deviations": [
+    "the cuRAND headers of SGLang's venv (nvidia/cu13/include/curand*.h, the folder as found) copied into the CUDA toolkit's include folder: its speculative-sampling JIT kernel includes curand.h, which the GPU tests' image lacks (SGLang's own image is CUDA devel)"
+   ],
+   "resolved": {
+    "kv_tokens": 57428,
+    "max_running_requests": 64,
+    "attention_backend": "triton",
+    "fp8_kernel": "auto",
+    "chunk_tokens": 8192,
+    "memory_fraction": 0.7887413964843749,
+    "prefix_cache": true,
+    "batch_invariant_active": false
+   },
+   "versions": {
+    "sglang": "0.5.23",
+    "sglang-kernel": "0.4.10",
+    "torch": "2.14.1+cu130",
+    "flashinfer-python": "0.7.2",
+    "flashinfer-cubin": "0.7.2",
+    "flashinfer-jit-cache": "0.7.2+cu130",
+    "triton": "3.8.0",
+    "xgrammar": "0.2.7",
+    "llguidance": "1.9.1",
+    "transformers": "5.19.0"
+   }
+  },
+  "p3/gemma/smoke/vllm-bi-nodg": {
+   "status": "ok",
+   "status_line": null,
+   "k": 5,
+   "k_source": "the same k as the other engines (vLLM's own: bench/engines/arms.py, VLLM_OWN_K)",
+   "batch_invariant": true,
+   "deviations": [
+    "VLLM_USE_DEEP_GEMM=0: DeepGEMM off, so vLLM selects its next block-FP8 kernel (the arm with DeepGEMM, vLLM's default, runs beside it)"
+   ],
+   "resolved": {
+    "kv_tokens": 57592,
+    "max_running_requests": 64,
+    "attention_backend": "TRITON_ATTN",
+    "fp8_kernel": "CutlassFp8BlockScaledMMKernel",
+    "chunk_tokens": 8192,
+    "memory_fraction": 0.9,
+    "prefix_cache": true,
+    "batch_invariant_active": true
+   },
+   "versions": {
+    "vllm": "0.33.0",
+    "torch": "2.14.0+cu130",
+    "flashinfer-python": "0.7.2.post1",
+    "flashinfer-cubin": "0.7.2.post1",
+    "flashinfer-jit-cache": "0.7.2.post1+cu130",
+    "triton": "3.8.0",
+    "xgrammar": "0.2.8",
+    "llguidance": "1.7.6",
+    "transformers": "5.20.2"
+   }
+  },
+  "p3/qwen/A1/ours": {
+   "status": "ok",
+   "status_line": null,
+   "k": 3,
+   "k_source": "llm-mini-infer's default; SGLang's recipe and its EAGLE default (3 steps, top-k 1, 4 draft tokens)",
+   "batch_invariant": true,
+   "deviations": [],
+   "resolved": {
+    "kv_tokens": 481168,
+    "max_running_requests": 64,
+    "attention_backend": "flashinfer",
+    "fp8_kernel": "CUTLASS",
+    "chunk_tokens": 2048,
+    "memory_fraction": 0.9,
+    "prefix_cache": true,
+    "batch_invariant_active": true
+   },
+   "versions": {
+    "llm-mini-infer": "0.7.2",
+    "torch": "2.14.1+cu130",
+    "flashinfer-python": "0.7.2",
+    "flashinfer-jit-cache": "0.7.2+cu130",
+    "triton": "3.8.0",
+    "llguidance": "1.9.1",
+    "transformers": "5.20.1"
+   }
+  },
+  "p3/qwen/A1/sglang": {
+   "status": "ok",
+   "status_line": null,
+   "k": 3,
+   "k_source": "llm-mini-infer's default; SGLang's recipe and its EAGLE default (3 steps, top-k 1, 4 draft tokens)",
+   "batch_invariant": false,
+   "deviations": [
+    "--max-running-requests 48 (SGLang's own value under speculative decoding), not 64: at 64 its fp32 mamba state (5 slots a request, ~49 GB) does not fit the ~41 GB left after the weights; a load at a higher concurrency queues in the server",
+    "the cuRAND headers of SGLang's venv (nvidia/cu13/include/curand*.h, the folder as found) copied into the CUDA toolkit's include folder: its speculative-sampling JIT kernel includes curand.h, which the GPU tests' image lacks (SGLang's own image is CUDA devel)"
+   ],
+   "resolved": {
+    "kv_tokens": 92567,
+    "max_running_requests": 48,
+    "attention_backend": "flashinfer",
+    "fp8_kernel": "auto",
+    "chunk_tokens": 8192,
+    "memory_fraction": 0.7971479687499999,
+    "prefix_cache": true,
+    "batch_invariant_active": false
+   },
+   "versions": {
+    "sglang": "0.5.23",
+    "sglang-kernel": "0.4.10",
+    "torch": "2.14.1+cu130",
+    "flashinfer-python": "0.7.2",
+    "flashinfer-cubin": "0.7.2",
+    "flashinfer-jit-cache": "0.7.2+cu130",
+    "triton": "3.8.0",
+    "xgrammar": "0.2.7",
+    "llguidance": "1.9.1",
+    "transformers": "5.19.0"
+   }
+  },
+  "p3/qwen/A1/vllm": {
+   "status": "ok",
+   "status_line": null,
+   "k": 3,
+   "k_source": "the same k as the other engines (vLLM's own: bench/engines/arms.py, VLLM_OWN_K)",
+   "batch_invariant": false,
+   "deviations": [],
+   "resolved": {
+    "kv_tokens": 289655,
+    "max_running_requests": 64,
+    "attention_backend": "FLASH_ATTN",
+    "fp8_kernel": "CutlassFp8BlockScaledMMKernel",
+    "chunk_tokens": 8192,
+    "memory_fraction": 0.9,
+    "prefix_cache": true,
+    "batch_invariant_active": false
+   },
+   "versions": {
+    "vllm": "0.33.0",
+    "torch": "2.14.0+cu130",
+    "flashinfer-python": "0.7.2.post1",
+    "flashinfer-cubin": "0.7.2.post1",
+    "flashinfer-jit-cache": "0.7.2.post1+cu130",
+    "triton": "3.8.0",
+    "xgrammar": "0.2.8",
+    "llguidance": "1.7.6",
+    "transformers": "5.20.2"
+   }
+  },
+  "p3/qwen/C/sglang-bi-p1": {
+   "status": "ok",
+   "status_line": null,
+   "k": 3,
+   "k_source": "llm-mini-infer's default; SGLang's recipe and its EAGLE default (3 steps, top-k 1, 4 draft tokens)",
+   "batch_invariant": true,
+   "deviations": [
+    "--max-running-requests 48 (SGLang's own value under speculative decoding), not 64: at 64 its fp32 mamba state (5 slots a request, ~49 GB) does not fit the ~41 GB left after the weights; a load at a higher concurrency queues in the server",
+    "the cuRAND headers of SGLang's venv (nvidia/cu13/include/curand*.h, the folder as found) copied into the CUDA toolkit's include folder: its speculative-sampling JIT kernel includes curand.h, which the GPU tests' image lacks (SGLang's own image is CUDA devel)"
+   ],
+   "resolved": {
+    "kv_tokens": 92567,
+    "max_running_requests": 48,
+    "attention_backend": "triton",
+    "fp8_kernel": "auto",
+    "chunk_tokens": 8192,
+    "memory_fraction": 0.7971479687499999,
+    "prefix_cache": true,
+    "batch_invariant_active": true
+   },
+   "versions": {
+    "sglang": "0.5.23",
+    "sglang-kernel": "0.4.10",
+    "torch": "2.14.1+cu130",
+    "flashinfer-python": "0.7.2",
+    "flashinfer-cubin": "0.7.2",
+    "flashinfer-jit-cache": "0.7.2+cu130",
+    "triton": "3.8.0",
+    "xgrammar": "0.2.7",
+    "llguidance": "1.9.1",
+    "transformers": "5.19.0"
+   }
+  },
+  "p3/qwen/C/sglang-bi-p2": {
+   "status": "ok",
+   "status_line": null,
+   "k": 3,
+   "k_source": "llm-mini-infer's default; SGLang's recipe and its EAGLE default (3 steps, top-k 1, 4 draft tokens)",
+   "batch_invariant": true,
+   "deviations": [
+    "--max-running-requests 48 (SGLang's own value under speculative decoding), not 64: at 64 its fp32 mamba state (5 slots a request, ~49 GB) does not fit the ~41 GB left after the weights; a load at a higher concurrency queues in the server",
+    "the cuRAND headers of SGLang's venv (nvidia/cu13/include/curand*.h, the folder as found) copied into the CUDA toolkit's include folder: its speculative-sampling JIT kernel includes curand.h, which the GPU tests' image lacks (SGLang's own image is CUDA devel)"
+   ],
+   "resolved": {
+    "kv_tokens": 92567,
+    "max_running_requests": 48,
+    "attention_backend": "triton",
+    "fp8_kernel": "auto",
+    "chunk_tokens": 8192,
+    "memory_fraction": 0.7971479687499999,
+    "prefix_cache": true,
+    "batch_invariant_active": true
+   },
+   "versions": {
+    "sglang": "0.5.23",
+    "sglang-kernel": "0.4.10",
+    "torch": "2.14.1+cu130",
+    "flashinfer-python": "0.7.2",
+    "flashinfer-cubin": "0.7.2",
+    "flashinfer-jit-cache": "0.7.2+cu130",
+    "triton": "3.8.0",
+    "xgrammar": "0.2.7",
+    "llguidance": "1.9.1",
+    "transformers": "5.19.0"
+   }
+  },
+  "p3/qwen/C/sglang-p1": {
+   "status": "ok",
+   "status_line": null,
+   "k": 3,
+   "k_source": "llm-mini-infer's default; SGLang's recipe and its EAGLE default (3 steps, top-k 1, 4 draft tokens)",
+   "batch_invariant": false,
+   "deviations": [
+    "--max-running-requests 48 (SGLang's own value under speculative decoding), not 64: at 64 its fp32 mamba state (5 slots a request, ~49 GB) does not fit the ~41 GB left after the weights; a load at a higher concurrency queues in the server",
+    "the cuRAND headers of SGLang's venv (nvidia/cu13/include/curand*.h, the folder as found) copied into the CUDA toolkit's include folder: its speculative-sampling JIT kernel includes curand.h, which the GPU tests' image lacks (SGLang's own image is CUDA devel)"
+   ],
+   "resolved": {
+    "kv_tokens": 92567,
+    "max_running_requests": 48,
+    "attention_backend": "flashinfer",
+    "fp8_kernel": "auto",
+    "chunk_tokens": 8192,
+    "memory_fraction": 0.7971479687499999,
+    "prefix_cache": true,
+    "batch_invariant_active": false
+   },
+   "versions": {
+    "sglang": "0.5.23",
+    "sglang-kernel": "0.4.10",
+    "torch": "2.14.1+cu130",
+    "flashinfer-python": "0.7.2",
+    "flashinfer-cubin": "0.7.2",
+    "flashinfer-jit-cache": "0.7.2+cu130",
+    "triton": "3.8.0",
+    "xgrammar": "0.2.7",
+    "llguidance": "1.9.1",
+    "transformers": "5.19.0"
+   }
+  },
+  "p3/qwen/C/sglang-p2": {
+   "status": "ok",
+   "status_line": null,
+   "k": 3,
+   "k_source": "llm-mini-infer's default; SGLang's recipe and its EAGLE default (3 steps, top-k 1, 4 draft tokens)",
+   "batch_invariant": false,
+   "deviations": [
+    "--max-running-requests 48 (SGLang's own value under speculative decoding), not 64: at 64 its fp32 mamba state (5 slots a request, ~49 GB) does not fit the ~41 GB left after the weights; a load at a higher concurrency queues in the server",
+    "the cuRAND headers of SGLang's venv (nvidia/cu13/include/curand*.h, the folder as found) copied into the CUDA toolkit's include folder: its speculative-sampling JIT kernel includes curand.h, which the GPU tests' image lacks (SGLang's own image is CUDA devel)"
+   ],
+   "resolved": {
+    "kv_tokens": 92567,
+    "max_running_requests": 48,
+    "attention_backend": "flashinfer",
+    "fp8_kernel": "auto",
+    "chunk_tokens": 8192,
+    "memory_fraction": 0.7971479687499999,
+    "prefix_cache": true,
+    "batch_invariant_active": false
+   },
+   "versions": {
+    "sglang": "0.5.23",
+    "sglang-kernel": "0.4.10",
+    "torch": "2.14.1+cu130",
+    "flashinfer-python": "0.7.2",
+    "flashinfer-cubin": "0.7.2",
+    "flashinfer-jit-cache": "0.7.2+cu130",
+    "triton": "3.8.0",
+    "xgrammar": "0.2.7",
+    "llguidance": "1.9.1",
+    "transformers": "5.19.0"
+   }
+  },
+  "p3/qwen/D/sglang": {
+   "status": "ok",
+   "status_line": null,
+   "k": 3,
+   "k_source": "llm-mini-infer's default; SGLang's recipe and its EAGLE default (3 steps, top-k 1, 4 draft tokens)",
+   "batch_invariant": false,
+   "deviations": [
+    "--max-running-requests 48 (SGLang's own value under speculative decoding), not 64: at 64 its fp32 mamba state (5 slots a request, ~49 GB) does not fit the ~41 GB left after the weights; a load at a higher concurrency queues in the server",
+    "no structured-output validity run (--skip-validity)",
+    "the cuRAND headers of SGLang's venv (nvidia/cu13/include/curand*.h, the folder as found) copied into the CUDA toolkit's include folder: its speculative-sampling JIT kernel includes curand.h, which the GPU tests' image lacks (SGLang's own image is CUDA devel)"
+   ],
+   "resolved": {
+    "kv_tokens": 92567,
+    "max_running_requests": 48,
+    "attention_backend": "flashinfer",
+    "fp8_kernel": "auto",
+    "chunk_tokens": 8192,
+    "memory_fraction": 0.7971479687499999,
+    "prefix_cache": true,
+    "batch_invariant_active": false
+   },
+   "versions": {
+    "sglang": "0.5.23",
+    "sglang-kernel": "0.4.10",
+    "torch": "2.14.1+cu130",
+    "flashinfer-python": "0.7.2",
+    "flashinfer-cubin": "0.7.2",
+    "flashinfer-jit-cache": "0.7.2+cu130",
+    "triton": "3.8.0",
+    "xgrammar": "0.2.7",
+    "llguidance": "1.9.1",
+    "transformers": "5.19.0"
+   }
+  },
+  "p3/qwen/smoke/sglang": {
+   "status": "ok",
+   "status_line": null,
+   "k": 3,
+   "k_source": "llm-mini-infer's default; SGLang's recipe and its EAGLE default (3 steps, top-k 1, 4 draft tokens)",
+   "batch_invariant": false,
+   "deviations": [
+    "--max-running-requests 48 (SGLang's own value under speculative decoding), not 64: at 64 its fp32 mamba state (5 slots a request, ~49 GB) does not fit the ~41 GB left after the weights; a load at a higher concurrency queues in the server",
+    "the cuRAND headers of SGLang's venv (nvidia/cu13/include/curand*.h, the folder as found) copied into the CUDA toolkit's include folder: its speculative-sampling JIT kernel includes curand.h, which the GPU tests' image lacks (SGLang's own image is CUDA devel)"
+   ],
+   "resolved": {
+    "kv_tokens": 92567,
+    "max_running_requests": 48,
+    "attention_backend": "flashinfer",
+    "fp8_kernel": "auto",
+    "chunk_tokens": 8192,
+    "memory_fraction": 0.7971479687499999,
+    "prefix_cache": true,
+    "batch_invariant_active": false
+   },
+   "versions": {
+    "sglang": "0.5.23",
+    "sglang-kernel": "0.4.10",
+    "torch": "2.14.1+cu130",
+    "flashinfer-python": "0.7.2",
+    "flashinfer-cubin": "0.7.2",
+    "flashinfer-jit-cache": "0.7.2+cu130",
+    "triton": "3.8.0",
+    "xgrammar": "0.2.7",
+    "llguidance": "1.9.1",
+    "transformers": "5.19.0"
+   }
+  },
+  "q-sglang/gemma/Q/sglang": {
+   "status": "ok",
+   "status_line": null,
+   "k": 5,
+   "k_source": "llm-mini-infer's default; SGLang's recipe and CI value (5 steps, top-k 1, 6 draft tokens)",
+   "batch_invariant": false,
+   "deviations": [],
+   "resolved": {
+    "kv_tokens": 57428,
+    "max_running_requests": 64,
+    "attention_backend": "triton",
+    "fp8_kernel": "auto",
+    "chunk_tokens": 8192,
+    "memory_fraction": 0.7887413964843749,
+    "prefix_cache": true,
+    "batch_invariant_active": false
+   },
+   "versions": {
+    "sglang": "0.5.23",
+    "sglang-kernel": "0.4.10",
+    "torch": "2.14.1+cu130",
+    "flashinfer-python": "0.7.2",
+    "flashinfer-cubin": "0.7.2",
+    "flashinfer-jit-cache": "0.7.2+cu130",
+    "triton": "3.8.0",
+    "xgrammar": "0.2.7",
+    "llguidance": "1.9.1",
+    "transformers": "5.19.0"
+   }
+  },
+  "q-vllm/gemma/Q/vllm": {
+   "status": "ok",
+   "status_line": null,
+   "k": 5,
+   "k_source": "the same k as the other engines (vLLM's own: bench/engines/arms.py, VLLM_OWN_K)",
+   "batch_invariant": false,
+   "deviations": [],
+   "resolved": {
+    "kv_tokens": 57227,
+    "max_running_requests": 64,
+    "attention_backend": "TRITON_ATTN (vLLM forces it for Gemma 4: FA4 not available)",
+    "fp8_kernel": "DeepGemmFp8BlockScaledMMKernel",
+    "chunk_tokens": 8192,
+    "memory_fraction": 0.9,
+    "prefix_cache": true,
+    "batch_invariant_active": false
+   },
+   "versions": {}
+  }
+ },
+ "clocks": {
+  "p1/gemma/A1/ours/scene-c1": {
+   "sm_mhz_median": 2422.0,
+   "power_w_median": 349.07,
+   "throttle": [
+    4
+   ]
+  },
+  "p1/gemma/A1/ours/chat-c1": {
+   "sm_mhz_median": 2422.0,
+   "power_w_median": 348.36,
+   "throttle": [
+    4
+   ]
+  },
+  "p1/gemma/A1/ours/scene-c16": {
+   "sm_mhz_median": 2370.0,
+   "power_w_median": 555.0,
+   "throttle": [
+    4
+   ]
+  },
+  "p1/gemma/A1/ours/scene-c64": {
+   "sm_mhz_median": 2317.0,
+   "power_w_median": 595.13,
+   "throttle": [
+    4
+   ]
+  },
+  "p1/gemma/A1/ours/chat-c16": {
+   "sm_mhz_median": 2385.0,
+   "power_w_median": 527.84,
+   "throttle": [
+    4
+   ]
+  },
+  "p1/gemma/A1/ours/chat-c64": {
+   "sm_mhz_median": 2310.0,
+   "power_w_median": 574.72,
+   "throttle": [
+    4
+   ]
+  },
+  "p1/gemma/A1/sglang/scene-c1": {
+   "sm_mhz_median": 2422.0,
+   "power_w_median": 267.1,
+   "throttle": [
+    4
+   ]
+  },
+  "p1/gemma/A1/sglang/chat-c1": {
+   "sm_mhz_median": 2422.0,
+   "power_w_median": 272.32,
+   "throttle": [
+    4
+   ]
+  },
+  "p1/gemma/A1/sglang/scene-c16": {
+   "sm_mhz_median": 2400.0,
+   "power_w_median": 423.125,
+   "throttle": [
+    4
+   ]
+  },
+  "p1/gemma/A1/sglang/scene-c64": {
+   "sm_mhz_median": 2392.0,
+   "power_w_median": 451.05,
+   "throttle": [
+    4
+   ]
+  },
+  "p1/gemma/A1/sglang/chat-c16": {
+   "sm_mhz_median": 2407.0,
+   "power_w_median": 466.03,
+   "throttle": [
+    4
+   ]
+  },
+  "p1/gemma/A1/sglang/chat-c64": {
+   "sm_mhz_median": 2385.0,
+   "power_w_median": 500.04,
+   "throttle": [
+    4
+   ]
+  },
+  "p1/gemma/A1/vllm/scene-c1": {
+   "sm_mhz_median": 2422.0,
+   "power_w_median": 349.53499999999997,
+   "throttle": [
+    4
+   ]
+  },
+  "p1/gemma/A1/vllm/chat-c1": {
+   "sm_mhz_median": 2422.0,
+   "power_w_median": 351.38,
+   "throttle": [
+    4
+   ]
+  },
+  "p1/gemma/A1/vllm/scene-c16": {
+   "sm_mhz_median": 2377.0,
+   "power_w_median": 478.92,
+   "throttle": [
+    4
+   ]
+  },
+  "p1/gemma/A1/vllm/scene-c64": {
+   "sm_mhz_median": 2347.0,
+   "power_w_median": 540.44,
+   "throttle": [
+    4
+   ]
+  },
+  "p1/gemma/A1/vllm/chat-c16": {
+   "sm_mhz_median": 2370.0,
+   "power_w_median": 485.11,
+   "throttle": [
+    4
+   ]
+  },
+  "p1/gemma/A1/vllm/chat-c64": {
+   "sm_mhz_median": 2325.0,
+   "power_w_median": 555.6949999999999,
+   "throttle": [
+    4
+   ]
+  },
+  "p2/gemma/A2/ours/find-rate": {
+   "sm_mhz_median": 2392.0,
+   "power_w_median": 501.54499999999996,
+   "throttle": [
+    4
+   ]
+  },
+  "p2/gemma/A2/sglang/find-rate": {
+   "sm_mhz_median": 2400.0,
+   "power_w_median": 324.39,
+   "throttle": [
+    4
+   ]
+  },
+  "p2/gemma/A2/vllm/find-rate": {
+   "sm_mhz_median": 2400.0,
+   "power_w_median": 408.01,
+   "throttle": [
+    4
+   ]
+  },
+  "p2/gemma/B/vllm-k1/scene-c1": {
+   "sm_mhz_median": 2422.0,
+   "power_w_median": 325.08,
+   "throttle": []
+  },
+  "p2/gemma/B/vllm-k1/scene-c64": {
+   "sm_mhz_median": 2377.0,
+   "power_w_median": 470.485,
+   "throttle": [
+    4
+   ]
+  },
+  "p2/gemma/B/vllm-k4/scene-c1": {
+   "sm_mhz_median": 2422.0,
+   "power_w_median": 337.43,
+   "throttle": []
+  },
+  "p2/gemma/B/vllm-k4/scene-c64": {
+   "sm_mhz_median": 2362.0,
+   "power_w_median": 504.745,
+   "throttle": [
+    4
+   ]
+  },
+  "p2/gemma/C/ours-nobi-p1/stability": {
+   "sm_mhz_median": 2370.0,
+   "power_w_median": 529.0250000000001,
+   "throttle": [
+    4
+   ]
+  },
+  "p2/gemma/C/ours-nobi-p1/scene-c64": {
+   "sm_mhz_median": 2325.0,
+   "power_w_median": 593.74,
+   "throttle": [
+    4
+   ]
+  },
+  "p2/gemma/C/ours-nobi-p1/chat-c64": {
+   "sm_mhz_median": 2325.0,
+   "power_w_median": 578.97,
+   "throttle": [
+    4
+   ]
+  },
+  "p2/gemma/C/ours-nobi-p2/stability": {
+   "sm_mhz_median": 2377.0,
+   "power_w_median": 533.76,
+   "throttle": [
+    4
+   ]
+  },
+  "p2/gemma/C/ours-p1/stability": {
+   "sm_mhz_median": 2385.0,
+   "power_w_median": 523.685,
+   "throttle": [
+    4
+   ]
+  },
+  "p2/gemma/C/ours-p2/stability": {
+   "sm_mhz_median": 2377.0,
+   "power_w_median": 524.55,
+   "throttle": [
+    4
+   ]
+  },
+  "p2/gemma/C/sglang-bi-p1/stability": {
+   "sm_mhz_median": 2392.0,
+   "power_w_median": 443.415,
+   "throttle": []
+  },
+  "p2/gemma/C/sglang-bi-p1/scene-c64": {
+   "sm_mhz_median": 2385.0,
+   "power_w_median": 488.08,
+   "throttle": [
+    4
+   ]
+  },
+  "p2/gemma/C/sglang-bi-p1/chat-c64": {
+   "sm_mhz_median": 2400.0,
+   "power_w_median": 451.18,
+   "throttle": [
+    4
+   ]
+  },
+  "p2/gemma/C/sglang-bi-p2/stability": {
+   "sm_mhz_median": 2392.0,
+   "power_w_median": 443.81,
+   "throttle": []
+  },
+  "p2/gemma/C/sglang-p1/stability": {
+   "sm_mhz_median": 2400.0,
+   "power_w_median": 408.63,
+   "throttle": [
+    4
+   ]
+  },
+  "p2/gemma/C/sglang-p2/stability": {
+   "sm_mhz_median": 2400.0,
+   "power_w_median": 408.9,
+   "throttle": [
+    4
+   ]
+  },
+  "p2/gemma/C/vllm-bi-p1/stability": {
+   "sm_mhz_median": 2385.0,
+   "power_w_median": 412.155,
+   "throttle": [
+    4
+   ]
+  },
+  "p2/gemma/C/vllm-bi-p1/scene-c64": {
+   "sm_mhz_median": 2362.0,
+   "power_w_median": 495.5,
+   "throttle": [
+    4
+   ]
+  },
+  "p2/gemma/C/vllm-bi-p1/chat-c64": {
+   "sm_mhz_median": 2370.0,
+   "power_w_median": 508.37,
+   "throttle": [
+    4
+   ]
+  },
+  "p2/gemma/C/vllm-bi-p2/stability": {
+   "sm_mhz_median": 2385.0,
+   "power_w_median": 411.46500000000003,
+   "throttle": [
+    4
+   ]
+  },
+  "p2/gemma/C/vllm-p1/stability": {
+   "sm_mhz_median": 2385.0,
+   "power_w_median": 460.9,
+   "throttle": [
+    4
+   ]
+  },
+  "p2/gemma/C/vllm-p2/stability": {
+   "sm_mhz_median": 2385.0,
+   "power_w_median": 461.155,
+   "throttle": [
+    4
+   ]
+  },
+  "p2/gemma/D/ours/validity": {
+   "sm_mhz_median": 2422.0,
+   "power_w_median": 377.89,
+   "throttle": []
+  },
+  "p2/gemma/D/ours/grammar-cost": {
+   "sm_mhz_median": null,
+   "power_w_median": null,
+   "throttle": []
+  },
+  "p2/gemma/D/vllm/validity": {
+   "sm_mhz_median": 2415.0,
+   "power_w_median": 375.65,
+   "throttle": []
+  },
+  "p2/qwen/A1/ours/scene-c1": {
+   "sm_mhz_median": 2377.0,
+   "power_w_median": 424.73,
+   "throttle": [
+    4
+   ]
+  },
+  "p2/qwen/A1/ours/chat-c1": {
+   "sm_mhz_median": 2422.0,
+   "power_w_median": 315.8,
+   "throttle": [
+    4
+   ]
+  },
+  "p2/qwen/A1/ours/scene-c16": {
+   "sm_mhz_median": 2317.0,
+   "power_w_median": 594.855,
+   "throttle": [
+    4
+   ]
+  },
+  "p2/qwen/A1/ours/scene-c64": {
+   "sm_mhz_median": 2302.0,
+   "power_w_median": 600.265,
+   "throttle": [
+    4
+   ]
+  },
+  "p2/qwen/A1/ours/chat-c16": {
+   "sm_mhz_median": 2362.0,
+   "power_w_median": 509.935,
+   "throttle": [
+    4
+   ]
+  },
+  "p2/qwen/A1/ours/chat-c64": {
+   "sm_mhz_median": 2317.0,
+   "power_w_median": 595.68,
+   "throttle": [
+    4
+   ]
+  },
+  "p2/qwen/A1/vllm/scene-c1": {
+   "sm_mhz_median": 2392.0,
+   "power_w_median": 408.78,
+   "throttle": [
+    4
+   ]
+  },
+  "p2/qwen/A1/vllm/chat-c1": {
+   "sm_mhz_median": 2422.0,
+   "power_w_median": 310.51,
+   "throttle": [
+    4
+   ]
+  },
+  "p2/qwen/A1/vllm/scene-c16": {
+   "sm_mhz_median": 2295.0,
+   "power_w_median": 596.0,
+   "throttle": [
+    4
+   ]
+  },
+  "p2/qwen/A1/vllm/scene-c64": {
+   "sm_mhz_median": 2257.0,
+   "power_w_median": 600.12,
+   "throttle": [
+    4
+   ]
+  },
+  "p2/qwen/A1/vllm/chat-c16": {
+   "sm_mhz_median": 2392.5,
+   "power_w_median": 485.17,
+   "throttle": [
+    4
+   ]
+  },
+  "p2/qwen/A1/vllm/chat-c64": {
+   "sm_mhz_median": 2343.5,
+   "power_w_median": 561.265,
+   "throttle": [
+    4
+   ]
+  },
+  "p2/qwen/A2/ours/find-rate": {
+   "sm_mhz_median": 2385.0,
+   "power_w_median": 352.655,
+   "throttle": [
+    4
+   ]
+  },
+  "p2/qwen/A2/vllm/find-rate": {
+   "sm_mhz_median": 2377.0,
+   "power_w_median": 388.88,
+   "throttle": [
+    4
+   ]
+  },
+  "p2/qwen/B/vllm-k1/scene-c1": {
+   "sm_mhz_median": 2377.0,
+   "power_w_median": 389.07500000000005,
+   "throttle": [
+    4
+   ]
+  },
+  "p2/qwen/B/vllm-k1/scene-c64": {
+   "sm_mhz_median": 2272.0,
+   "power_w_median": 599.65,
+   "throttle": [
+    4
+   ]
+  },
+  "p2/qwen/C/ours-nobi-p1/stability": {
+   "sm_mhz_median": 2302.0,
+   "power_w_median": 598.59,
+   "throttle": [
+    4
+   ]
+  },
+  "p2/qwen/C/ours-nobi-p1/scene-c64": {
+   "sm_mhz_median": 2272.0,
+   "power_w_median": 599.61,
+   "throttle": [
+    4
+   ]
+  },
+  "p2/qwen/C/ours-nobi-p1/chat-c64": {
+   "sm_mhz_median": 2295.0,
+   "power_w_median": 599.16,
+   "throttle": [
+    4
+   ]
+  },
+  "p2/qwen/C/ours-nobi-p2/stability": {
+   "sm_mhz_median": 2302.0,
+   "power_w_median": 598.3499999999999,
+   "throttle": [
+    4
+   ]
+  },
+  "p2/qwen/C/ours-p1/stability": {
+   "sm_mhz_median": 2325.0,
+   "power_w_median": 592.4,
+   "throttle": [
+    4
+   ]
+  },
+  "p2/qwen/C/ours-p2/stability": {
+   "sm_mhz_median": 2325.0,
+   "power_w_median": 593.94,
+   "throttle": [
+    4
+   ]
+  },
+  "p2/qwen/C/vllm-p1/stability": {
+   "sm_mhz_median": 2310.0,
+   "power_w_median": 594.74,
+   "throttle": [
+    4
+   ]
+  },
+  "p2/qwen/C/vllm-p2/stability": {
+   "sm_mhz_median": 2302.0,
+   "power_w_median": 592.41,
+   "throttle": [
+    4
+   ]
+  },
+  "p2/qwen/D/ours/validity": {
+   "sm_mhz_median": 2370.0,
+   "power_w_median": 366.225,
+   "throttle": []
+  },
+  "p2/qwen/D/ours/grammar-cost": {
+   "sm_mhz_median": null,
+   "power_w_median": null,
+   "throttle": []
+  },
+  "p2/qwen/D/vllm/validity": {
+   "sm_mhz_median": 2400.0,
+   "power_w_median": 362.815,
+   "throttle": []
+  },
+  "p3/gemma/C/vllm-bi-nodg-p1/stability": {
+   "sm_mhz_median": 2377.0,
+   "power_w_median": 409.27,
+   "throttle": [
+    4
+   ]
+  },
+  "p3/gemma/C/vllm-bi-nodg-p1/scene-c64": {
+   "sm_mhz_median": 2370.0,
+   "power_w_median": 499.77,
+   "throttle": [
+    4
+   ]
+  },
+  "p3/gemma/C/vllm-bi-nodg-p1/chat-c64": {
+   "sm_mhz_median": 2362.0,
+   "power_w_median": 508.06,
+   "throttle": [
+    4
+   ]
+  },
+  "p3/gemma/C/vllm-bi-nodg-p2/stability": {
+   "sm_mhz_median": 2377.0,
+   "power_w_median": 401.29999999999995,
+   "throttle": []
+  },
+  "p3/gemma/I/ours-nobi/scene-c64": {
+   "sm_mhz_median": 2325.0,
+   "power_w_median": 583.38,
+   "throttle": [
+    4
+   ]
+  },
+  "p3/gemma/I/ours-nobi/chat-c64": {
+   "sm_mhz_median": 2328.5,
+   "power_w_median": 570.0799999999999,
+   "throttle": [
+    4
+   ]
+  },
+  "p3/gemma/I/ours/scene-c64": {
+   "sm_mhz_median": 2347.0,
+   "power_w_median": 556.88,
+   "throttle": [
+    4
+   ]
+  },
+  "p3/gemma/I/ours/chat-c64": {
+   "sm_mhz_median": 2332.0,
+   "power_w_median": 548.12,
+   "throttle": [
+    4
+   ]
+  },
+  "p3/gemma/I/sglang-bi/scene-c64": {
+   "sm_mhz_median": 2392.0,
+   "power_w_median": 481.02,
+   "throttle": [
+    4
+   ]
+  },
+  "p3/gemma/I/sglang-bi/chat-c64": {
+   "sm_mhz_median": 2400.0,
+   "power_w_median": 450.475,
+   "throttle": [
+    4
+   ]
+  },
+  "p3/gemma/I/sglang/scene-c64": {
+   "sm_mhz_median": 2392.0,
+   "power_w_median": 433.53,
+   "throttle": [
+    4
+   ]
+  },
+  "p3/gemma/I/sglang/chat-c64": {
+   "sm_mhz_median": 2392.0,
+   "power_w_median": 485.0,
+   "throttle": [
+    4
+   ]
+  },
+  "p3/gemma/I/vllm-bi-nodg/scene-c64": {
+   "sm_mhz_median": 2370.0,
+   "power_w_median": 492.42,
+   "throttle": [
+    4
+   ]
+  },
+  "p3/gemma/I/vllm-bi-nodg/chat-c64": {
+   "sm_mhz_median": 2370.0,
+   "power_w_median": 513.58,
+   "throttle": [
+    4
+   ]
+  },
+  "p3/gemma/I/vllm/scene-c64": {
+   "sm_mhz_median": 2362.0,
+   "power_w_median": 506.70500000000004,
+   "throttle": [
+    4
+   ]
+  },
+  "p3/gemma/I/vllm/chat-c64": {
+   "sm_mhz_median": 2355.0,
+   "power_w_median": 534.86,
+   "throttle": [
+    4
+   ]
+  },
+  "p3/qwen/A1/ours/scene-c1": {
+   "sm_mhz_median": 2377.0,
+   "power_w_median": 429.83500000000004,
+   "throttle": [
+    4
+   ]
+  },
+  "p3/qwen/A1/ours/chat-c1": {
+   "sm_mhz_median": 2422.0,
+   "power_w_median": 335.19,
+   "throttle": [
+    4
+   ]
+  },
+  "p3/qwen/A1/ours/scene-c16": {
+   "sm_mhz_median": 2310.0,
+   "power_w_median": 598.24,
+   "throttle": [
+    4
+   ]
+  },
+  "p3/qwen/A1/ours/scene-c64": {
+   "sm_mhz_median": 2287.0,
+   "power_w_median": 600.01,
+   "throttle": [
+    4
+   ]
+  },
+  "p3/qwen/A1/ours/chat-c16": {
+   "sm_mhz_median": 2355.0,
+   "power_w_median": 518.9,
+   "throttle": [
+    4
+   ]
+  },
+  "p3/qwen/A1/ours/chat-c64": {
+   "sm_mhz_median": 2302.0,
+   "power_w_median": 599.06,
+   "throttle": [
+    4
+   ]
+  },
+  "p3/qwen/A1/sglang/scene-c1": {
+   "sm_mhz_median": 2400.0,
+   "power_w_median": 360.97,
+   "throttle": [
+    4
+   ]
+  },
+  "p3/qwen/A1/sglang/chat-c1": {
+   "sm_mhz_median": 2422.0,
+   "power_w_median": 317.355,
+   "throttle": [
+    4
+   ]
+  },
+  "p3/qwen/A1/sglang/scene-c16": {
+   "sm_mhz_median": 2377.0,
+   "power_w_median": 500.95500000000004,
+   "throttle": [
+    4
+   ]
+  },
+  "p3/qwen/A1/sglang/scene-c64": {
+   "sm_mhz_median": 2347.0,
+   "power_w_median": 521.66,
+   "throttle": [
+    4
+   ]
+  },
+  "p3/qwen/A1/sglang/chat-c16": {
+   "sm_mhz_median": 2377.0,
+   "power_w_median": 494.94,
+   "throttle": [
+    4
+   ]
+  },
+  "p3/qwen/A1/sglang/chat-c64": {
+   "sm_mhz_median": 2332.0,
+   "power_w_median": 576.2650000000001,
+   "throttle": [
+    4
+   ]
+  },
+  "p3/qwen/A1/vllm/scene-c1": {
+   "sm_mhz_median": 2385.0,
+   "power_w_median": 410.96,
+   "throttle": [
+    4
+   ]
+  },
+  "p3/qwen/A1/vllm/chat-c1": {
+   "sm_mhz_median": 2422.0,
+   "power_w_median": 318.09,
+   "throttle": [
+    4
+   ]
+  },
+  "p3/qwen/A1/vllm/scene-c16": {
+   "sm_mhz_median": 2295.0,
+   "power_w_median": 597.46,
+   "throttle": [
+    4
+   ]
+  },
+  "p3/qwen/A1/vllm/scene-c64": {
+   "sm_mhz_median": 2238.5,
+   "power_w_median": 599.8,
+   "throttle": [
+    4
+   ]
+  },
+  "p3/qwen/A1/vllm/chat-c16": {
+   "sm_mhz_median": 2377.0,
+   "power_w_median": 502.02,
+   "throttle": [
+    4
+   ]
+  },
+  "p3/qwen/A1/vllm/chat-c64": {
+   "sm_mhz_median": 2340.0,
+   "power_w_median": 570.89,
+   "throttle": [
+    4
+   ]
+  },
+  "p3/qwen/C/sglang-bi-p1/stability": {
+   "sm_mhz_median": 2362.0,
+   "power_w_median": 501.26,
+   "throttle": [
+    4
+   ]
+  },
+  "p3/qwen/C/sglang-bi-p1/scene-c64": {
+   "sm_mhz_median": 2355.0,
+   "power_w_median": 552.19,
+   "throttle": [
+    4
+   ]
+  },
+  "p3/qwen/C/sglang-bi-p1/chat-c64": {
+   "sm_mhz_median": 2351.0,
+   "power_w_median": 540.96,
+   "throttle": [
+    4
+   ]
+  },
+  "p3/qwen/C/sglang-bi-p2/stability": {
+   "sm_mhz_median": 2362.0,
+   "power_w_median": 510.44,
+   "throttle": [
+    4
+   ]
+  },
+  "p3/qwen/C/sglang-p1/stability": {
+   "sm_mhz_median": 2370.0,
+   "power_w_median": 504.065,
+   "throttle": [
+    4
+   ]
+  },
+  "p3/qwen/C/sglang-p2/stability": {
+   "sm_mhz_median": 2370.0,
+   "power_w_median": 500.71,
+   "throttle": [
+    4
+   ]
+  },
+  "q-sglang/gemma/Q/sglang/scene-c1": {
+   "sm_mhz_median": 2422.0,
+   "power_w_median": 272.415,
+   "throttle": []
+  },
+  "q-sglang/gemma/Q/sglang/scene-c64": {
+   "sm_mhz_median": 2392.0,
+   "power_w_median": 446.03499999999997,
+   "throttle": []
+  },
+  "q-vllm/gemma/Q/vllm/scene-c1": {
+   "sm_mhz_median": 2422.0,
+   "power_w_median": 351.155,
+   "throttle": [
+    4
+   ]
+  },
+  "q-vllm/gemma/Q/vllm/scene-c64": {
+   "sm_mhz_median": 2347.0,
+   "power_w_median": 525.93,
+   "throttle": [
+    4
+   ]
+  }
+ },
+ "controls": {
+  "p1-start": {
+   "bf16_tflops": 402.7,
+   "fp8_tflops": 758.7,
+   "copy_gbs": 1459.1,
+   "sm_mhz_median_bf16": 2160.0,
+   "power_w_median_bf16": 599.98
+  },
+  "p2-end": {
+   "bf16_tflops": 405.8,
+   "fp8_tflops": 772.0,
+   "copy_gbs": 1460.2,
+   "sm_mhz_median_bf16": 2175.0,
+   "power_w_median_bf16": 599.98
+  },
+  "p2-middle": {
+   "bf16_tflops": 410.8,
+   "fp8_tflops": 776.4,
+   "copy_gbs": 1460.1,
+   "sm_mhz_median_bf16": 2205.0,
+   "power_w_median_bf16": 600.03
+  },
+  "p2-start": {
+   "bf16_tflops": 410.9,
+   "fp8_tflops": 777.9,
+   "copy_gbs": 1459.8,
+   "sm_mhz_median_bf16": 2212.0,
+   "power_w_median_bf16": 600.02
+  },
+  "p3-end": {
+   "bf16_tflops": 400.5,
+   "fp8_tflops": 761.8,
+   "copy_gbs": 1459.9,
+   "sm_mhz_median_bf16": 2145.0,
+   "power_w_median_bf16": 600.01
+  },
+  "p3-middle": {
+   "bf16_tflops": 406.7,
+   "fp8_tflops": 771.4,
+   "copy_gbs": 1459.9,
+   "sm_mhz_median_bf16": 2182.0,
+   "power_w_median_bf16": 600.03
+  },
+  "p3-start": {
+   "bf16_tflops": 411.2,
+   "fp8_tflops": 781.3,
+   "copy_gbs": 1460.5,
+   "sm_mhz_median_bf16": 2220.0,
+   "power_w_median_bf16": 599.98
+  },
+  "q-sglang-end": {
+   "bf16_tflops": 402.8,
+   "fp8_tflops": 767.9,
+   "copy_gbs": 1459.8,
+   "sm_mhz_median_bf16": 2160.0,
+   "power_w_median_bf16": 599.99
+  },
+  "q-sglang-start": {
+   "bf16_tflops": 408.3,
+   "fp8_tflops": 772.1,
+   "copy_gbs": 1460.0,
+   "sm_mhz_median_bf16": 2190.0,
+   "power_w_median_bf16": 599.95
+  },
+  "q-vllm-end": {
+   "bf16_tflops": 398.0,
+   "fp8_tflops": 760.2,
+   "copy_gbs": 1460.0,
+   "sm_mhz_median_bf16": 2130.0,
+   "power_w_median_bf16": 599.99
+  },
+  "q-vllm-start": {
+   "bf16_tflops": 402.3,
+   "fp8_tflops": 762.6,
+   "copy_gbs": 1460.0,
+   "sm_mhz_median_bf16": 2160.0,
+   "power_w_median_bf16": 599.99
+  }
+ },
+ "grammar_cost": {
+  "gemma": {
+   "model": "gemma-4-31b-it",
+   "vocab": 262144,
+   "backend": "guidance",
+   "compact": true,
+   "llguidance": "1.9.1",
+   "k": 5,
+   "tokenizer_build_s": 2.141,
+   "compile_corpus_ms_p50_max": [
+    0.386,
+    3.593
+   ],
+   "compile_json_object_ms": 0.352,
+   "compile_catalog_cold_ms": 0.664,
+   "compile_catalog_again_ms": [
+    0.577,
+    0.538,
+    0.509,
+    0.494,
+    0.484
+   ],
+   "clone_us_p50": 0.0,
+   "masks_p50_p99": {
+    "threads=1 rows=1": {
+     "one_mask_ms": [
+      0.01,
+      0.09
+     ],
+     "6_masks_ms": [
+      0.037,
+      0.179
+     ]
+    },
+    "threads=1 rows=8": {
+     "one_mask_ms": [
+      0.06,
+      0.266
+     ],
+     "6_masks_ms": [
+      0.286,
+      0.564
+     ]
+    },
+    "threads=1 rows=32": {
+     "one_mask_ms": [
+      0.207,
+      0.395
+     ],
+     "6_masks_ms": [
+      1.069,
+      1.547
+     ]
+    },
+    "threads=1 rows=64": {
+     "one_mask_ms": [
+      0.425,
+      0.545
+     ],
+     "6_masks_ms": [
+      2.12,
+      2.653
+     ]
+    },
+    "threads=2 rows=1": {
+     "one_mask_ms": [
+      0.006,
+      0.057
+     ],
+     "6_masks_ms": [
+      0.03,
+      0.074
+     ]
+    },
+    "threads=2 rows=8": {
+     "one_mask_ms": [
+      0.06,
+      0.265
+     ],
+     "6_masks_ms": [
+      0.338,
+      0.686
+     ]
+    },
+    "threads=2 rows=32": {
+     "one_mask_ms": [
+      0.232,
+      0.429
+     ],
+     "6_masks_ms": [
+      1.219,
+      1.581
+     ]
+    },
+    "threads=2 rows=64": {
+     "one_mask_ms": [
+      0.472,
+      0.673
+     ],
+     "6_masks_ms": [
+      2.517,
+      3.085
+     ]
+    },
+    "threads=4 rows=1": {
+     "one_mask_ms": [
+      0.006,
+      0.477
+     ],
+     "6_masks_ms": [
+      0.028,
+      0.105
+     ]
+    },
+    "threads=4 rows=8": {
+     "one_mask_ms": [
+      0.098,
+      0.372
+     ],
+     "6_masks_ms": [
+      0.412,
+      0.777
+     ]
+    },
+    "threads=4 rows=32": {
+     "one_mask_ms": [
+      0.314,
+      0.892
+     ],
+     "6_masks_ms": [
+      1.54,
+      2.593
+     ]
+    },
+    "threads=4 rows=64": {
+     "one_mask_ms": [
+      0.623,
+      0.847
+     ],
+     "6_masks_ms": [
+      3.026,
+      4.263
+     ]
+    },
+    "threads=8 rows=1": {
+     "one_mask_ms": [
+      0.009,
+      0.076
+     ],
+     "6_masks_ms": [
+      0.037,
+      0.103
+     ]
+    },
+    "threads=8 rows=8": {
+     "one_mask_ms": [
+      0.122,
+      0.447
+     ],
+     "6_masks_ms": [
+      0.441,
+      1.345
+     ]
+    },
+    "threads=8 rows=32": {
+     "one_mask_ms": [
+      0.334,
+      0.496
+     ],
+     "6_masks_ms": [
+      1.562,
+      2.018
+     ]
+    },
+    "threads=8 rows=64": {
+     "one_mask_ms": [
+      0.61,
+      0.802
+     ],
+     "6_masks_ms": [
+      2.943,
+      3.37
+     ]
+    }
+   }
+  },
+  "qwen": {
+   "model": "qwen3.8-27b",
+   "vocab": 248320,
+   "backend": "guidance",
+   "compact": true,
+   "llguidance": "1.9.1",
+   "k": 3,
+   "tokenizer_build_s": 1.308,
+   "compile_corpus_ms_p50_max": [
+    0.377,
+    1.229
+   ],
+   "compile_json_object_ms": 0.372,
+   "compile_catalog_cold_ms": 0.581,
+   "compile_catalog_again_ms": [
+    0.526,
+    0.491,
+    0.478,
+    0.47,
+    0.471
+   ],
+   "clone_us_p50": 1.0,
+   "masks_p50_p99": {
+    "threads=1 rows=1": {
+     "one_mask_ms": [
+      0.011,
+      0.517
+     ],
+     "4_masks_ms": [
+      0.026,
+      0.061
+     ]
+    },
+    "threads=1 rows=8": {
+     "one_mask_ms": [
+      0.065,
+      0.424
+     ],
+     "4_masks_ms": [
+      0.213,
+      0.569
+     ]
+    },
+    "threads=1 rows=32": {
+     "one_mask_ms": [
+      0.212,
+      0.379
+     ],
+     "4_masks_ms": [
+      0.828,
+      1.044
+     ]
+    },
+    "threads=1 rows=64": {
+     "one_mask_ms": [
+      0.477,
+      0.594
+     ],
+     "4_masks_ms": [
+      1.653,
+      1.958
+     ]
+    },
+    "threads=2 rows=1": {
+     "one_mask_ms": [
+      0.008,
+      0.08
+     ],
+     "4_masks_ms": [
+      0.024,
+      0.074
+     ]
+    },
+    "threads=2 rows=8": {
+     "one_mask_ms": [
+      0.063,
+      0.375
+     ],
+     "4_masks_ms": [
+      0.205,
+      0.554
+     ]
+    },
+    "threads=2 rows=32": {
+     "one_mask_ms": [
+      0.208,
+      0.345
+     ],
+     "4_masks_ms": [
+      0.736,
+      0.984
+     ]
+    },
+    "threads=2 rows=64": {
+     "one_mask_ms": [
+      0.394,
+      0.537
+     ],
+     "4_masks_ms": [
+      1.352,
+      1.722
+     ]
+    },
+    "threads=4 rows=1": {
+     "one_mask_ms": [
+      0.01,
+      0.106
+     ],
+     "4_masks_ms": [
+      0.024,
+      0.058
+     ]
+    },
+    "threads=4 rows=8": {
+     "one_mask_ms": [
+      0.071,
+      0.27
+     ],
+     "4_masks_ms": [
+      0.227,
+      0.47
+     ]
+    },
+    "threads=4 rows=32": {
+     "one_mask_ms": [
+      0.281,
+      0.409
+     ],
+     "4_masks_ms": [
+      0.868,
+      1.227
+     ]
+    },
+    "threads=4 rows=64": {
+     "one_mask_ms": [
+      0.5,
+      0.639
+     ],
+     "4_masks_ms": [
+      1.703,
+      2.068
+     ]
+    },
+    "threads=8 rows=1": {
+     "one_mask_ms": [
+      0.008,
+      0.097
+     ],
+     "4_masks_ms": [
+      0.023,
+      0.049
+     ]
+    },
+    "threads=8 rows=8": {
+     "one_mask_ms": [
+      0.077,
+      0.398
+     ],
+     "4_masks_ms": [
+      0.26,
+      0.599
+     ]
+    },
+    "threads=8 rows=32": {
+     "one_mask_ms": [
+      0.284,
+      0.5
+     ],
+     "4_masks_ms": [
+      0.953,
+      1.264
+     ]
+    },
+    "threads=8 rows=64": {
+     "one_mask_ms": [
+      0.56,
+      0.717
+     ],
+     "4_masks_ms": [
+      1.83,
+      2.197
+     ]
+    }
+   }
+  }
+ },
+ "clock_check": {
+  "p1": {
+   "loads_counted": 18,
+   "host_median_sm_mhz": 2388.5,
+   "outliers": [
+    {
+     "unit": "gemma/A1/ours",
+     "load": "chat-c64",
+     "sm_mhz_median": 2310.0,
+     "diff_pct": -3.2865815365292024,
+     "power_w_median": 574.72,
+     "throttle": [
+      4
+     ]
+    }
+   ],
+   "controls": [
+    {
+     "control": "start",
+     "bf16_sm_mhz_median": 2160.0,
+     "bf16_tflops": 402.7
+    }
+   ]
+  },
+  "p2": {
+   "loads_counted": 53,
+   "host_median_sm_mhz": 2377.0,
+   "outliers": [
+    {
+     "unit": "qwen/A1/ours",
+     "load": "scene-c64",
+     "sm_mhz_median": 2302.0,
+     "diff_pct": -3.155237694572991,
+     "power_w_median": 600.265,
+     "throttle": [
+      4
+     ]
+    },
+    {
+     "unit": "qwen/A1/vllm",
+     "load": "scene-c16",
+     "sm_mhz_median": 2295.0,
+     "diff_pct": -3.4497265460664703,
+     "power_w_median": 596.0,
+     "throttle": [
+      4
+     ]
+    },
+    {
+     "unit": "qwen/A1/vllm",
+     "load": "scene-c64",
+     "sm_mhz_median": 2257.0,
+     "diff_pct": -5.0483803113167856,
+     "power_w_median": 600.12,
+     "throttle": [
+      4
+     ]
+    },
+    {
+     "unit": "qwen/B/vllm-k1",
+     "load": "scene-c64",
+     "sm_mhz_median": 2272.0,
+     "diff_pct": -4.417332772402188,
+     "power_w_median": 599.65,
+     "throttle": [
+      4
+     ]
+    },
+    {
+     "unit": "qwen/C/ours-nobi-p1",
+     "load": "stability",
+     "sm_mhz_median": 2302.0,
+     "diff_pct": -3.155237694572991,
+     "power_w_median": 598.59,
+     "throttle": [
+      4
+     ]
+    },
+    {
+     "unit": "qwen/C/ours-nobi-p1",
+     "load": "scene-c64",
+     "sm_mhz_median": 2272.0,
+     "diff_pct": -4.417332772402188,
+     "power_w_median": 599.61,
+     "throttle": [
+      4
+     ]
+    },
+    {
+     "unit": "qwen/C/ours-nobi-p1",
+     "load": "chat-c64",
+     "sm_mhz_median": 2295.0,
+     "diff_pct": -3.4497265460664703,
+     "power_w_median": 599.16,
+     "throttle": [
+      4
+     ]
+    },
+    {
+     "unit": "qwen/C/ours-nobi-p2",
+     "load": "stability",
+     "sm_mhz_median": 2302.0,
+     "diff_pct": -3.155237694572991,
+     "power_w_median": 598.3499999999999,
+     "throttle": [
+      4
+     ]
+    },
+    {
+     "unit": "qwen/C/vllm-p2",
+     "load": "stability",
+     "sm_mhz_median": 2302.0,
+     "diff_pct": -3.155237694572991,
+     "power_w_median": 592.41,
+     "throttle": [
+      4
+     ]
+    }
+   ],
+   "controls": [
+    {
+     "control": "start",
+     "bf16_sm_mhz_median": 2212.0,
+     "bf16_tflops": 410.9
+    },
+    {
+     "control": "middle",
+     "bf16_sm_mhz_median": 2205.0,
+     "bf16_tflops": 410.8
+    },
+    {
+     "control": "end",
+     "bf16_sm_mhz_median": 2175.0,
+     "bf16_tflops": 405.8
+    }
+   ]
+  },
+  "p3": {
+   "loads_counted": 40,
+   "host_median_sm_mhz": 2366.0,
+   "outliers": [
+    {
+     "unit": "qwen/A1/ours",
+     "load": "scene-c64",
+     "sm_mhz_median": 2287.0,
+     "diff_pct": -3.338968723584108,
+     "power_w_median": 600.01,
+     "throttle": [
+      4
+     ]
+    },
+    {
+     "unit": "qwen/A1/vllm",
+     "load": "scene-c16",
+     "sm_mhz_median": 2295.0,
+     "diff_pct": -3.0008453085376163,
+     "power_w_median": 597.46,
+     "throttle": [
+      4
+     ]
+    },
+    {
+     "unit": "qwen/A1/vllm",
+     "load": "scene-c64",
+     "sm_mhz_median": 2238.5,
+     "diff_pct": -5.388841927303465,
+     "power_w_median": 599.8,
+     "throttle": [
+      4
+     ]
+    }
+   ],
+   "controls": [
+    {
+     "control": "start",
+     "bf16_sm_mhz_median": 2220.0,
+     "bf16_tflops": 411.2
+    },
+    {
+     "control": "middle",
+     "bf16_sm_mhz_median": 2182.0,
+     "bf16_tflops": 406.7
+    },
+    {
+     "control": "end",
+     "bf16_sm_mhz_median": 2145.0,
+     "bf16_tflops": 400.5
+    }
+   ]
+  },
+  "q-sglang": {
+   "loads_counted": 2,
+   "host_median_sm_mhz": 2407.0,
+   "outliers": [],
+   "controls": [
+    {
+     "control": "start",
+     "bf16_sm_mhz_median": 2190.0,
+     "bf16_tflops": 408.3
+    },
+    {
+     "control": "end",
+     "bf16_sm_mhz_median": 2160.0,
+     "bf16_tflops": 402.8
+    }
+   ]
+  },
+  "q-vllm": {
+   "loads_counted": 2,
+   "host_median_sm_mhz": 2384.5,
+   "outliers": [],
+   "controls": [
+    {
+     "control": "start",
+     "bf16_sm_mhz_median": 2160.0,
+     "bf16_tflops": 402.3
+    },
+    {
+     "control": "end",
+     "bf16_sm_mhz_median": 2130.0,
+     "bf16_tflops": 398.0
+    }
+   ]
+  }
+ }
+}

@@ -1,0 +1,11 @@
+{{- $fullName := include "llm-mini-infer.fullname" . -}}
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ $fullName }}
+  labels:
+    {{- include "llm-mini-infer.labels" . | nindent 4 }}
+data:
+  # llm-mini-infer's configuration (llm_mini_infer/config.py): .Values.config, with the model from .Values.model
+  config.yaml: |
+    {{- include "llm-mini-infer.config" . | nindent 4 }}

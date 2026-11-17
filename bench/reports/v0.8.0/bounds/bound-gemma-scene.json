@@ -1,0 +1,15 @@
+{
+ "model": "RedHatAI/gemma-4-31B-it-FP8-block",
+ "workload": "scene",
+ "metric": "e2e_ms.p99",
+ "value": 3977.4,
+ "rule": "e2e p99 at most 2 x the median, across the engines, of their e2e p50 at one request in flight (family A1, the same draft count), with zero drops and zero failures",
+ "median_ms": 1988.7,
+ "inputs_e2e_p50_ms": {
+  "ours": 1627.3,
+  "vllm": 1988.7,
+  "sglang": 2524.1
+ },
+ "excluded": {},
+ "source": "gemma/A1/<engine>/scene-c1.json"
+}

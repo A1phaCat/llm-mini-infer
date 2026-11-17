@@ -1,0 +1,987 @@
+{
+ "summary": {
+  "catalog": {
+   "requests": 0,
+   "stop": 0,
+   "valid": 0,
+   "invalid": 0,
+   "duplicate_keys": 0,
+   "duplicate_key_ids": [],
+   "length": 0,
+   "length_at_max_tokens": 0,
+   "errors": 0,
+   "other_finish": 0,
+   "invalid_ids": [],
+   "mean_tokens": 0.0
+  },
+  "corpus": {
+   "requests": 93,
+   "stop": 90,
+   "valid": 86,
+   "invalid": 0,
+   "duplicate_keys": 4,
+   "duplicate_key_ids": [
+    "object_any-2",
+    "min_properties-0",
+    "min_properties-1",
+    "min_properties-2"
+   ],
+   "length": 3,
+   "length_at_max_tokens": 3,
+   "errors": 0,
+   "other_finish": 0,
+   "invalid_ids": [],
+   "mean_tokens": 69.27956989247312
+  },
+  "all": {
+   "requests": 93,
+   "stop": 90,
+   "valid": 86,
+   "invalid": 0,
+   "duplicate_keys": 4,
+   "duplicate_key_ids": [
+    "object_any-2",
+    "min_properties-0",
+    "min_properties-1",
+    "min_properties-2"
+   ],
+   "length": 3,
+   "length_at_max_tokens": 3,
+   "errors": 0,
+   "other_finish": 0,
+   "invalid_ids": [],
+   "mean_tokens": 69.27956989247312
+  }
+ },
+ "wall_s": 15.729262828826904,
+ "max_tokens": 1024,
+ "results": [
+  {
+   "finish": "length",
+   "tokens": 1024,
+   "s": 9.162551021203399,
+   "id": "person-0",
+   "group": "corpus",
+   "stream": false,
+   "temperature": 0.0
+  },
+  {
+   "finish": "stop",
+   "tokens": 25,
+   "s": 0.6348727010190487,
+   "id": "person-1",
+   "group": "corpus",
+   "stream": true,
+   "temperature": 0.8,
+   "error_schema": null
+  },
+  {
+   "finish": "stop",
+   "tokens": 15,
+   "s": 0.39405591203831136,
+   "id": "person-2",
+   "group": "corpus",
+   "stream": false,
+   "temperature": 0.8,
+   "error_schema": null
+  },
+  {
+   "finish": "stop",
+   "tokens": 13,
+   "s": 0.41047659586183727,
+   "id": "sentiment-0",
+   "group": "corpus",
+   "stream": false,
+   "temperature": 0.0,
+   "error_schema": null
+  },
+  {
+   "finish": "stop",
+   "tokens": 13,
+   "s": 0.4969604678917676,
+   "id": "sentiment-1",
+   "group": "corpus",
+   "stream": true,
+   "temperature": 0.8,
+   "error_schema": null
+  },
+  {
+   "finish": "stop",
+   "tokens": 12,
+   "s": 0.49749550595879555,
+   "id": "sentiment-2",
+   "group": "corpus",
+   "stream": false,
+   "temperature": 0.8,
+   "error_schema": null
+  },
+  {
+   "finish": "stop",
+   "tokens": 30,
+   "s": 0.667592256097123,
+   "id": "address-0",
+   "group": "corpus",
+   "stream": false,
+   "temperature": 0.0,
+   "error_schema": null
+  },
+  {
+   "finish": "stop",
+   "tokens": 42,
+   "s": 0.9421274291817099,
+   "id": "address-1",
+   "group": "corpus",
+   "stream": true,
+   "temperature": 0.8,
+   "error_schema": null
+  },
+  {
+   "finish": "stop",
+   "tokens": 24,
+   "s": 0.5663075170014054,
+   "id": "address-2",
+   "group": "corpus",
+   "stream": false,
+   "temperature": 0.8,
+   "error_schema": null
+  },
+  {
+   "finish": "stop",
+   "tokens": 84,
+   "s": 1.1590187188703567,
+   "id": "order-0",
+   "group": "corpus",
+   "stream": false,
+   "temperature": 0.0,
+   "error_schema": null
+  },
+  {
+   "finish": "stop",
+   "tokens": 67,
+   "s": 1.0371249390300363,
+   "id": "order-1",
+   "group": "corpus",
+   "stream": true,
+   "temperature": 0.8,
+   "error_schema": null
+  },
+  {
+   "finish": "stop",
+   "tokens": 64,
+   "s": 0.954262139974162,
+   "id": "order-2",
+   "group": "corpus",
+   "stream": false,
+   "temperature": 0.8,
+   "error_schema": null
+  },
+  {
+   "finish": "stop",
+   "tokens": 56,
+   "s": 0.8620952509809285,
+   "id": "event-0",
+   "group": "corpus",
+   "stream": false,
+   "temperature": 0.0,
+   "error_schema": null
+  },
+  {
+   "finish": "stop",
+   "tokens": 53,
+   "s": 0.8284266800619662,
+   "id": "event-1",
+   "group": "corpus",
+   "stream": true,
+   "temperature": 0.8,
+   "error_schema": null
+  },
+  {
+   "finish": "stop",
+   "tokens": 70,
+   "s": 1.1129447938874364,
+   "id": "event-2",
+   "group": "corpus",
+   "stream": false,
+   "temperature": 0.8,
+   "error_schema": null
+  },
+  {
+   "finish": "stop",
+   "tokens": 29,
+   "s": 0.44153425307013094,
+   "id": "contact-0",
+   "group": "corpus",
+   "stream": false,
+   "temperature": 0.0,
+   "error_schema": null
+  },
+  {
+   "finish": "stop",
+   "tokens": 16,
+   "s": 0.46216850099153817,
+   "id": "contact-1",
+   "group": "corpus",
+   "stream": true,
+   "temperature": 0.8,
+   "error_schema": null
+  },
+  {
+   "finish": "stop",
+   "tokens": 31,
+   "s": 0.5065677780658007,
+   "id": "contact-2",
+   "group": "corpus",
+   "stream": false,
+   "temperature": 0.8,
+   "error_schema": null
+  },
+  {
+   "finish": "stop",
+   "tokens": 6,
+   "s": 0.2774394149892032,
+   "id": "optional_keys-0",
+   "group": "corpus",
+   "stream": false,
+   "temperature": 0.0,
+   "error_schema": null
+  },
+  {
+   "finish": "stop",
+   "tokens": 6,
+   "s": 0.24216863419860601,
+   "id": "optional_keys-1",
+   "group": "corpus",
+   "stream": true,
+   "temperature": 0.8,
+   "error_schema": null
+  },
+  {
+   "finish": "stop",
+   "tokens": 49,
+   "s": 1.0044992337934673,
+   "id": "optional_keys-2",
+   "group": "corpus",
+   "stream": false,
+   "temperature": 0.8,
+   "error_schema": null
+  },
+  {
+   "finish": "stop",
+   "tokens": 74,
+   "s": 1.085733714979142,
+   "id": "open_object-0",
+   "group": "corpus",
+   "stream": false,
+   "temperature": 0.0,
+   "error_schema": null
+  },
+  {
+   "finish": "stop",
+   "tokens": 61,
+   "s": 1.0512302299030125,
+   "id": "open_object-1",
+   "group": "corpus",
+   "stream": true,
+   "temperature": 0.8,
+   "error_schema": null
+  },
+  {
+   "finish": "stop",
+   "tokens": 97,
+   "s": 1.7500446271151304,
+   "id": "open_object-2",
+   "group": "corpus",
+   "stream": false,
+   "temperature": 0.8,
+   "error_schema": null
+  },
+  {
+   "finish": "stop",
+   "tokens": 10,
+   "s": 0.3122166800312698,
+   "id": "one_of-0",
+   "group": "corpus",
+   "stream": false,
+   "temperature": 0.0,
+   "error_schema": null
+  },
+  {
+   "finish": "stop",
+   "tokens": 10,
+   "s": 0.31115897186100483,
+   "id": "one_of-1",
+   "group": "corpus",
+   "stream": true,
+   "temperature": 0.8,
+   "error_schema": null
+  },
+  {
+   "finish": "stop",
+   "tokens": 10,
+   "s": 0.3125206530094147,
+   "id": "one_of-2",
+   "group": "corpus",
+   "stream": false,
+   "temperature": 0.8,
+   "error_schema": null
+  },
+  {
+   "finish": "stop",
+   "tokens": 12,
+   "s": 0.3795073719229549,
+   "id": "any_of_nullable-0",
+   "group": "corpus",
+   "stream": false,
+   "temperature": 0.0,
+   "error_schema": null
+  },
+  {
+   "finish": "stop",
+   "tokens": 14,
+   "s": 0.4112034710124135,
+   "id": "any_of_nullable-1",
+   "group": "corpus",
+   "stream": true,
+   "temperature": 0.8,
+   "error_schema": null
+  },
+  {
+   "finish": "stop",
+   "tokens": 14,
+   "s": 0.5008041311521083,
+   "id": "any_of_nullable-2",
+   "group": "corpus",
+   "stream": false,
+   "temperature": 0.8,
+   "error_schema": null
+  },
+  {
+   "finish": "stop",
+   "tokens": 74,
+   "s": 0.9854253029916435,
+   "id": "tree-0",
+   "group": "corpus",
+   "stream": false,
+   "temperature": 0.0,
+   "error_schema": null
+  },
+  {
+   "finish": "stop",
+   "tokens": 78,
+   "s": 1.2185540031641722,
+   "id": "tree-1",
+   "group": "corpus",
+   "stream": true,
+   "temperature": 0.8,
+   "error_schema": null
+  },
+  {
+   "finish": "stop",
+   "tokens": 72,
+   "s": 0.9371616318821907,
+   "id": "tree-2",
+   "group": "corpus",
+   "stream": false,
+   "temperature": 0.8,
+   "error_schema": null
+  },
+  {
+   "finish": "stop",
+   "tokens": 10,
+   "s": 0.3844784770626575,
+   "id": "const_version-0",
+   "group": "corpus",
+   "stream": false,
+   "temperature": 0.0,
+   "error_schema": null
+  },
+  {
+   "finish": "stop",
+   "tokens": 10,
+   "s": 0.3790618171915412,
+   "id": "const_version-1",
+   "group": "corpus",
+   "stream": true,
+   "temperature": 0.8,
+   "error_schema": null
+  },
+  {
+   "finish": "stop",
+   "tokens": 10,
+   "s": 0.3809494629967958,
+   "id": "const_version-2",
+   "group": "corpus",
+   "stream": false,
+   "temperature": 0.8,
+   "error_schema": null
+  },
+  {
+   "finish": "stop",
+   "tokens": 16,
+   "s": 0.37942946585826576,
+   "id": "bounded_strings-0",
+   "group": "corpus",
+   "stream": false,
+   "temperature": 0.0,
+   "error_schema": null
+  },
+  {
+   "finish": "stop",
+   "tokens": 15,
+   "s": 0.42253488302230835,
+   "id": "bounded_strings-1",
+   "group": "corpus",
+   "stream": true,
+   "temperature": 0.8,
+   "error_schema": null
+  },
+  {
+   "finish": "stop",
+   "tokens": 22,
+   "s": 0.5751544339582324,
+   "id": "bounded_strings-2",
+   "group": "corpus",
+   "stream": false,
+   "temperature": 0.8,
+   "error_schema": null
+  },
+  {
+   "finish": "stop",
+   "tokens": 14,
+   "s": 0.3459688958246261,
+   "id": "integers-0",
+   "group": "corpus",
+   "stream": false,
+   "temperature": 0.0,
+   "error_schema": null
+  },
+  {
+   "finish": "stop",
+   "tokens": 14,
+   "s": 0.3007017131894827,
+   "id": "integers-1",
+   "group": "corpus",
+   "stream": true,
+   "temperature": 0.8,
+   "error_schema": null
+  },
+  {
+   "finish": "stop",
+   "tokens": 14,
+   "s": 0.34269377985037863,
+   "id": "integers-2",
+   "group": "corpus",
+   "stream": false,
+   "temperature": 0.8,
+   "error_schema": null
+  },
+  {
+   "finish": "stop",
+   "tokens": 34,
+   "s": 0.6245944700203836,
+   "id": "numbers-0",
+   "group": "corpus",
+   "stream": false,
+   "temperature": 0.0,
+   "error_schema": null
+  },
+  {
+   "finish": "stop",
+   "tokens": 34,
+   "s": 0.6231964139733464,
+   "id": "numbers-1",
+   "group": "corpus",
+   "stream": true,
+   "temperature": 0.8,
+   "error_schema": null
+  },
+  {
+   "finish": "stop",
+   "tokens": 32,
+   "s": 0.5633802108932287,
+   "id": "numbers-2",
+   "group": "corpus",
+   "stream": false,
+   "temperature": 0.8,
+   "error_schema": null
+  },
+  {
+   "finish": "stop",
+   "tokens": 11,
+   "s": 0.21132520795799792,
+   "id": "tuple-0",
+   "group": "corpus",
+   "stream": false,
+   "temperature": 0.0,
+   "error_schema": null
+  },
+  {
+   "finish": "stop",
+   "tokens": 11,
+   "s": 0.25631191092543304,
+   "id": "tuple-1",
+   "group": "corpus",
+   "stream": true,
+   "temperature": 0.8,
+   "error_schema": null
+  },
+  {
+   "finish": "stop",
+   "tokens": 11,
+   "s": 0.2829761439934373,
+   "id": "tuple-2",
+   "group": "corpus",
+   "stream": false,
+   "temperature": 0.8,
+   "error_schema": null
+  },
+  {
+   "finish": "stop",
+   "tokens": 6,
+   "s": 0.21484640007838607,
+   "id": "dictionary-0",
+   "group": "corpus",
+   "stream": false,
+   "temperature": 0.0,
+   "error_schema": null
+  },
+  {
+   "finish": "stop",
+   "tokens": 6,
+   "s": 0.2132490579970181,
+   "id": "dictionary-1",
+   "group": "corpus",
+   "stream": true,
+   "temperature": 0.8,
+   "error_schema": null
+  },
+  {
+   "finish": "stop",
+   "tokens": 29,
+   "s": 0.5647365839686245,
+   "id": "dictionary-2",
+   "group": "corpus",
+   "stream": false,
+   "temperature": 0.8,
+   "error_schema": null
+  },
+  {
+   "finish": "stop",
+   "tokens": 23,
+   "s": 0.4876371710561216,
+   "id": "deep-0",
+   "group": "corpus",
+   "stream": false,
+   "temperature": 0.0,
+   "error_schema": null
+  },
+  {
+   "finish": "stop",
+   "tokens": 17,
+   "s": 0.3832429440226406,
+   "id": "deep-1",
+   "group": "corpus",
+   "stream": true,
+   "temperature": 0.8,
+   "error_schema": null
+  },
+  {
+   "finish": "stop",
+   "tokens": 18,
+   "s": 0.5061506158672273,
+   "id": "deep-2",
+   "group": "corpus",
+   "stream": false,
+   "temperature": 0.8,
+   "error_schema": null
+  },
+  {
+   "finish": "stop",
+   "tokens": 10,
+   "s": 0.30896065197885036,
+   "id": "enum_numbers-0",
+   "group": "corpus",
+   "stream": false,
+   "temperature": 0.0,
+   "error_schema": null
+  },
+  {
+   "finish": "stop",
+   "tokens": 10,
+   "s": 0.3908214680850506,
+   "id": "enum_numbers-1",
+   "group": "corpus",
+   "stream": true,
+   "temperature": 0.8,
+   "error_schema": null
+  },
+  {
+   "finish": "stop",
+   "tokens": 10,
+   "s": 0.3293668609112501,
+   "id": "enum_numbers-2",
+   "group": "corpus",
+   "stream": false,
+   "temperature": 0.8,
+   "error_schema": null
+  },
+  {
+   "finish": "stop",
+   "tokens": 7,
+   "s": 0.23086713603697717,
+   "id": "long_enum-0",
+   "group": "corpus",
+   "stream": false,
+   "temperature": 0.0,
+   "error_schema": null
+  },
+  {
+   "finish": "stop",
+   "tokens": 7,
+   "s": 0.2353352711070329,
+   "id": "long_enum-1",
+   "group": "corpus",
+   "stream": true,
+   "temperature": 0.8,
+   "error_schema": null
+  },
+  {
+   "finish": "stop",
+   "tokens": 6,
+   "s": 0.22628041496500373,
+   "id": "long_enum-2",
+   "group": "corpus",
+   "stream": false,
+   "temperature": 0.8,
+   "error_schema": null
+  },
+  {
+   "finish": "stop",
+   "tokens": 6,
+   "s": 0.2932008448988199,
+   "id": "object_any-0",
+   "group": "corpus",
+   "stream": false,
+   "temperature": 0.0,
+   "error_schema": null
+  },
+  {
+   "finish": "stop",
+   "tokens": 39,
+   "s": 0.8068578869570047,
+   "id": "object_any-1",
+   "group": "corpus",
+   "stream": true,
+   "temperature": 0.8,
+   "error_schema": null
+  },
+  {
+   "finish": "stop",
+   "tokens": 651,
+   "s": 6.725228815106675,
+   "id": "object_any-2",
+   "group": "corpus",
+   "stream": false,
+   "temperature": 0.8,
+   "error_schema": "duplicate keys"
+  },
+  {
+   "finish": "stop",
+   "tokens": 78,
+   "s": 1.0417872741818428,
+   "id": "array_top-0",
+   "group": "corpus",
+   "stream": false,
+   "temperature": 0.0,
+   "error_schema": null
+  },
+  {
+   "finish": "stop",
+   "tokens": 64,
+   "s": 1.0867256647907197,
+   "id": "array_top-1",
+   "group": "corpus",
+   "stream": true,
+   "temperature": 0.8,
+   "error_schema": null
+  },
+  {
+   "finish": "stop",
+   "tokens": 77,
+   "s": 1.1250682780519128,
+   "id": "array_top-2",
+   "group": "corpus",
+   "stream": false,
+   "temperature": 0.8,
+   "error_schema": null
+  },
+  {
+   "finish": "stop",
+   "tokens": 4,
+   "s": 0.18456904706545174,
+   "id": "string_top-0",
+   "group": "corpus",
+   "stream": false,
+   "temperature": 0.0,
+   "error_schema": null
+  },
+  {
+   "finish": "stop",
+   "tokens": 4,
+   "s": 0.17533512297086418,
+   "id": "string_top-1",
+   "group": "corpus",
+   "stream": true,
+   "temperature": 0.8,
+   "error_schema": null
+  },
+  {
+   "finish": "stop",
+   "tokens": 4,
+   "s": 0.17411296092905104,
+   "id": "string_top-2",
+   "group": "corpus",
+   "stream": false,
+   "temperature": 0.8,
+   "error_schema": null
+  },
+  {
+   "finish": "stop",
+   "tokens": 36,
+   "s": 0.5826788379345089,
+   "id": "pattern_ids-0",
+   "group": "corpus",
+   "stream": false,
+   "temperature": 0.0,
+   "error_schema": null
+  },
+  {
+   "finish": "stop",
+   "tokens": 23,
+   "s": 0.5822695270180702,
+   "id": "pattern_ids-1",
+   "group": "corpus",
+   "stream": true,
+   "temperature": 0.8,
+   "error_schema": null
+  },
+  {
+   "finish": "stop",
+   "tokens": 40,
+   "s": 0.6342826699838042,
+   "id": "pattern_ids-2",
+   "group": "corpus",
+   "stream": false,
+   "temperature": 0.8,
+   "error_schema": null
+  },
+  {
+   "finish": "stop",
+   "tokens": 59,
+   "s": 0.7803893161471933,
+   "id": "date_time-0",
+   "group": "corpus",
+   "stream": false,
+   "temperature": 0.0,
+   "error_schema": null
+  },
+  {
+   "finish": "stop",
+   "tokens": 64,
+   "s": 1.08124492992647,
+   "id": "date_time-1",
+   "group": "corpus",
+   "stream": true,
+   "temperature": 0.8,
+   "error_schema": null
+  },
+  {
+   "finish": "stop",
+   "tokens": 74,
+   "s": 1.5067205189261585,
+   "id": "date_time-2",
+   "group": "corpus",
+   "stream": false,
+   "temperature": 0.8,
+   "error_schema": null
+  },
+  {
+   "finish": "stop",
+   "tokens": 11,
+   "s": 0.35738266119733453,
+   "id": "min_properties-0",
+   "group": "corpus",
+   "stream": false,
+   "temperature": 0.0,
+   "error_schema": "duplicate keys"
+  },
+  {
+   "finish": "stop",
+   "tokens": 11,
+   "s": 0.3528292279224843,
+   "id": "min_properties-1",
+   "group": "corpus",
+   "stream": true,
+   "temperature": 0.8,
+   "error_schema": "duplicate keys"
+  },
+  {
+   "finish": "stop",
+   "tokens": 11,
+   "s": 0.3527084880042821,
+   "id": "min_properties-2",
+   "group": "corpus",
+   "stream": false,
+   "temperature": 0.8,
+   "error_schema": "duplicate keys"
+  },
+  {
+   "finish": "stop",
+   "tokens": 81,
+   "s": 1.3155290430877358,
+   "id": "invoice-0",
+   "group": "corpus",
+   "stream": false,
+   "temperature": 0.0,
+   "error_schema": null
+  },
+  {
+   "finish": "stop",
+   "tokens": 54,
+   "s": 0.9984945668838918,
+   "id": "invoice-1",
+   "group": "corpus",
+   "stream": true,
+   "temperature": 0.8,
+   "error_schema": null
+  },
+  {
+   "finish": "stop",
+   "tokens": 163,
+   "s": 2.468679419020191,
+   "id": "invoice-2",
+   "group": "corpus",
+   "stream": false,
+   "temperature": 0.8,
+   "error_schema": null
+  },
+  {
+   "finish": "stop",
+   "tokens": 6,
+   "s": 0.24008265300653875,
+   "id": "pydantic_like-0",
+   "group": "corpus",
+   "stream": false,
+   "temperature": 0.0,
+   "error_schema": null
+  },
+  {
+   "finish": "stop",
+   "tokens": 6,
+   "s": 0.24396657710894942,
+   "id": "pydantic_like-1",
+   "group": "corpus",
+   "stream": true,
+   "temperature": 0.8,
+   "error_schema": null
+  },
+  {
+   "finish": "stop",
+   "tokens": 6,
+   "s": 0.24567700806073844,
+   "id": "pydantic_like-2",
+   "group": "corpus",
+   "stream": false,
+   "temperature": 0.8,
+   "error_schema": null
+  },
+  {
+   "finish": "stop",
+   "tokens": 27,
+   "s": 0.5254260771907866,
+   "id": "escapes-0",
+   "group": "corpus",
+   "stream": false,
+   "temperature": 0.0,
+   "error_schema": null
+  },
+  {
+   "finish": "stop",
+   "tokens": 25,
+   "s": 0.5269667659886181,
+   "id": "escapes-1",
+   "group": "corpus",
+   "stream": true,
+   "temperature": 0.8,
+   "error_schema": null
+  },
+  {
+   "finish": "stop",
+   "tokens": 17,
+   "s": 0.4710154179483652,
+   "id": "escapes-2",
+   "group": "corpus",
+   "stream": false,
+   "temperature": 0.8,
+   "error_schema": null
+  },
+  {
+   "finish": "stop",
+   "tokens": 18,
+   "s": 0.3543952938634902,
+   "id": "bool_matrix-0",
+   "group": "corpus",
+   "stream": false,
+   "temperature": 0.0,
+   "error_schema": null
+  },
+  {
+   "finish": "stop",
+   "tokens": 18,
+   "s": 0.3565417758654803,
+   "id": "bool_matrix-1",
+   "group": "corpus",
+   "stream": true,
+   "temperature": 0.8,
+   "error_schema": null
+  },
+  {
+   "finish": "stop",
+   "tokens": 18,
+   "s": 0.35875100106932223,
+   "id": "bool_matrix-2",
+   "group": "corpus",
+   "stream": false,
+   "temperature": 0.8,
+   "error_schema": null
+  },
+  {
+   "finish": "length",
+   "tokens": 1024,
+   "s": 7.986632124055177,
+   "id": "unicode-0",
+   "group": "corpus",
+   "stream": false,
+   "temperature": 0.0
+  },
+  {
+   "finish": "stop",
+   "tokens": 38,
+   "s": 0.7349887159653008,
+   "id": "unicode-1",
+   "group": "corpus",
+   "stream": true,
+   "temperature": 0.8,
+   "error_schema": null
+  },
+  {
+   "finish": "length",
+   "tokens": 1024,
+   "s": 7.9599283209536225,
+   "id": "unicode-2",
+   "group": "corpus",
+   "stream": false,
+   "temperature": 0.8
+  }
+ ]
+}

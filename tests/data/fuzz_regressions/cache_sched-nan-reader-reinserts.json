@@ -1,0 +1,116 @@
+{
+ "suite": "cache_sched",
+ "seed": null,
+ "note": "the NaN fuzz, reduced; GDN with MTP and a drafter that writes KV: R1's chunk [0, 1) writes NaN unseen, and R0 and R2 resume from its checkpoint at 1 once that step completed (no write in flight to depend on), R0 copying page 0. When R1's final chunk reports the NaN and its unverified writes leave the cache, R0's next chunk would insert the pages it holds again, R1's copied page among them. The rule under test: a request whose locked node a removal took caches nothing more. The error is the one without unverified-write tracking",
+ "error": "AssertionError: the cache holds poisoned entries: ['Node(1, [0, 1), pages [1], tail 0, ckpt 4, lock 0, ready 1): KV at 0', 'Node(1, [0, 1), pages [1], tail 0, ckpt 4, lock 0, ready 1): its checkpoint']",
+ "example": {
+  "specs": [
+   {
+    "rid": 0,
+    "prompt_len": 20,
+    "max_tokens": 4,
+    "seed": 100,
+    "arrive": 2,
+    "eos_after": null,
+    "ignore_eos": false,
+    "abort_at": null,
+    "priority": 2,
+    "stop_ids": [],
+    "prompt": [
+     5,
+     36,
+     67,
+     98,
+     129,
+     160,
+     191,
+     222,
+     253,
+     284,
+     315,
+     346,
+     377,
+     408,
+     439,
+     470,
+     501,
+     532,
+     563,
+     594
+    ],
+    "hints": [
+     4
+    ],
+    "salt": null,
+    "nonfinite_after": null,
+    "images": [],
+    "grammar": "",
+    "nonfinite_write": null,
+    "mask_empty_after": null
+   },
+   {
+    "rid": 1,
+    "prompt_len": 6,
+    "max_tokens": 4,
+    "seed": 101,
+    "arrive": 0,
+    "eos_after": null,
+    "ignore_eos": false,
+    "abort_at": null,
+    "priority": 0,
+    "stop_ids": [],
+    "prompt": [
+     5,
+     36,
+     67,
+     0,
+     0,
+     0
+    ],
+    "hints": [
+     1
+    ],
+    "salt": null,
+    "nonfinite_after": null,
+    "images": [],
+    "grammar": "",
+    "nonfinite_write": 0,
+    "mask_empty_after": null
+   },
+   {
+    "rid": 2,
+    "prompt_len": 3,
+    "max_tokens": 4,
+    "seed": 102,
+    "arrive": 2,
+    "eos_after": null,
+    "ignore_eos": false,
+    "abort_at": null,
+    "priority": 0,
+    "stop_ids": [],
+    "prompt": [
+     5,
+     36,
+     3
+    ],
+    "hints": [],
+    "salt": null,
+    "nonfinite_after": null,
+    "images": [],
+    "grammar": "",
+    "nonfinite_write": null,
+    "mask_empty_after": null
+   }
+  ],
+  "page_size": 1,
+  "grid": 8,
+  "max_model_len": 160,
+  "max_num_seqs": 3,
+  "max_tokens": 16,
+  "num_pages": 171,
+  "checkpoint_slots": 3,
+  "policy": "priority",
+  "mtp_k": 3,
+  "accept_p": 1.0
+ }
+}

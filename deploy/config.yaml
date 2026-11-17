@@ -1,0 +1,21 @@
+# The image's configuration for any model (docs/operations.md, "The image's configuration file"), baked into the image:
+# what the image itself fixes, and the seed and structured-output settings it serves with. Everything else is derived
+# (the server logs each value at startup with its reason, and serves them at /server_info), the workload's settings
+# from the model: its context, its image budget, its sampling defaults. Every setting: llm_mini_infer/config.py. The
+# model and its own settings (its drafter) come from where the model is chosen: the chart's values, the host check Job's
+# --set, compose's mount and command; a deployment pins its workload's own settings there too.
+model:
+  path: /models/checkpoint               # the checkpoint, bind-mounted read-only (compose: LLM_MINI_INFER_MODEL_DIR)
+  # What clients send as "model": the path as given unless model.served_model_name is set (vLLM's rule), so a
+  # repo id as model.path is served under the repo id, and a mounted checkpoint needs the name set (compose's command)
+runner:
+  kind: cuda                             # the GPU (the default too; fake answers with random tokens: tests, benchmarks)
+scheduler:
+  seed: 0                                # requests without a seed draw theirs from it, the same sequence every start
+# Structured output with the guidance backend and compact JSON: llguidance's JSON grammar with its canonical forcing
+# (the tokens a grammar forces cost no step) and fewer tokens
+structured_output:
+  backend: guidance
+  disable_any_whitespace: true
+server:
+  port: 8000                             # the image's EXPOSE

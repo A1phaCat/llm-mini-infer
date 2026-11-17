@@ -1,0 +1,164 @@
+{{- $fullName := include "llm-mini-infer.fullname" . -}}
+{{- $server := .Values.config.server | default dict -}}
+{{- $drain := add (int ($server.drain_grace_s | default 0)) (int ($server.drain_timeout_s | default 30)) -}}
+{{- if le (int .Values.terminationGracePeriodSeconds) (add $drain 20) }}
+{{- fail (printf "terminationGracePeriodSeconds (%d) must exceed config.server.drain_grace_s + drain_timeout_s (%d) by more than 20 s, or Kubernetes kills the drain" (int .Values.terminationGracePeriodSeconds) $drain) }}
+{{- end }}
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ $fullName }}
+  labels:
+    {{- include "llm-mini-infer.labels" . | nindent 4 }}
+spec:
+  replicas: {{ .Values.replicaCount }}
+  revisionHistoryLimit: 3
+  progressDeadlineSeconds: {{ .Values.progressDeadlineSeconds }}
+  # One GPU per replica and none spare: a replica stops before its replacement starts
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 0
+      maxUnavailable: 1
+  selector:
+    matchLabels:
+      {{- include "llm-mini-infer.selectorLabels" . | nindent 6 }}
+  template:
+    metadata:
+      labels:
+        {{- include "llm-mini-infer.podLabels" . | nindent 8 }}
+      annotations:
+        checksum/config: {{ include (print $.Template.BasePath "/configmap.yaml") . | sha256sum }}
+        {{- with .Values.podAnnotations }}
+        {{- toYaml . | nindent 8 }}
+        {{- end }}
+    spec:
+      # SIGTERM drains (docs/operations.md, "Health, drain and restarts")
+      terminationGracePeriodSeconds: {{ .Values.terminationGracePeriodSeconds }}
+      {{- with .Values.runtimeClassName }}
+      runtimeClassName: {{ . }}
+      {{- end }}
+      affinity:
+        {{- with .Values.nodeSelectorTerms }}
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+              {{- toYaml . | nindent 14 }}
+        {{- end }}
+        podAntiAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            - labelSelector:
+                matchLabels:
+                  {{- include "llm-mini-infer.selectorLabels" . | nindent 18 }}
+              topologyKey: "kubernetes.io/hostname"
+            {{- range .Values.avoidPodsWithLabels }}
+            # in every namespace: another inference engine claims its node's GPU whichever namespace it runs in (an empty
+            # namespaceSelector matches all; without one, a term sees only llm-mini-infer's own namespace)
+            - labelSelector:
+                matchLabels:
+                  {{- toYaml . | nindent 18 }}
+              namespaceSelector: {}
+              topologyKey: "kubernetes.io/hostname"
+            {{- end }}
+      {{- with .Values.tolerations }}
+      tolerations:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.imagePullSecrets }}
+      imagePullSecrets:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.podSecurityContext }}
+      securityContext:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      serviceAccountName: {{ include "llm-mini-infer.serviceAccountName" . }}
+      enableServiceLinks: false
+      containers:
+        - name: llm-mini-infer
+          image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          # The image's entrypoint: `python3 -m llm_mini_infer.entrypoint serve` with $LLM_MINI_INFER_CONFIG
+          env:
+            - name: LLM_MINI_INFER_CONFIG
+              value: /etc/llm-mini-infer/config.yaml
+            - name: HF_HOME
+              value: /cache/huggingface
+            {{- if .Values.model.hfToken.secretName }}
+            - name: HF_TOKEN
+              valueFrom:
+                secretKeyRef:
+                  name: {{ .Values.model.hfToken.secretName }}
+                  key: {{ .Values.model.hfToken.secretKey }}
+            {{- end }}
+            {{- if .Values.apiKey.secretName }}
+            - name: VLLM_API_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: {{ .Values.apiKey.secretName }}
+                  key: {{ .Values.apiKey.secretKey }}
+            {{- end }}
+            {{- with .Values.env }}
+            {{- toYaml . | nindent 12 }}
+            {{- end }}
+          ports:
+            - name: http
+              containerPort: {{ include "llm-mini-infer.port" . }}
+              protocol: TCP
+          startupProbe:
+            httpGet:
+              path: /health
+              port: http
+            initialDelaySeconds: {{ .Values.probes.startup.initialDelaySeconds }}
+            periodSeconds: {{ .Values.probes.startup.periodSeconds }}
+            timeoutSeconds: 5
+            failureThreshold: {{ .Values.probes.startup.failureThreshold }}
+          readinessProbe:
+            httpGet:
+              path: /health
+              port: http
+            periodSeconds: {{ .Values.probes.readiness.periodSeconds }}
+            timeoutSeconds: {{ .Values.probes.readiness.timeoutSeconds }}
+            failureThreshold: {{ .Values.probes.readiness.failureThreshold }}
+          livenessProbe:
+            httpGet:
+              path: /live
+              port: http
+            periodSeconds: {{ .Values.probes.liveness.periodSeconds }}
+            timeoutSeconds: {{ .Values.probes.liveness.timeoutSeconds }}
+            failureThreshold: {{ .Values.probes.liveness.failureThreshold }}
+          resources:
+            requests:
+              {{- toYaml .Values.resources.requests | nindent 14 }}
+              {{- if .Values.gpu.count }}
+              {{ .Values.gpu.resource }}: {{ .Values.gpu.count }}
+              {{- end }}
+            limits:
+              {{- toYaml .Values.resources.limits | nindent 14 }}
+              {{- if .Values.gpu.count }}
+              {{ .Values.gpu.resource }}: {{ .Values.gpu.count }}
+              {{- end }}
+          volumeMounts:
+            - name: config
+              mountPath: /etc/llm-mini-infer
+              readOnly: true
+            - name: cache
+              mountPath: /cache
+            - name: shm
+              mountPath: /dev/shm
+      volumes:
+        - name: config
+          configMap:
+            name: {{ $fullName }}
+        - name: cache
+          {{- if .Values.cache.existingClaim }}
+          persistentVolumeClaim:
+            claimName: {{ .Values.cache.existingClaim }}
+          {{- else }}
+          emptyDir:
+            {{- toYaml (.Values.cache.emptyDir | default dict) | nindent 12 }}
+          {{- end }}
+        - name: shm
+          emptyDir:
+            medium: Memory
+            sizeLimit: {{ .Values.shm.sizeLimit }}

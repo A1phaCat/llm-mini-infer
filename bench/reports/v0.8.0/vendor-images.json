@@ -1,0 +1,31 @@
+{
+ "note": "The vendor images of the vendor-image check (family Q): Docker Hub's tag reads (linux/amd64), the pods' own reads.",
+ "vllm": {
+  "image": "vllm/vllm-openai:v0.33.0",
+  "tag_digest": "sha256:d825baf9ce4b1b6bfc5ecc7b79880c7e6748c65a72d697ce3d47607aafa84c6e",
+  "amd64_digest": "sha256:91ee972ab751fb7180bc71c175865e36b091686600dca783d52b2511399810b3",
+  "amd64_compressed_bytes": 9738495250,
+  "disk_used_mib_before_weights": 24327,
+  "ready_after_create_s": 108,
+  "nvcc": "13.0.88",
+  "python": "3.12.3",
+  "engine_install": "a wheel built inside the image (vllm 0.33.0)",
+  "weights_download_s": 17,
+  "client_imports": "ok",
+  "reachability": "github.com, download.pytorch.org (cu130), flashinfer.ai, pypi.org, huggingface.co and vLLM's wheel index answered 200; objects.githubusercontent.com and files.pythonhosted.org answered 404 at their roots (reachable hosts that serve no page there)"
+ },
+ "sglang": {
+  "image": "lmsysorg/sglang:v0.5.23-cu130-runtime",
+  "tag_digest": "sha256:3ce6da3e5ea0fee2dac6a23b528cb294fedd31ca74a55a4511f709c5e01e8652",
+  "amd64_digest": "sha256:354700f4404ab0b8dcb493bc61d5d11e7c2a91f3a7babb4efe741cb75d4b51c0",
+  "amd64_compressed_bytes": 14470475457,
+  "disk_used_mib_before_weights": 33268,
+  "ready_after_create_s": 202,
+  "nvcc": "13.0.88",
+  "python": "3.12.16",
+  "engine_install": "editable from the v0.5.23 tag's commit (sglang 0.5.23)",
+  "weights_download_s": 23,
+  "client_imports": "ok",
+  "reachability": "github.com, download.pytorch.org (cu130), flashinfer.ai, pypi.org, huggingface.co and vLLM's wheel index answered 200; objects.githubusercontent.com and files.pythonhosted.org answered 404 at their roots (reachable hosts that serve no page there)"
+ }
+}

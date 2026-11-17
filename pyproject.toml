@@ -1,0 +1,211 @@
+[project]
+name = "llm-mini-infer"
+version = "0.8.0"
+description = "An LLM inference server for recent open models on NVIDIA GPUs, with an OpenAI-compatible API."
+readme = "README.md"
+license = "Apache-2.0"
+license-files = ["LICENSE"]
+authors = [{ name = "The llm-mini-infer Authors" }]
+requires-python = ">=3.12"
+# Every lower bound is the locked version, so the declared minimums are what the tests ran. Five packages are pinned
+# to the GPU-validated stack's versions in [tool.uv] constraint-dependencies, below.
+dependencies = [
+    "numpy>=2.5.4",
+    "msgspec>=0.22.0",
+    "pyzmq>=27.2.0",
+    "tokenizers>=0.23.3",
+    "jinja2>=3.1.6",
+    "uvloop>=0.23.0",
+    "pyyaml>=6.0.3",
+    "uvicorn>=0.54.0",
+    "httptools>=0.9.0",
+    "blake3>=1.0.11",
+    "llguidance>=1.9.1",
+    "huggingface-hub>=2.2.0",  # model.path as a Hugging Face repo id (llm_mini_infer.hub)
+]
+
+[project.optional-dependencies]
+# The CUDA runner (llm_mini_infer/runner/cuda), on linux. FlashInfer imports its AOT modules' shim at startup, which
+# finds the modules' providers, one per GPU architecture, by their entry points, and its cubin package when it is
+# installed (flashinfer/jit/env.py): the slim image keeps SM120's provider, cut to the three modules llm-mini-infer
+# loads, and leaves the other providers and the cubin package out (none of its cubins is opened on SM120;
+# deploy/Dockerfile, tests/data/image/). torch's CUDA wheels come from PyTorch's index and FlashInfer's from its own
+# (tool.uv.sources).
+cuda = ["torch>=2.14.1", "safetensors>=0.8.0",
+        "flashinfer-python>=0.7.2; sys_platform == 'linux'",
+        "flashinfer-jit-cache>=0.7.2; sys_platform == 'linux'",
+        "flashinfer-cubin>=0.7.2; sys_platform == 'linux'"]
+# Image inputs (docs/architecture.md, "Images"): http(s) fetching in the frontends, and the image pool's exact decode
+# and resize (torchvision's uint8 antialiased bicubic, PIL as the fallback decoder); pybase64 decodes data URIs about
+# 3x faster than the standard library (llm_mini_infer/vision/fetch.py). The image (deploy/Dockerfile) ships all of them.
+images = ["aiohttp>=3.14.5", "pillow>=13.0.0", "torchvision>=0.29.1", "torch>=2.14.1", "pybase64>=1.5.1"]
+# The image's other imports (the inventory, tests/data/image/inventory.json): optional imports of our dependencies
+# that its processes make, kept so the image runs as the stack it was measured on. None changes a path llm-mini-infer
+# uses: torch checks for dill, tvm-ffi names dtypes with ml_dtypes, uvicorn detects websockets and watchfiles (no
+# websocket route, no reload).
+image = ["dill>=0.4.1", "ml-dtypes>=0.6.0", "websockets>=17.2", "watchfiles>=1.3.0"]
+
+[project.scripts]
+llm-mini-infer = "llm_mini_infer.cli:main"
+
+[project.urls]
+Homepage = "https://github.com/deftinfer/llm-mini-infer"
+Repository = "https://github.com/deftinfer/llm-mini-infer"
+Issues = "https://github.com/deftinfer/llm-mini-infer/issues"
+Changelog = "https://github.com/deftinfer/llm-mini-infer/blob/main/CHANGELOG.md"
+
+[dependency-groups]
+# torch (CPU) and safetensors run the CUDA runner's logic on the Mac with the torch reference kernels; transformers
+# is the reference implementation the model is tested against (never imported on the serving path).
+dev = [
+    "pytest>=9.1.1",
+    "pytest-xdist>=3.8.0",
+    "hypothesis>=6.170.1",
+    "ruff>=0.17.1",
+    "psutil>=7.2.2",
+    "torch>=2.14.1",
+    "safetensors>=0.8.0",
+    "transformers>=5.20.1",
+    "torchvision>=0.29.1",
+    "pillow>=13.0.0",
+    "aiohttp>=3.14.5",
+    "pydantic>=2.14.1",
+    "jsonschema>=4.26.0",
+    "openai>=3.35.1",
+    "packaging>=26.3",
+]
+# The checks of a built image (tests/deploy/test_image_checks.py, the Actions workflow): pytest on the host, docker runs
+# the rest inside the image
+image-checks = ["pytest>=9.1.1", "packaging>=26.3"]
+
+[tool.uv]
+# One lock for both platforms: the Mac (development, torch's CPU wheels from PyPI) and linux x86_64 (the image, torch's
+# CUDA 13.0 wheels from PyTorch's index)
+environments = ["sys_platform == 'darwin' and platform_machine == 'arm64'",
+                "sys_platform == 'linux' and platform_machine == 'x86_64'"]
+# The GPU-validated stack (tests/data/image/, recorded from the image): five packages stay at the versions the GPU
+# suite ran on the image, and move together, in one GPU-validated step; what they constrain follows them.
+# tests/deploy/test_image_build.py checks every one the image installs against its freeze (tests/data/image/freeze.txt),
+# and those it leaves out (flashinfer-cubin, the other GPUs' providers) against FlashInfer's release; everything else is
+# at its newest version.
+constraint-dependencies = [
+    # the five
+    "torch==2.14.1",  # 2.14.1+cu130 on linux (PyTorch's index), the CPU wheel on the Mac
+    "torchvision==0.29.1",
+    "flashinfer-python==0.7.2",
+    "flashinfer-jit-cache==0.7.2",  # a shim: it finds the providers below by their entry points
+    "flashinfer-cubin==0.7.2",
+    # grammars and masks equal to vLLM's guidance backend on the same llguidance
+    # (tests/structured/test_grammar_parity.py)
+    "llguidance==1.9.1",
+    "tokenizers==0.23.3",
+    "pillow==13.0.0",
+    # what they constrain, on linux: FlashInfer's AOT modules by architecture (the shim's exact pins, named here so
+    # they come from FlashInfer's index too: tool.uv.sources), torch's CUDA libraries, NCCL and triton (torch's own
+    # pins), FlashInfer's CuTe DSL, cuDNN frontend and NVML, the CUDA Python bindings both use, FlashInfer's FFI (its
+    # AOT modules are tvm-ffi modules) and NCCL bindings
+    "flashinfer-jit-cache-sm80==0.7.2",
+    "flashinfer-jit-cache-sm89==0.7.2",
+    "flashinfer-jit-cache-sm90a==0.7.2",
+    "flashinfer-jit-cache-sm100a==0.7.2",
+    "flashinfer-jit-cache-sm103a==0.7.2",
+    "flashinfer-jit-cache-sm120f==0.7.2",
+    "triton==3.8.0",
+    "cuda-toolkit==13.0.3.0",
+    "nvidia-cublas==13.1.1.3",
+    "nvidia-cuda-cupti==13.0.85",
+    "nvidia-cuda-nvrtc==13.0.88",
+    "nvidia-cuda-runtime==13.0.96",
+    "nvidia-cudnn-cu13==9.24.0.43",
+    "nvidia-cufft==12.0.0.61",
+    "nvidia-cufile==1.15.1.6",
+    "nvidia-curand==10.4.0.35",
+    "nvidia-cusolver==12.0.4.66",
+    "nvidia-cusparse==12.6.3.3",
+    "nvidia-cusparselt-cu13==0.8.1",
+    "nvidia-nccl-cu13==2.30.7",
+    "nvidia-nvjitlink==13.4.92",
+    "nvidia-nvshmem-cu13==3.4.5",
+    "nvidia-nvtx==13.0.85",
+    "nvidia-cutlass-dsl==4.8.1",
+    "nvidia-cutlass-dsl-libs-base==4.8.1",
+    "nvidia-cutlass-dsl-libs-core==4.8.1",
+    "nvidia-cutlass-dsl-libs-cu13==4.8.1",
+    "nvidia-cudnn-frontend==1.31.0",
+    "nvidia-ml-py==13.615.71",
+    "cuda-bindings==13.4.4",
+    "cuda-core==1.2.2",
+    "cuda-pathfinder==1.8.3",
+    "cuda-python==13.4.4",
+    "cuda-tile==1.6.0",
+    "apache-tvm-ffi==0.1.14.post1",
+    "nccl4py==0.6.0",
+    "nccl-extensions==0.1.0",
+]
+override-dependencies = [
+    # never installed (the slim image): nvidia-cutlass-dsl requires it, but CuTe DSL loads the newest
+    # flavour the driver supports (_mlir_libs/__init__.py), cu13 under any CUDA 13 driver, which torch cu130 needs;
+    # no process of Gemma, Qwen or the host check imported or mapped it (the inventory). 0.21 GB
+    "nvidia-cutlass-dsl-libs-cu12; sys_platform == 'never'",
+    # never locked: the jit-cache shim's wheels require the providers of their own platform's architectures, and uv
+    # takes one wheel's requirements for the version: the aarch64 wheel's add these two, which have aarch64 wheels only
+    # and which the x86_64 wheel, the image's, does not require
+    "flashinfer-jit-cache-sm110a; sys_platform == 'never'",
+    "flashinfer-jit-cache-sm121a; sys_platform == 'never'",
+]
+
+[tool.uv.sources]
+torch = { index = "pytorch-cu130", marker = "sys_platform == 'linux'" }
+torchvision = { index = "pytorch-cu130", marker = "sys_platform == 'linux'" }
+flashinfer-jit-cache = { index = "flashinfer-cu130" }
+flashinfer-jit-cache-sm80 = { index = "flashinfer-cu130" }
+flashinfer-jit-cache-sm89 = { index = "flashinfer-cu130" }
+flashinfer-jit-cache-sm90a = { index = "flashinfer-cu130" }
+flashinfer-jit-cache-sm100a = { index = "flashinfer-cu130" }
+flashinfer-jit-cache-sm103a = { index = "flashinfer-cu130" }
+flashinfer-jit-cache-sm120f = { index = "flashinfer-cu130" }
+flashinfer-cubin = { index = "flashinfer" }
+
+[[tool.uv.index]]
+name = "pytorch-cu130"
+url = "https://download.pytorch.org/whl/cu130"
+explicit = true
+
+[[tool.uv.index]]
+name = "flashinfer-cu130"
+url = "https://flashinfer.ai/whl/cu130"
+explicit = true
+
+[[tool.uv.index]]
+name = "flashinfer"
+url = "https://flashinfer.ai/whl"
+explicit = true
+
+[build-system]
+requires = ["hatchling==1.32.4"]
+build-backend = "hatchling.build"
+
+[tool.hatch.build.targets.wheel]
+packages = ["llm_mini_infer"]
+
+[tool.ruff]
+line-length = 120
+target-version = "py312"
+extend-exclude = ["results"]
+
+[tool.ruff.lint]
+select = ["E", "F", "W", "I", "B", "UP", "SIM", "RUF"]
+ignore = ["SIM108", "RUF001", "RUF002", "RUF003", "B905"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-ra --strict-markers"
+# The GPU tests' requirements (tests/conftest.py skips a test whose host lacks them, with the mark's reason): every GPU
+# test carries gpu, so -m gpu selects them all
+markers = [
+    "gpu(reason): needs a CUDA GPU and the kernel library (kernels.build.load())",
+    "cutlass(reason): needs a CUDA GPU and the CUTLASS library (kernels.build.load_cutlass())",
+    "flashinfer(reason): needs a CUDA GPU and FlashInfer",
+    # CI runs these alone, after its parallel workers (.github/workflows/ci.yml)
+    "serial: a timing bound on a whole core, or servers that leave the runner no memory for a second worker",
+]
